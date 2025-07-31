@@ -1,26 +1,25 @@
+
+
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en" data-content_root="./">
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>How does DFTpy work? &mdash; DFTpy 2.0.0 documentation</title>
-      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="_static/custom.css" type="text/css" />
-      <link rel="stylesheet" href="_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" type="text/css" />
-    <link rel="shortcut icon" href="_static/dftpy.ico"/>
-  <!--[if lt IE 9]>
-    <script src="_static/js/html5shiv.min.js"></script>
-  <![endif]-->
+  <title>How does DFTpy work? &mdash; DFTpy 2.2.0dev documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/custom.css?v=9b3c20d5" />
+      <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+
   
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-        <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
-        <script src="_static/doctools.js"></script>
-        <script src="_static/design-tabs.js"></script>
-        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-        <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
-        <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="shortcut icon" href="_static/dftpy.ico"/>
+      <script src="_static/documentation_options.js?v=15cefba6"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="_static/design-tabs.js?v=f930bc37"></script>
+      <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+      <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+      <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -33,12 +32,16 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="index.html" class="icon icon-home"> DFTpy
-            <img src="_static/dftpy.png" class="logo" alt="Logo"/>
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            DFTpy
+              <img src="_static/dftpy.png" class="logo" alt="Logo"/>
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -73,8 +76,8 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
-      <li>How does DFTpy work?</li>
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">How does DFTpy work?</li>
       <li class="wy-breadcrumbs-aside">
         
 			<a href=genindex.html>Index</a>
@@ -94,34 +97,10 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  
-<style>
-/* CSS overrides for sphinx_rtd_theme */
-
-/* 24px margin */
-.nbinput.nblast.container,
-.nboutput.nblast.container {
-    margin-bottom: 19px;  /* padding has already 5px */
-}
-
-/* ... except between code cells! */
-.nblast.container + .nbinput.container {
-    margin-top: -19px;
-}
-
-.admonition > p:before {
-    margin-right: 4px;  /* make room for the exclamation icon */
-}
-
-/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
-.math {
-    text-align: unset;
-}
-</style>
-<section id="how-does-dftpy-work">
-<span id="ofdft"></span><h1>How does DFTpy work?<a class="headerlink" href="#how-does-dftpy-work" title="Permalink to this headline">¶</a></h1>
+  <section id="how-does-dftpy-work">
+<span id="ofdft"></span><h1>How does DFTpy work?<a class="headerlink" href="#how-does-dftpy-work" title="Link to this heading">¶</a></h1>
 <section id="orbital-free-dft">
-<h2>Orbital-Free DFT<a class="headerlink" href="#orbital-free-dft" title="Permalink to this headline">¶</a></h2>
+<h2>Orbital-Free DFT<a class="headerlink" href="#orbital-free-dft" title="Link to this heading">¶</a></h2>
 <p>In OF-DFT, the ground state electron density, <span class="math notranslate nohighlight">\(n_0(\mathbf{r})\)</span>, is obtained from the direct minimization of the ground state energy density functional, <span class="math notranslate nohighlight">\(E[n]\)</span>. Namely,</p>
 <div class="math notranslate nohighlight">
 \[n_0 = \text{argmin}_n \left[ E[n] - \mu \left( \int n(\mathbf{r}) d\mathbf{r} - N \right) \right]\]</div>
@@ -148,7 +127,7 @@
 </div>
 </section>
 <section id="time-dependent-orbital-free-dft">
-<h2>Time-Dependent Orbital-Free DFT<a class="headerlink" href="#time-dependent-orbital-free-dft" title="Permalink to this headline">¶</a></h2>
+<h2>Time-Dependent Orbital-Free DFT<a class="headerlink" href="#time-dependent-orbital-free-dft" title="Link to this heading">¶</a></h2>
 <p>DFTpy can also describe systems out of equilibrium by propagating them in <a class="reference external" href="https://wires.onlinelibrary.wiley.com/doi/abs/10.1002/wcms.1482">real time</a> as well as in <a class="reference external" href="https://journals.aps.org/prb/abstract/10.1103/PhysRevB.103.245102">frequency space</a> finding the roots of the frequency dependent polarizability (Casida). Because of the OF-DFT foundation, DFTpy implements the so-called time-dependent orbital-free DFT (td-OF-DFT) approach whereby a single Bosonic wavefunction, <span class="math notranslate nohighlight">\(\Psi(\mathbf{r},t)\)</span> is propagated with a time-dependent KS-like Hamiltonian. Namely,</p>
 <div class="math notranslate nohighlight">
 \[\hat{H}(t)  \Psi(\mathbf{r},t) = i \frac{d}{dt}\Psi(\mathbf{r},t)\]</div>
@@ -179,11 +158,11 @@
 </div>
 </section>
 <section id="short-note-on-the-implementation">
-<h2>Short note on the implementation<a class="headerlink" href="#short-note-on-the-implementation" title="Permalink to this headline">¶</a></h2>
+<h2>Short note on the implementation<a class="headerlink" href="#short-note-on-the-implementation" title="Link to this heading">¶</a></h2>
 <p>In DFTpy, the electron density is represented in a discrete set of points given by a Cartesian <cite>grid</cite> and contained in a simulation <cite>cell</cite> that is specified by 3 <cite>lattice vectors</cite>. The number of grid points and the cell size are regulated by the user. The Cartesian grid allows for an efficient parallelization of data and work (we use <cite>mpi4py</cite>), and for the exploitation of Fast Fourier Transforms for solving convolution integrals (such as the one needed to compute <span class="math notranslate nohighlight">\(E_H[n]\)</span>). Either <cite>NumPy.fft</cite> or <cite>PyFFT</cite> are used depending on user input.</p>
 </section>
 <section id="references">
-<h2>References<a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h2>
+<h2>References<a class="headerlink" href="#references" title="Link to this heading">¶</a></h2>
 <ul class="simple">
 <li><p><a class="reference external" href="https://wires.onlinelibrary.wiley.com/doi/abs/10.1002/wcms.1482">DFTpy release paper (ground state and td-OF-DFT)</a></p></li>
 <li><p><a class="reference external" href="https://journals.aps.org/prb/abstract/10.1103/PhysRevB.103.245102">DFTpy td-OF-DFT (Casida)</a></p></li>
@@ -204,8 +183,8 @@
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2019-2023, Pavanello Research Group.
-      <span class="lastupdated">Last updated on Thursday, 31 Jul 2025 14:01:42.
+    <p>&#169; Copyright 2019-2025, Pavanello Research Group.
+      <span class="lastupdated">Last updated on Thursday, 31 Jul 2025 17:03:53.
       </span></p>
   </div>
 

@@ -1,0 +1,1825 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Script mode of DFTpy &mdash; DFTpy 2.2.0dev documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=9b3c20d5" />
+      <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+
+  
+    <link rel="shortcut icon" href="../_static/dftpy.ico"/>
+      <script src="../_static/documentation_options.js?v=15cefba6"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/design-tabs.js?v=f930bc37"></script>
+      <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+      <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+      <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Optimization of Density" href="ofdft/optimize.html" />
+    <link rel="prev" title="Tutorials" href="tutorials.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            DFTpy
+              <img src="../_static/dftpy.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../contact.html">Contact</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ofdft.html">How does DFTpy work?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../LPP.html">Local Pseudopotentials</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="tutorials.html">Tutorials</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="tutorials.html#config-of-dftpy-script">Config of DFTpy script</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Script mode of DFTpy</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#job">JOB</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#path">PATH</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#math">MATH</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pp">PP</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cell">CELL</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#grid">GRID</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#density">DENSITY</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#exc">EXC</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#kedf">KEDF</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#kedf2">KEDF2</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#output">OUTPUT</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#opt">OPT</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#mix">MIX</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#propagator">PROPAGATOR</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#td">TD</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#casida">CASIDA</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nonadiabatic">NONADIABATIC</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nonadiabatic2">NONADIABATIC2</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#inversion">INVERSION</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="tutorials.html#ofdft">OFDFT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorials.html#local-pseudopotentials">Local Pseudopotentials</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorials.html#spin-unrestricted-calculation">Spin unrestricted calculation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorials.html#tddft">TDDFT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorials.html#do-it-on-a-jupyter-notebook">Do it on a Jupyter Notebook!</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../releases.html">Stable releases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq.html">Frequently Asked Questions</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">DFTpy</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="tutorials.html">Tutorials</a></li>
+      <li class="breadcrumb-item active">Script mode of DFTpy</li>
+      <li class="wy-breadcrumbs-aside">
+        
+			<a href=../genindex.html>Index</a>
+		
+          
+			<a href="https://gitlab.com/pavanello-research-group/dftpy/tree/master/doc/tutorials/config.rst">Source</a>
+          
+        
+      </li>
+    
+  </ul><div class="rst-breadcrumbs-buttons" role="navigation" aria-label="Sequential page navigation">
+        <a href="tutorials.html" class="btn btn-neutral float-left" title="Tutorials" accesskey="p"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="ofdft/optimize.html" class="btn btn-neutral float-right" title="Optimization of Density" accesskey="n">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+  </div>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="script-mode-of-dftpy">
+<span id="config"></span><h1>Script mode of DFTpy<a class="headerlink" href="#script-mode-of-dftpy" title="Link to this heading">¶</a></h1>
+<p>DFTpy is a set of python modules. However, it can be executed in the old way by using the <cite>dftpy</cite> script which is generated at installation time. Here’s a quick guide to the script’s configuration dictionary, or <cite>config</cite>.</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#job">JOB</a></p></td>
+<td><p><a class="reference internal" href="#path">PATH</a></p></td>
+<td><p><a class="reference internal" href="#math">MATH</a></p></td>
+<td><p><a class="reference internal" href="#pp">PP</a></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#cell">CELL</a></p></td>
+<td><p><a class="reference internal" href="#grid">GRID</a></p></td>
+<td><p><a class="reference internal" href="#density">DENSITY</a></p></td>
+<td><p><a class="reference internal" href="#exc">EXC</a></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#kedf">KEDF</a></p></td>
+<td><p><a class="reference internal" href="#output">OUTPUT</a></p></td>
+<td><p><a class="reference internal" href="#opt">OPT</a></p></td>
+<td><p><a class="reference internal" href="#propagator">PROPAGATOR</a></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#td">TD</a></p></td>
+<td><p><a class="reference internal" href="#casida">CASIDA</a></p></td>
+<td><p><a class="reference internal" href="#inversion">INVERSION</a></p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p><a class="reference internal" href="#pp">PP</a> is a mandatory input (i.e., no default is avaliable for it).</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Defaults work well for most arguments.</p>
+<p>When <em>Options</em> is empty, it can accept any value.</p>
+</div>
+<section id="job">
+<h2>JOB<a class="headerlink" href="#job" title="Link to this heading">¶</a></h2>
+<blockquote>
+<div><p>Control of the running job.</p>
+</div></blockquote>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#job-task"><span class="std std-ref">task</span></a></p></td>
+<td><p><a class="reference internal" href="#job-calctype"><span class="std std-ref">calctype</span></a></p></td>
+</tr>
+</tbody>
+</table>
+<dl class="simple" id="job-task">
+<dt><strong>task</strong></dt><dd><p>The task to be performed.</p>
+<ul class="simple">
+<li><p><em>Options</em> : Optdensity, Calculation, Propagate, Casida, Diagonalize, Inversion</p></li>
+<li><p><em>Default</em> : Optdensity</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="simple" id="job-calctype">
+<dt><strong>calctype</strong></dt><dd><p>The property to be calculated.</p>
+<ul class="simple">
+<li><p><em>Options</em> : Energy, Potential, Both, Force, Stress</p></li>
+<li><p><em>Default</em> : Energy</p></li>
+</ul>
+</dd>
+</dl>
+</section>
+<section id="path">
+<h2>PATH<a class="headerlink" href="#path" title="Link to this heading">¶</a></h2>
+<blockquote>
+<div><p>Specify the path of needed files.</p>
+</div></blockquote>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#path-pppath"><span class="std std-ref">pppath</span></a></p></td>
+<td><p><a class="reference internal" href="#path-cellpath"><span class="std std-ref">cellpath</span></a></p></td>
+</tr>
+</tbody>
+</table>
+<dl class="simple" id="path-pppath">
+<dt><strong>pppath</strong></dt><dd><p>The path of pseudopotential.</p>
+<ul class="simple">
+<li><p><em>Options</em> :</p></li>
+<li><p><em>Default</em> : ./</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="simple" id="path-cellpath">
+<dt><strong>cellpath</strong></dt><dd><p>The path of input structure.</p>
+<ul class="simple">
+<li><p><em>Options</em> :</p></li>
+<li><p><em>Default</em> : ./</p></li>
+</ul>
+</dd>
+</dl>
+</section>
+<section id="math">
+<h2>MATH<a class="headerlink" href="#math" title="Link to this heading">¶</a></h2>
+<blockquote>
+<div><p>Some methods and techniques that make DFTpy really fast.</p>
+</div></blockquote>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#math-linearii"><span class="std std-ref">linearii</span></a></p></td>
+<td><p><a class="reference internal" href="#math-linearie"><span class="std std-ref">linearie</span></a></p></td>
+<td><p><a class="reference internal" href="#math-twostep"><span class="std std-ref">twostep</span></a></p></td>
+<td><p><a class="reference internal" href="#math-multistep"><span class="std std-ref">multistep</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#math-reuse"><span class="std std-ref">reuse</span></a></p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<dl class="simple" id="math-linearii">
+<dt><strong>linearii</strong></dt><dd><p>Linear-scaling method to deal with Ion-Ion interactions (PME).</p>
+<ul class="simple">
+<li><p><em>Options</em> : True, False</p></li>
+<li><p><em>Default</em> : True</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="simple" id="math-linearie">
+<dt><strong>linearie</strong></dt><dd><p>Linear-scaling method to deal with Ion-Electron interactions (PME).</p>
+<ul class="simple">
+<li><p><em>Options</em> : True, False</p></li>
+<li><p><em>Default</em> : True</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="simple" id="math-twostep">
+<dt><strong>twostep</strong></dt><dd><p>A two-step method for performing density optimizations. ‘<cite>True</cite>’ is equivalent to <a class="reference internal" href="#math-multistep"><span class="std std-ref">multistep</span></a> = 2.</p>
+<ul class="simple">
+<li><p><em>Options</em> : True, False</p></li>
+<li><p><em>Default</em> : False</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="simple" id="math-multistep">
+<dt><strong>multistep</strong></dt><dd><p>A multi-step method for performing density optimizations.</p>
+<ul class="simple">
+<li><p><em>Options</em> : 1,2,…</p></li>
+<li><p><em>Default</em> : 1</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="simple" id="math-reuse">
+<dt><strong>reuse</strong></dt><dd><p>Except in the first step, the initial density is given by the optimized density of the previous step.</p>
+<ul class="simple">
+<li><p><em>Options</em> : True, False</p></li>
+<li><p><em>Default</em> : True</p></li>
+</ul>
+</dd>
+</dl>
+</section>
+<section id="pp">
+<h2>PP<a class="headerlink" href="#pp" title="Link to this heading">¶</a></h2>
+<blockquote>
+<div><p>{}</p>
+<ul>
+<li><p><em>e.g.</em> :</p>
+<blockquote>
+<div><p>Al = Al_lda.oe01.recpot</p>
+</div></blockquote>
+</li>
+</ul>
+</div></blockquote>
+</section>
+<section id="cell">
+<h2>CELL<a class="headerlink" href="#cell" title="Link to this heading">¶</a></h2>
+<blockquote>
+<div><p>Information about the input structure.</p>
+</div></blockquote>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#cell-cellfile"><span class="std std-ref">cellfile</span></a></p></td>
+<td><p><a class="reference internal" href="#cell-elename"><span class="std std-ref">elename</span></a></p></td>
+<td><p><a class="reference internal" href="#cell-zval"><span class="std std-ref">zval</span></a></p></td>
+<td><p><a class="reference internal" href="#cell-format"><span class="std std-ref">format</span></a></p></td>
+</tr>
+</tbody>
+</table>
+<dl class="simple" id="cell-cellfile">
+<dt><strong>cellfile</strong></dt><dd><p>The file of input structure.</p>
+<ul class="simple">
+<li><p><em>Options</em> :</p></li>
+<li><p><em>Default</em> : POSCAR</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="simple" id="cell-elename">
+<dt><strong>elename</strong></dt><dd><p>The name of atom.</p>
+<ul class="simple">
+<li><p><em>Options</em> :</p></li>
+<li><p><em>Default</em> : None</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="simple" id="cell-zval">
+<dt><strong>zval</strong></dt><dd><p>The charge of atomic species.</p>
+<ul class="simple">
+<li><p><em>Options</em> :</p></li>
+<li><p><em>Default</em> : None</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="simple" id="cell-format">
+<dt><strong>format</strong></dt><dd><p>The format of structure file.</p>
+<ul class="simple">
+<li><p><em>Options</em> : pp, vasp, xsf, snpy, …</p></li>
+<li><p><em>Default</em> : None</p></li>
+</ul>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Only <cite>snpy</cite> format support parallel read and write</p>
+</div>
+</section>
+<section id="grid">
+<h2>GRID<a class="headerlink" href="#grid" title="Link to this heading">¶</a></h2>
+<blockquote>
+<div><p>Control the grid.</p>
+</div></blockquote>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#grid-ecut"><span class="std std-ref">ecut</span></a></p></td>
+<td><p><a class="reference internal" href="#grid-spacing"><span class="std std-ref">spacing</span></a></p></td>
+<td><p><a class="reference internal" href="#grid-gfull"><span class="std std-ref">gfull</span></a></p></td>
+<td><p><a class="reference internal" href="#grid-nr"><span class="std std-ref">nr</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#grid-maxprime"><span class="std std-ref">maxprime</span></a></p></td>
+<td><p><a class="reference internal" href="#grid-scale"><span class="std std-ref">scale</span></a></p></td>
+<td><p><a class="reference internal" href="#grid-cplx"><span class="std std-ref">cplx</span></a></p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<dl class="simple" id="grid-ecut">
+<dt><strong>ecut</strong></dt><dd><p>The kinetic energy cutoff.</p>
+<ul class="simple">
+<li><p><em>Options</em> :</p></li>
+<li><p><em>Default</em> : 600</p></li>
+<li><p><em>Unit</em> : eV</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="simple" id="grid-spacing">
+<dt><strong>spacing</strong></dt><dd><p>The spacing (or gap) separating nearest real space grid points. If set this, <a class="reference internal" href="#grid-ecut"><span class="std std-ref">ecut</span></a> is disabled.</p>
+<ul class="simple">
+<li><p><em>Options</em> :</p></li>
+<li><p><em>Default</em> : None</p></li>
+<li><p><em>Unit</em> : Angstrom</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="simple" id="grid-gfull">
+<dt><strong>gfull</strong></dt><dd><p>Determines oif the number of grid points in the reciprocal and real space grids are equal. If ‘<cite>False</cite>’ only use half grid, which will be faster.</p>
+<ul class="simple">
+<li><p><em>Options</em> : True, False</p></li>
+<li><p><em>Default</em> : False</p></li>
+</ul>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><cite>gfull=False</cite>’ implies that the the number of points of reciprocal space is only half of real space.</p>
+</div>
+<dl id="grid-nr">
+<dt><strong>nr</strong></dt><dd><p>The number of grid points in the direction of the three lattice vectors.</p>
+<ul>
+<li><p><em>Options</em> :</p></li>
+<li><p><em>Default</em> : None</p></li>
+<li><p><em>e.g.</em> :</p>
+<blockquote>
+<div><p>nr = 32 32 32</p>
+</div></blockquote>
+</li>
+</ul>
+</dd>
+</dl>
+<dl class="simple" id="grid-maxprime">
+<dt><strong>maxprime</strong></dt><dd><p>The max prime of guess best number of grid points for FFT</p>
+<ul class="simple">
+<li><p><em>Options</em> : 3, 5, 7, 11, 13, 17,…, 97</p></li>
+<li><p><em>Default</em> : 13</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="simple" id="grid-scale">
+<dt><strong>scale</strong></dt><dd><p>The minimum scale for guess the best number of grid points</p>
+<ul class="simple">
+<li><p><em>Options</em> :</p></li>
+<li><p><em>Default</em> : 0.99</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="simple" id="grid-cplx">
+<dt><strong>cplx</strong></dt><dd><p>The type of real space value</p>
+<ul class="simple">
+<li><p><em>Options</em> : True, False</p></li>
+<li><p><em>Default</em> : False</p></li>
+</ul>
+</dd>
+</dl>
+</section>
+<section id="density">
+<h2>DENSITY<a class="headerlink" href="#density" title="Link to this heading">¶</a></h2>
+<blockquote>
+<div><p>Control the charge density.</p>
+</div></blockquote>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#density-nspin"><span class="std std-ref">nspin</span></a></p></td>
+<td><p><a class="reference internal" href="#density-magmom"><span class="std std-ref">magmom</span></a></p></td>
+<td><p><a class="reference internal" href="#density-densityini"><span class="std std-ref">densityini</span></a></p></td>
+<td><p><a class="reference internal" href="#density-densityfile"><span class="std std-ref">densityfile</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#density-densityoutput"><span class="std std-ref">densityoutput</span></a></p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<dl class="simple" id="density-nspin">
+<dt><strong>nspin</strong></dt><dd><p>non/spin-polarized calculation</p>
+<ul class="simple">
+<li><p><em>Options</em> : 1, 2</p></li>
+<li><p><em>Default</em> : 1</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="simple" id="density-magmom">
+<dt><strong>magmom</strong></dt><dd><p>Total electronic magnetization.</p>
+<ul class="simple">
+<li><p><em>Options</em> :</p></li>
+<li><p><em>Default</em> : 0</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="simple" id="density-densityini">
+<dt><strong>densityini</strong></dt><dd><p>The initial density is given by homogeneous electron gas (HEG) or read from <a class="reference internal" href="#density-densityfile"><span class="std std-ref">densityfile</span></a>. If set <cite>Read</cite>, must given the <a class="reference internal" href="#density-densityfile"><span class="std std-ref">densityfile</span></a>.</p>
+<ul class="simple">
+<li><p><em>Options</em> : heg, read</p></li>
+<li><p><em>Default</em> : heg</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="simple" id="density-densityfile">
+<dt><strong>densityfile</strong></dt><dd><p>The charge density for initial density, only works when if <a class="reference internal" href="#density-densityini"><span class="std std-ref">densityini</span></a> set <cite>Read</cite>.</p>
+<ul class="simple">
+<li><p><em>Options</em> :</p></li>
+<li><p><em>Default</em> : None</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="simple" id="density-densityoutput">
+<dt><strong>densityoutput</strong></dt><dd><p>The output file of final density. The default is not output the density.</p>
+<ul class="simple">
+<li><p><em>Options</em> :</p></li>
+<li><p><em>Default</em> : None</p></li>
+</ul>
+</dd>
+</dl>
+</section>
+<section id="exc">
+<h2>EXC<a class="headerlink" href="#exc" title="Link to this heading">¶</a></h2>
+<blockquote>
+<div><p>Control the exchange-correlation functional.</p>
+</div></blockquote>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#exc-xc"><span class="std std-ref">xc</span></a></p></td>
+<td><p><a class="reference internal" href="#exc-libxc"><span class="std std-ref">libxc</span></a></p></td>
+<td><p><a class="reference internal" href="#exc-x-str"><span class="std std-ref">x_str</span></a></p></td>
+<td><p><a class="reference internal" href="#exc-c-str"><span class="std std-ref">c_str</span></a></p></td>
+</tr>
+</tbody>
+</table>
+<dl class="simple" id="exc-xc">
+<dt><strong>xc</strong></dt><dd><p>The kind of exchange-correlation functional. If not <cite>LDA</cite>, must have <a class="reference external" href="https://tddft.org/programs/libxc/">pylibxc</a> installed. It has higher priority than <a class="reference internal" href="#exc-libxc"><span class="std std-ref">libxc</span></a></p>
+<ul class="simple">
+<li><p><em>Options</em> : LDA, PBE</p></li>
+<li><p><em>Default</em> : None</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="simple" id="exc-libxc">
+<dt><strong>libxc</strong></dt><dd><p>The type of exchange-correlation functionals with <a class="reference external" href="https://tddft.org/programs/libxc/">pylibxc</a>. See <a class="reference external" href="https://www.tddft.org/programs/libxc/functionals/">available functionals</a>.</p>
+<ul class="simple">
+<li><p><em>Options</em> :</p></li>
+<li><p><em>Default</em> : lda_x lda_c_pz</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="simple" id="exc-x-str">
+<dt><strong>x_str</strong></dt><dd><p>See <a class="reference external" href="https://www.tddft.org/programs/libxc/functionals/">libxc’s available exchange functionals</a> (deprecated).</p>
+<ul class="simple">
+<li><p><em>Options</em> :</p></li>
+<li><p><em>Default</em> : None</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="simple" id="exc-c-str">
+<dt><strong>c_str</strong></dt><dd><p>See <a class="reference external" href="https://www.tddft.org/programs/libxc/functionals/">libxc’s available correlation functionals</a> (deprecated).</p>
+<ul class="simple">
+<li><p><em>Options</em> :</p></li>
+<li><p><em>Default</em> : None</p></li>
+</ul>
+</dd>
+</dl>
+</section>
+<section id="kedf">
+<h2>KEDF<a class="headerlink" href="#kedf" title="Link to this heading">¶</a></h2>
+<blockquote>
+<div><p>Control the kinetic energy density functional (KEDF). DFTpy features most KEDFs, from GGAs to nonlocal to nonlocal with density dependent kernel.</p>
+</div></blockquote>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#kedf-kedf"><span class="std std-ref">kedf</span></a></p></td>
+<td><p><a class="reference internal" href="#kedf-x"><span class="std std-ref">x</span></a></p></td>
+<td><p><a class="reference internal" href="#kedf-y"><span class="std std-ref">y</span></a></p></td>
+<td><p><a class="reference internal" href="#kedf-alpha"><span class="std std-ref">alpha</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#kedf-beta"><span class="std std-ref">beta</span></a></p></td>
+<td><p><a class="reference internal" href="#kedf-sigma"><span class="std std-ref">sigma</span></a></p></td>
+<td><p><a class="reference internal" href="#kedf-nsp"><span class="std std-ref">nsp</span></a></p></td>
+<td><p><a class="reference internal" href="#kedf-interp"><span class="std std-ref">interp</span></a></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#kedf-kerneltype"><span class="std std-ref">kerneltype</span></a></p></td>
+<td><p><a class="reference internal" href="#kedf-symmetrization"><span class="std std-ref">symmetrization</span></a></p></td>
+<td><p><a class="reference internal" href="#kedf-lumpfactor"><span class="std std-ref">lumpfactor</span></a></p></td>
+<td><p><a class="reference internal" href="#kedf-neta"><span class="std std-ref">neta</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#kedf-etamax"><span class="std std-ref">etamax</span></a></p></td>
+<td><p><a class="reference internal" href="#kedf-order"><span class="std std-ref">order</span></a></p></td>
+<td><p><a class="reference internal" href="#kedf-ratio"><span class="std std-ref">ratio</span></a></p></td>
+<td><p><a class="reference internal" href="#kedf-maxpoints"><span class="std std-ref">maxpoints</span></a></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#kedf-delta"><span class="std std-ref">delta</span></a></p></td>
+<td><p><a class="reference internal" href="#kedf-kdd"><span class="std std-ref">kdd</span></a></p></td>
+<td><p><a class="reference internal" href="#kedf-rho0"><span class="std std-ref">rho0</span></a></p></td>
+<td><p><a class="reference internal" href="#kedf-k-str"><span class="std std-ref">k_str</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#kedf-params"><span class="std std-ref">params</span></a></p></td>
+<td><p><a class="reference internal" href="#kedf-kfmin"><span class="std std-ref">kfmin</span></a></p></td>
+<td><p><a class="reference internal" href="#kedf-kfmax"><span class="std std-ref">kfmax</span></a></p></td>
+<td><p><a class="reference internal" href="#kedf-rhomax"><span class="std std-ref">rhomax</span></a></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#kedf-ldw"><span class="std std-ref">ldw</span></a></p></td>
+<td><p><a class="reference internal" href="#kedf-temperature"><span class="std std-ref">temperature</span></a></p></td>
+<td><p><a class="reference internal" href="#kedf-temperature0"><span class="std std-ref">temperature0</span></a></p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<dl class="simple" id="kedf-kedf">
+<dt><strong>kedf</strong></dt><dd><p>The type of KEDF. GGA functionals are available with keywords GGA and LIBXC.</p>
+<ul class="simple">
+<li><p><em>Options</em> : TF, GGA, LIBXC, vW, TFvW, WT, SM, FP, MGP, MGPA, MGPG, LMGP, LMGPA, LMGPG</p></li>
+<li><p><em>Default</em> : WT</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="simple" id="kedf-x">
+<dt><strong>x</strong></dt><dd><p>The ratio of TF KEDF.</p>
+<ul class="simple">
+<li><p><em>Options</em> :</p></li>
+<li><p><em>Default</em> : 1</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="simple" id="kedf-y">
+<dt><strong>y</strong></dt><dd><p>The ratio of vW KEDF.</p>
+<ul class="simple">
+<li><p><em>Options</em> :</p></li>
+<li><p><em>Default</em> : 1</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="simple" id="kedf-alpha">
+<dt><strong>alpha</strong></dt><dd><p>The alpha parameter typical in  nonlocal KEDF <span class="math notranslate nohighlight">\(\rho^{\alpha}\)</span>.</p>
+<ul class="simple">
+<li><p><em>Options</em> :</p></li>
+<li><p><em>Default</em> : None</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="simple" id="kedf-beta">
+<dt><strong>beta</strong></dt><dd><p>The beta parameter typical in  nonlocal KEDF <span class="math notranslate nohighlight">\(\rho^{\beta}\)</span>.</p>
+<ul class="simple">
+<li><p><em>Options</em> :</p></li>
+<li><p><em>Default</em> : None</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="simple" id="kedf-sigma">
+<dt><strong>sigma</strong></dt><dd><p>A parameter used to smooth with a Gaussian convolution FFTs of problematic functions (e.g., invfft of <span class="math notranslate nohighlight">\({G^2\rho(G)}\)</span> ).</p>
+<ul class="simple">
+<li><p><em>Options</em> :</p></li>
+<li><p><em>Default</em> : None</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="simple" id="kedf-nsp">
+<dt><strong>nsp</strong></dt><dd><p>The number of <span class="math notranslate nohighlight">\({k_{f}}\)</span> points for splining <cite>LWT</cite> like nonlocal KEDFs. There are three options to achieve the same goal, the priority is <a class="reference internal" href="#kedf-nsp"><span class="std std-ref">nsp</span></a> -&gt; <a class="reference internal" href="#kedf-delta"><span class="std std-ref">delta</span></a> -&gt; <a class="reference internal" href="#kedf-ratio"><span class="std std-ref">ratio</span></a>. Default is using <a class="reference internal" href="#kedf-ratio"><span class="std std-ref">ratio</span></a>.</p>
+<ul class="simple">
+<li><p><em>Options</em> :</p></li>
+<li><p><em>Default</em> : None</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="simple" id="kedf-interp">
+<dt><strong>interp</strong></dt><dd><p>The interpolation method for <cite>LWT</cite> KEDF’s kernel from the kernel table.</p>
+<ul class="simple">
+<li><p><em>Options</em> : linear, newton, hermite</p></li>
+<li><p><em>Default</em> : hermite</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="simple" id="kedf-kerneltype">
+<dt><strong>kerneltype</strong></dt><dd><p>The kernel for <cite>LWT</cite> KEDF.</p>
+<ul class="simple">
+<li><p><em>Options</em> : WT, MGP, MGPA, MGPG, HC</p></li>
+<li><p><em>Default</em> : None</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="simple" id="kedf-symmetrization">
+<dt><strong>symmetrization</strong></dt><dd><p>The symmetrization way for <cite>MGP</cite> KEDF. See <a class="reference external" href="https://aip.scitation.org/doi/abs/10.1063/1.5023926">MGP_paper</a>.</p>
+<ul class="simple">
+<li><p><em>Options</em> : None, Arithmetic, Geometric</p></li>
+<li><p><em>Default</em> : None</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="simple" id="kedf-lumpfactor">
+<dt><strong>lumpfactor</strong></dt><dd><p>The kinetic electron for <cite>LWT</cite> KEDF.</p>
+<ul class="simple">
+<li><p><em>Options</em> :</p></li>
+<li><p><em>Default</em> : None</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="simple" id="kedf-neta">
+<dt><strong>neta</strong></dt><dd><p>The max number of discrete <span class="math notranslate nohighlight">\(\eta\)</span> for <cite>LWT</cite> KEDF.</p>
+<ul class="simple">
+<li><p><em>Options</em> :</p></li>
+<li><p><em>Default</em> : 50000</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="simple" id="kedf-etamax">
+<dt><strong>etamax</strong></dt><dd><p>The max value of eta for kernel in <cite>LWT</cite> KEDF.</p>
+<ul class="simple">
+<li><p><em>Options</em> :</p></li>
+<li><p><em>Default</em> : 50</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="simple" id="kedf-order">
+<dt><strong>order</strong></dt><dd><p>The order for the interpolation of the kernel in <cite>LWT</cite> KEDF. ‘0’ means using the value of nearest-neighbor point is used.</p>
+<ul class="simple">
+<li><p><em>Options</em> : 1, 2, 3, 4, 5</p></li>
+<li><p><em>Default</em> : 3</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="simple" id="kedf-ratio">
+<dt><strong>ratio</strong></dt><dd><p>The ratio of <span class="math notranslate nohighlight">\({k_{f}}\)</span> for spline in <cite>LWT</cite> KEDF. There are three options to do same thing, the priority is <a class="reference internal" href="#kedf-nsp"><span class="std std-ref">nsp</span></a> -&gt; <a class="reference internal" href="#kedf-delta"><span class="std std-ref">delta</span></a> -&gt; <a class="reference internal" href="#kedf-ratio"><span class="std std-ref">ratio</span></a>. Default is using <a class="reference internal" href="#kedf-ratio"><span class="std std-ref">ratio</span></a>.</p>
+<ul class="simple">
+<li><p><em>Options</em> :</p></li>
+<li><p><em>Default</em> : 1.15</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="simple" id="kedf-maxpoints">
+<dt><strong>maxpoints</strong></dt><dd><p>The max number of integration points for the evaluation of the <cite>MGP</cite> kernel.</p>
+<ul class="simple">
+<li><p><em>Options</em> :</p></li>
+<li><p><em>Default</em> : 1000</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="simple" id="kedf-delta">
+<dt><strong>delta</strong></dt><dd><p>The gap of spline</p>
+<ul class="simple">
+<li><p><em>Options</em> :</p></li>
+<li><p><em>Default</em> : None</p></li>
+</ul>
+</dd>
+</dl>
+<dl id="kedf-kdd">
+<dt><strong>kdd</strong></dt><dd><dl class="simple">
+<dt>The kernel density dependent for <cite>LWT</cite> KEDF:</dt><dd><ul class="simple">
+<li><p>1 : The origin <cite>LWT</cite> KEDF.</p></li>
+<li><p>2 : Considers the <span class="math notranslate nohighlight">\(\rho^{\beta}(r')\omega(\rho(r),r-r')\)</span> term in the potential.</p></li>
+<li><p>3 : Also considers the derivative of kernel which is neglected in LWT. See <a class="reference external" href="https://journals.aps.org/prb/abstract/10.1103/PhysRevB.100.041105">LMGP_paper</a>.</p></li>
+</ul>
+</dd>
+</dl>
+<ul class="simple">
+<li><p><em>Options</em> : 1, 2, 3</p></li>
+<li><p><em>Default</em> : 3</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="simple" id="kedf-rho0">
+<dt><strong>rho0</strong></dt><dd><p>The ‘average’ density used for the definition of the Fermi momentum. Default is None, which means it calculated based on the total charge and system volume.</p>
+<ul class="simple">
+<li><p><em>Options</em> :</p></li>
+<li><p><em>Default</em> : None</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="simple" id="kedf-k-str">
+<dt><strong>k_str</strong></dt><dd><p>Functional type for GGA/LIBXC</p>
+<ul class="simple">
+<li><p><em>Options</em> : LKT, DK, LLP, LLP91, OL1, OL, OL2, T92, THAK, B86A, B86, B86B, DK87, PW86, PW91O, PW91, PW91k, LG94, E00, P92, PBE2, PBE3, PBE4, P82, TW02, APBE, APBEK, REVAPBEK, REVAPBE, VJKS00, LC94, VT84F, SMP, TF, VW, X_TF_Y_VW, TFVW, STV, PBE2M, PG</p></li>
+<li><p><em>Default</em> : None</p></li>
+</ul>
+</dd>
+</dl>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>GGA invokes DFTpy’s implementation. LIBXC invokes libxc’s implementation (discouraged).</p>
+</div>
+<dl class="simple" id="kedf-params">
+<dt><strong>params</strong></dt><dd><p>Parameters for GGA KEDF functionals</p>
+<ul class="simple">
+<li><p><em>Options</em> :</p></li>
+<li><p><em>Default</em> : None</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="simple" id="kedf-kfmin">
+<dt><strong>kfmin</strong></dt><dd><p>Lower limit of kf</p>
+<ul class="simple">
+<li><p><em>Options</em> :</p></li>
+<li><p><em>Default</em> : None</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="simple" id="kedf-kfmax">
+<dt><strong>kfmax</strong></dt><dd><p>Upper limit of kf</p>
+<ul class="simple">
+<li><p><em>Options</em> :</p></li>
+<li><p><em>Default</em> : None</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="simple" id="kedf-rhomax">
+<dt><strong>rhomax</strong></dt><dd><p>Maximum/cutoff density</p>
+<ul class="simple">
+<li><p><em>Options</em> :</p></li>
+<li><p><em>Default</em> : None</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="simple" id="kedf-ldw">
+<dt><strong>ldw</strong></dt><dd><p>local density weight</p>
+<ul class="simple">
+<li><p><em>Options</em> :</p></li>
+<li><p><em>Default</em> : None</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="simple" id="kedf-temperature">
+<dt><strong>temperature</strong></dt><dd><p>The temperature of TF KEDF.</p>
+<ul class="simple">
+<li><p><em>Options</em> :</p></li>
+<li><p><em>Default</em> : None</p></li>
+<li><p><em>Unit</em> : eV</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="simple" id="kedf-temperature0">
+<dt><strong>temperature0</strong></dt><dd><p>The temperature of TF KEDF (analytical approximation).</p>
+<ul class="simple">
+<li><p><em>Options</em> :</p></li>
+<li><p><em>Default</em> : None</p></li>
+<li><p><em>Unit</em> : eV</p></li>
+</ul>
+</dd>
+</dl>
+</section>
+<section id="kedf2">
+<h2>KEDF2<a class="headerlink" href="#kedf2" title="Link to this heading">¶</a></h2>
+<blockquote>
+<div><p>Control the kinetic energy density functional (KEDF). DFTpy features most KEDFs, from GGAs to nonlocal to nonlocal with density dependent kernel.</p>
+</div></blockquote>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#kedf2-copy"><span class="std std-ref">copy</span></a></p></td>
+<td><p><a class="reference internal" href="#kedf2-active"><span class="std std-ref">active</span></a></p></td>
+<td><p><a class="reference internal" href="#kedf2-x"><span class="std std-ref">x</span></a></p></td>
+<td><p><a class="reference internal" href="#kedf2-y"><span class="std std-ref">y</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#kedf2-kedf"><span class="std std-ref">kedf</span></a></p></td>
+<td><p><a class="reference internal" href="#kedf2-alpha"><span class="std std-ref">alpha</span></a></p></td>
+<td><p><a class="reference internal" href="#kedf2-beta"><span class="std std-ref">beta</span></a></p></td>
+<td><p><a class="reference internal" href="#kedf2-sigma"><span class="std std-ref">sigma</span></a></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#kedf2-nsp"><span class="std std-ref">nsp</span></a></p></td>
+<td><p><a class="reference internal" href="#kedf2-interp"><span class="std std-ref">interp</span></a></p></td>
+<td><p><a class="reference internal" href="#kedf2-kerneltype"><span class="std std-ref">kerneltype</span></a></p></td>
+<td><p><a class="reference internal" href="#kedf2-symmetrization"><span class="std std-ref">symmetrization</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#kedf2-lumpfactor"><span class="std std-ref">lumpfactor</span></a></p></td>
+<td><p><a class="reference internal" href="#kedf2-neta"><span class="std std-ref">neta</span></a></p></td>
+<td><p><a class="reference internal" href="#kedf2-etamax"><span class="std std-ref">etamax</span></a></p></td>
+<td><p><a class="reference internal" href="#kedf2-order"><span class="std std-ref">order</span></a></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#kedf2-ratio"><span class="std std-ref">ratio</span></a></p></td>
+<td><p><a class="reference internal" href="#kedf2-maxpoints"><span class="std std-ref">maxpoints</span></a></p></td>
+<td><p><a class="reference internal" href="#kedf2-delta"><span class="std std-ref">delta</span></a></p></td>
+<td><p><a class="reference internal" href="#kedf2-kdd"><span class="std std-ref">kdd</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#kedf2-rho0"><span class="std std-ref">rho0</span></a></p></td>
+<td><p><a class="reference internal" href="#kedf2-k-str"><span class="std std-ref">k_str</span></a></p></td>
+<td><p><a class="reference internal" href="#kedf2-params"><span class="std std-ref">params</span></a></p></td>
+<td><p><a class="reference internal" href="#kedf2-kfmin"><span class="std std-ref">kfmin</span></a></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#kedf2-kfmax"><span class="std std-ref">kfmax</span></a></p></td>
+<td><p><a class="reference internal" href="#kedf2-rhomax"><span class="std std-ref">rhomax</span></a></p></td>
+<td><p><a class="reference internal" href="#kedf2-ldw"><span class="std std-ref">ldw</span></a></p></td>
+<td><p><a class="reference internal" href="#kedf2-temperature"><span class="std std-ref">temperature</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#kedf2-temperature0"><span class="std std-ref">temperature0</span></a></p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p id="kedf2-copy"><strong>copy</strong></p>
+<blockquote>
+<div><ul class="simple">
+<li><p><em>Options</em> :</p></li>
+<li><p><em>Default</em> : KEDF</p></li>
+</ul>
+</div></blockquote>
+<p id="kedf2-active"><strong>active</strong></p>
+<blockquote>
+<div><ul class="simple">
+<li><p><em>Options</em> : True, False</p></li>
+<li><p><em>Default</em> : False</p></li>
+</ul>
+</div></blockquote>
+<dl class="simple" id="kedf2-x">
+<dt><strong>x</strong></dt><dd><p>The ratio of TF KEDF.</p>
+<ul class="simple">
+<li><p><em>Options</em> :</p></li>
+<li><p><em>Default</em> : 0</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="simple" id="kedf2-y">
+<dt><strong>y</strong></dt><dd><p>The ratio of vW KEDF.</p>
+<ul class="simple">
+<li><p><em>Options</em> :</p></li>
+<li><p><em>Default</em> : 0</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="simple" id="kedf2-kedf">
+<dt><strong>kedf</strong></dt><dd><p>The type of KEDF. GGA functionals are available with keywords GGA and LIBXC.</p>
+<ul class="simple">
+<li><p><em>Options</em> : TF, GGA, LIBXC, vW, TFvW, WT, SM, FP, MGP, MGPA, MGPG, LMGP, LMGPA, LMGPG</p></li>
+<li><p><em>Default</em> : WT</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="simple" id="kedf2-alpha">
+<dt><strong>alpha</strong></dt><dd><p>The alpha parameter typical in  nonlocal KEDF <span class="math notranslate nohighlight">\(\rho^{\alpha}\)</span>.</p>
+<ul class="simple">
+<li><p><em>Options</em> :</p></li>
+<li><p><em>Default</em> : None</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="simple" id="kedf2-beta">
+<dt><strong>beta</strong></dt><dd><p>The beta parameter typical in  nonlocal KEDF <span class="math notranslate nohighlight">\(\rho^{\beta}\)</span>.</p>
+<ul class="simple">
+<li><p><em>Options</em> :</p></li>
+<li><p><em>Default</em> : None</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="simple" id="kedf2-sigma">
+<dt><strong>sigma</strong></dt><dd><p>A parameter used to smooth with a Gaussian convolution FFTs of problematic functions (e.g., invfft of <span class="math notranslate nohighlight">\({G^2\rho(G)}\)</span> ).</p>
+<ul class="simple">
+<li><p><em>Options</em> :</p></li>
+<li><p><em>Default</em> : None</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="simple" id="kedf2-nsp">
+<dt><strong>nsp</strong></dt><dd><p>The number of <span class="math notranslate nohighlight">\({k_{f}}\)</span> points for splining <cite>LWT</cite> like nonlocal KEDFs. There are three options to achieve the same goal, the priority is <a class="reference internal" href="#kedf-nsp"><span class="std std-ref">nsp</span></a> -&gt; <a class="reference internal" href="#kedf-delta"><span class="std std-ref">delta</span></a> -&gt; <a class="reference internal" href="#kedf-ratio"><span class="std std-ref">ratio</span></a>. Default is using <a class="reference internal" href="#kedf-ratio"><span class="std std-ref">ratio</span></a>.</p>
+<ul class="simple">
+<li><p><em>Options</em> :</p></li>
+<li><p><em>Default</em> : None</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="simple" id="kedf2-interp">
+<dt><strong>interp</strong></dt><dd><p>The interpolation method for <cite>LWT</cite> KEDF’s kernel from the kernel table.</p>
+<ul class="simple">
+<li><p><em>Options</em> : linear, newton, hermite</p></li>
+<li><p><em>Default</em> : hermite</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="simple" id="kedf2-kerneltype">
+<dt><strong>kerneltype</strong></dt><dd><p>The kernel for <cite>LWT</cite> KEDF.</p>
+<ul class="simple">
+<li><p><em>Options</em> : WT, MGP, MGPA, MGPG, HC</p></li>
+<li><p><em>Default</em> : None</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="simple" id="kedf2-symmetrization">
+<dt><strong>symmetrization</strong></dt><dd><p>The symmetrization way for <cite>MGP</cite> KEDF. See <a class="reference external" href="https://aip.scitation.org/doi/abs/10.1063/1.5023926">MGP_paper</a>.</p>
+<ul class="simple">
+<li><p><em>Options</em> : None, Arithmetic, Geometric</p></li>
+<li><p><em>Default</em> : None</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="simple" id="kedf2-lumpfactor">
+<dt><strong>lumpfactor</strong></dt><dd><p>The kinetic electron for <cite>LWT</cite> KEDF.</p>
+<ul class="simple">
+<li><p><em>Options</em> :</p></li>
+<li><p><em>Default</em> : None</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="simple" id="kedf2-neta">
+<dt><strong>neta</strong></dt><dd><p>The max number of discrete <span class="math notranslate nohighlight">\(\eta\)</span> for <cite>LWT</cite> KEDF.</p>
+<ul class="simple">
+<li><p><em>Options</em> :</p></li>
+<li><p><em>Default</em> : 50000</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="simple" id="kedf2-etamax">
+<dt><strong>etamax</strong></dt><dd><p>The max value of eta for kernel in <cite>LWT</cite> KEDF.</p>
+<ul class="simple">
+<li><p><em>Options</em> :</p></li>
+<li><p><em>Default</em> : 50</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="simple" id="kedf2-order">
+<dt><strong>order</strong></dt><dd><p>The order for the interpolation of the kernel in <cite>LWT</cite> KEDF. ‘0’ means using the value of nearest-neighbor point is used.</p>
+<ul class="simple">
+<li><p><em>Options</em> : 1, 2, 3, 4, 5</p></li>
+<li><p><em>Default</em> : 3</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="simple" id="kedf2-ratio">
+<dt><strong>ratio</strong></dt><dd><p>The ratio of <span class="math notranslate nohighlight">\({k_{f}}\)</span> for spline in <cite>LWT</cite> KEDF. There are three options to do same thing, the priority is <a class="reference internal" href="#kedf-nsp"><span class="std std-ref">nsp</span></a> -&gt; <a class="reference internal" href="#kedf-delta"><span class="std std-ref">delta</span></a> -&gt; <a class="reference internal" href="#kedf-ratio"><span class="std std-ref">ratio</span></a>. Default is using <a class="reference internal" href="#kedf-ratio"><span class="std std-ref">ratio</span></a>.</p>
+<ul class="simple">
+<li><p><em>Options</em> :</p></li>
+<li><p><em>Default</em> : 1.15</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="simple" id="kedf2-maxpoints">
+<dt><strong>maxpoints</strong></dt><dd><p>The max number of integration points for the evaluation of the <cite>MGP</cite> kernel.</p>
+<ul class="simple">
+<li><p><em>Options</em> :</p></li>
+<li><p><em>Default</em> : 1000</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="simple" id="kedf2-delta">
+<dt><strong>delta</strong></dt><dd><p>The gap of spline</p>
+<ul class="simple">
+<li><p><em>Options</em> :</p></li>
+<li><p><em>Default</em> : None</p></li>
+</ul>
+</dd>
+</dl>
+<dl id="kedf2-kdd">
+<dt><strong>kdd</strong></dt><dd><dl class="simple">
+<dt>The kernel density dependent for <cite>LWT</cite> KEDF:</dt><dd><ul class="simple">
+<li><p>1 : The origin <cite>LWT</cite> KEDF.</p></li>
+<li><p>2 : Considers the <span class="math notranslate nohighlight">\(\rho^{\beta}(r')\omega(\rho(r),r-r')\)</span> term in the potential.</p></li>
+<li><p>3 : Also considers the derivative of kernel which is neglected in LWT. See <a class="reference external" href="https://journals.aps.org/prb/abstract/10.1103/PhysRevB.100.041105">LMGP_paper</a>.</p></li>
+</ul>
+</dd>
+</dl>
+<ul class="simple">
+<li><p><em>Options</em> : 1, 2, 3</p></li>
+<li><p><em>Default</em> : 3</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="simple" id="kedf2-rho0">
+<dt><strong>rho0</strong></dt><dd><p>The ‘average’ density used for the definition of the Fermi momentum. Default is None, which means it calculated based on the total charge and system volume.</p>
+<ul class="simple">
+<li><p><em>Options</em> :</p></li>
+<li><p><em>Default</em> : None</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="simple" id="kedf2-k-str">
+<dt><strong>k_str</strong></dt><dd><p>Functional type for GGA/LIBXC</p>
+<ul class="simple">
+<li><p><em>Options</em> : LKT, DK, LLP, LLP91, OL1, OL, OL2, T92, THAK, B86A, B86, B86B, DK87, PW86, PW91O, PW91, PW91k, LG94, E00, P92, PBE2, PBE3, PBE4, P82, TW02, APBE, APBEK, REVAPBEK, REVAPBE, VJKS00, LC94, VT84F, SMP, TF, VW, X_TF_Y_VW, TFVW, STV, PBE2M, PG</p></li>
+<li><p><em>Default</em> : None</p></li>
+</ul>
+</dd>
+</dl>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>GGA invokes DFTpy’s implementation. LIBXC invokes libxc’s implementation (discouraged).</p>
+</div>
+<dl class="simple" id="kedf2-params">
+<dt><strong>params</strong></dt><dd><p>Parameters for GGA KEDF functionals</p>
+<ul class="simple">
+<li><p><em>Options</em> :</p></li>
+<li><p><em>Default</em> : None</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="simple" id="kedf2-kfmin">
+<dt><strong>kfmin</strong></dt><dd><p>Lower limit of kf</p>
+<ul class="simple">
+<li><p><em>Options</em> :</p></li>
+<li><p><em>Default</em> : None</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="simple" id="kedf2-kfmax">
+<dt><strong>kfmax</strong></dt><dd><p>Upper limit of kf</p>
+<ul class="simple">
+<li><p><em>Options</em> :</p></li>
+<li><p><em>Default</em> : None</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="simple" id="kedf2-rhomax">
+<dt><strong>rhomax</strong></dt><dd><p>Maximum/cutoff density</p>
+<ul class="simple">
+<li><p><em>Options</em> :</p></li>
+<li><p><em>Default</em> : None</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="simple" id="kedf2-ldw">
+<dt><strong>ldw</strong></dt><dd><p>local density weight</p>
+<ul class="simple">
+<li><p><em>Options</em> :</p></li>
+<li><p><em>Default</em> : None</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="simple" id="kedf2-temperature">
+<dt><strong>temperature</strong></dt><dd><p>The temperature of TF KEDF.</p>
+<ul class="simple">
+<li><p><em>Options</em> :</p></li>
+<li><p><em>Default</em> : None</p></li>
+<li><p><em>Unit</em> : eV</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="simple" id="kedf2-temperature0">
+<dt><strong>temperature0</strong></dt><dd><p>The temperature of TF KEDF (analytical approximation).</p>
+<ul class="simple">
+<li><p><em>Options</em> :</p></li>
+<li><p><em>Default</em> : None</p></li>
+<li><p><em>Unit</em> : eV</p></li>
+</ul>
+</dd>
+</dl>
+</section>
+<section id="output">
+<h2>OUTPUT<a class="headerlink" href="#output" title="Link to this heading">¶</a></h2>
+<blockquote>
+<div><p>Control the output.</p>
+</div></blockquote>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#output-time"><span class="std std-ref">time</span></a></p></td>
+<td><p><a class="reference internal" href="#output-stress"><span class="std std-ref">stress</span></a></p></td>
+<td><p><a class="reference internal" href="#output-electrostatic-potential"><span class="std std-ref">electrostatic_potential</span></a></p></td>
+</tr>
+</tbody>
+</table>
+<dl class="simple" id="output-time">
+<dt><strong>time</strong></dt><dd><p>Output the time information of all parts.</p>
+<ul class="simple">
+<li><p><em>Options</em> : True, False</p></li>
+<li><p><em>Default</em> : True</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="simple" id="output-stress">
+<dt><strong>stress</strong></dt><dd><p>Output the stress information of all terms.</p>
+<ul class="simple">
+<li><p><em>Options</em> : True, False</p></li>
+<li><p><em>Default</em> : True</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="simple" id="output-electrostatic-potential">
+<dt><strong>electrostatic_potential</strong></dt><dd><p>Output of electrostatic potential</p>
+<ul class="simple">
+<li><p><em>Options</em> :</p></li>
+<li><p><em>Default</em> : None</p></li>
+</ul>
+</dd>
+</dl>
+</section>
+<section id="opt">
+<h2>OPT<a class="headerlink" href="#opt" title="Link to this heading">¶</a></h2>
+<blockquote>
+<div><p>Control the charge density optimization.</p>
+</div></blockquote>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#opt-method"><span class="std std-ref">method</span></a></p></td>
+<td><p><a class="reference internal" href="#opt-algorithm"><span class="std std-ref">algorithm</span></a></p></td>
+<td><p><a class="reference internal" href="#opt-vector"><span class="std std-ref">vector</span></a></p></td>
+<td><p><a class="reference internal" href="#opt-c1"><span class="std std-ref">c1</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#opt-c2"><span class="std std-ref">c2</span></a></p></td>
+<td><p><a class="reference internal" href="#opt-maxls"><span class="std std-ref">maxls</span></a></p></td>
+<td><p><a class="reference internal" href="#opt-econv"><span class="std std-ref">econv</span></a></p></td>
+<td><p><a class="reference internal" href="#opt-maxfun"><span class="std std-ref">maxfun</span></a></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#opt-maxiter"><span class="std std-ref">maxiter</span></a></p></td>
+<td><p><a class="reference internal" href="#opt-xtol"><span class="std std-ref">xtol</span></a></p></td>
+<td><p><a class="reference internal" href="#opt-h0"><span class="std std-ref">h0</span></a></p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<dl class="simple" id="opt-method">
+<dt><strong>method</strong></dt><dd><p>The density optimization method.</p>
+<ul class="simple">
+<li><p><em>Options</em> : TN, LBFGS, CG-HS, CG-DY, CG-CD, CG-LS, CG-FR, CG-PR</p></li>
+<li><p><em>Default</em> : CG-HS</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="simple" id="opt-algorithm">
+<dt><strong>algorithm</strong></dt><dd><p>Direct energy minimization method (EMM), direct residual minimization method (RMM), and one-orbital ensemble self-consistent field (<a class="reference external" href="https://pubs.acs.org/doi/full/10.1021/acs.jpclett.1c00716">OESCF</a>).</p>
+<ul class="simple">
+<li><p><em>Options</em> : EMM, RMM, OESCF</p></li>
+<li><p><em>Default</em> : EMM</p></li>
+</ul>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>In <cite>OESCF</cite> solver, the <a class="reference internal" href="#kedf-kedf"><span class="std std-ref">kedf</span></a> has to contains full <cite>vW</cite> functional.</p>
+</div>
+<dl class="simple" id="opt-vector">
+<dt><strong>vector</strong></dt><dd><p>The scheme to deal with search direction.</p>
+<ul class="simple">
+<li><p><em>Options</em> : Orthogonalization, Scaling</p></li>
+<li><p><em>Default</em> : Orthogonalization</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="simple" id="opt-c1">
+<dt><strong>c1</strong></dt><dd><p>The wolfe parameters <cite>c1</cite></p>
+<ul class="simple">
+<li><p><em>Options</em> :</p></li>
+<li><p><em>Default</em> : 0.0001</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="simple" id="opt-c2">
+<dt><strong>c2</strong></dt><dd><p>The wolfe parameters <cite>c2</cite></p>
+<ul class="simple">
+<li><p><em>Options</em> :</p></li>
+<li><p><em>Default</em> : 0.2</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="simple" id="opt-maxls">
+<dt><strong>maxls</strong></dt><dd><p>The max steps for line search.</p>
+<ul class="simple">
+<li><p><em>Options</em> :</p></li>
+<li><p><em>Default</em> : 10</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="simple" id="opt-econv">
+<dt><strong>econv</strong></dt><dd><p>The energy convergence for last three steps (a.u./atom).</p>
+<ul class="simple">
+<li><p><em>Options</em> :</p></li>
+<li><p><em>Default</em> : 1e-06</p></li>
+<li><p><em>Unit</em> : a.u./atom</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="simple" id="opt-maxfun">
+<dt><strong>maxfun</strong></dt><dd><p>The max steps for function calls. For <cite>TN</cite> density optimization method its the max steps for searching direction.</p>
+<ul class="simple">
+<li><p><em>Options</em> :</p></li>
+<li><p><em>Default</em> : 50</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="simple" id="opt-maxiter">
+<dt><strong>maxiter</strong></dt><dd><p>The max steps for optimization</p>
+<ul class="simple">
+<li><p><em>Options</em> :</p></li>
+<li><p><em>Default</em> : 100</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="simple" id="opt-xtol">
+<dt><strong>xtol</strong></dt><dd><p>Relative tolerance for an acceptable step.</p>
+<ul class="simple">
+<li><p><em>Options</em> :</p></li>
+<li><p><em>Default</em> : 1e-12</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="simple" id="opt-h0">
+<dt><strong>h0</strong></dt><dd><p>The initial approximation for the inverse Hessian needed by <cite>LBFGS</cite>.</p>
+<ul class="simple">
+<li><p><em>Options</em> :</p></li>
+<li><p><em>Default</em> : 1</p></li>
+</ul>
+</dd>
+</dl>
+</section>
+<section id="mix">
+<h2>MIX<a class="headerlink" href="#mix" title="Link to this heading">¶</a></h2>
+<blockquote>
+<div><p>Control the charge density mixing.</p>
+</div></blockquote>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#mix-scheme"><span class="std std-ref">scheme</span></a></p></td>
+<td><p><a class="reference internal" href="#mix-predtype"><span class="std std-ref">predtype</span></a></p></td>
+<td><p><a class="reference internal" href="#mix-predcoef"><span class="std std-ref">predcoef</span></a></p></td>
+<td><p><a class="reference internal" href="#mix-predecut"><span class="std std-ref">predecut</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#mix-maxm"><span class="std std-ref">maxm</span></a></p></td>
+<td><p><a class="reference internal" href="#mix-coef"><span class="std std-ref">coef</span></a></p></td>
+<td><p><a class="reference internal" href="#mix-delay"><span class="std std-ref">delay</span></a></p></td>
+<td><p><a class="reference internal" href="#mix-restarted"><span class="std std-ref">restarted</span></a></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#mix-kf"><span class="std std-ref">kf</span></a></p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<dl class="simple" id="mix-scheme">
+<dt><strong>scheme</strong></dt><dd><p>Density mixing scheme.</p>
+<ul class="simple">
+<li><p><em>Options</em> : pulay, linear</p></li>
+<li><p><em>Default</em> : pulay</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="simple" id="mix-predtype">
+<dt><strong>predtype</strong></dt><dd><p>The preconditioning method.</p>
+<ul class="simple">
+<li><p><em>Options</em> : kerker, inverse_kerker, resta</p></li>
+<li><p><em>Default</em> : kerker</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="simple" id="mix-predcoef">
+<dt><strong>predcoef</strong></dt><dd><p>The parameters for preconditioning.</p>
+<ul class="simple">
+<li><p><em>Options</em> :</p></li>
+<li><p><em>Default</em> : 1.0 1.0 1.0</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="simple" id="mix-predecut">
+<dt><strong>predecut</strong></dt><dd><p>The preconditioning energy cutoff.</p>
+<ul class="simple">
+<li><p><em>Options</em> :</p></li>
+<li><p><em>Default</em> : None</p></li>
+<li><p><em>Unit</em> : eV</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="simple" id="mix-maxm">
+<dt><strong>maxm</strong></dt><dd><p>Maximum of iterations used for mixing.</p>
+<ul class="simple">
+<li><p><em>Options</em> :</p></li>
+<li><p><em>Default</em> : 7</p></li>
+</ul>
+</dd>
+</dl>
+<p id="mix-coef"><strong>coef</strong></p>
+<blockquote>
+<div><ul class="simple">
+<li><p><em>Options</em> : The mixing parameter.</p></li>
+<li><p><em>Default</em> : 0.7</p></li>
+</ul>
+</div></blockquote>
+<dl class="simple" id="mix-delay">
+<dt><strong>delay</strong></dt><dd><p>Delay several step to mixing the density.</p>
+<ul class="simple">
+<li><p><em>Options</em> :</p></li>
+<li><p><em>Default</em> : 2</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="simple" id="mix-restarted">
+<dt><strong>restarted</strong></dt><dd><p>Restart the mixer after several step.</p>
+<ul class="simple">
+<li><p><em>Options</em> : True, False</p></li>
+<li><p><em>Default</em> : False</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="simple" id="mix-kf">
+<dt><strong>kf</strong></dt><dd><p>Similar as predcoef, not use now.</p>
+<ul class="simple">
+<li><p><em>Options</em> :</p></li>
+<li><p><em>Default</em> : auto</p></li>
+</ul>
+</dd>
+</dl>
+</section>
+<section id="propagator">
+<h2>PROPAGATOR<a class="headerlink" href="#propagator" title="Link to this heading">¶</a></h2>
+<blockquote>
+<div><p>Control of the propagator. <cite>DFTpy</cite> has an implementation of hydrodynamic TDDFT. This is essentially TDDFT with one orbital only, defined as <span class="math notranslate nohighlight">\({\psi(r,t)=\sqrt{\rho(r,t)}e^{iS(r,t)}}\)</span>, and determined by the following time-dependent Schroedinger equation,</p>
+<blockquote>
+<div><p><span class="math notranslate nohighlight">\({-\frac{1}{2} \nabla^2 \psi(r,t) + v_s(r,t) \psi(r,t) = i\frac{d}{dt}\psi(r,t)}\)</span>,</p>
+</div></blockquote>
+<p>where <span class="math notranslate nohighlight">\({v_s = v_{xc} + v_H + v_{T_s} - v_{vW} + v_{dyn}}\)</span>, See <a class="reference external" href="https://journals.aps.org/prl/abstract/10.1103/PhysRevLett.111.175002">paper</a>.</p>
+</div></blockquote>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#propagator-propagator"><span class="std std-ref">propagator</span></a></p></td>
+<td><p><a class="reference internal" href="#propagator-order"><span class="std std-ref">order</span></a></p></td>
+<td><p><a class="reference internal" href="#propagator-linearsolver"><span class="std std-ref">linearsolver</span></a></p></td>
+<td><p><a class="reference internal" href="#propagator-tol"><span class="std std-ref">tol</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#propagator-maxiter"><span class="std std-ref">maxiter</span></a></p></td>
+<td><p><a class="reference internal" href="#propagator-atol"><span class="std std-ref">atol</span></a></p></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<dl class="simple" id="propagator-propagator">
+<dt><strong>propagator</strong></dt><dd><p>The type of propagator.</p>
+<ul class="simple">
+<li><p><em>Options</em> : crank-nicholson, taylor</p></li>
+<li><p><em>Default</em> : crank-nicholson</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="simple" id="propagator-order">
+<dt><strong>order</strong></dt><dd><p>The order used for the Taylor expansion propagator.</p>
+<ul class="simple">
+<li><p><em>Options</em> :</p></li>
+<li><p><em>Default</em> : 20</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="simple" id="propagator-linearsolver">
+<dt><strong>linearsolver</strong></dt><dd><p>The linear solver used for the Crank-Nicolson propagator. The solvers with a name end with <cite>_scipy</cite> are from the <cite>SciPy</cite> package and should be used in serial calculations only.</p>
+<ul class="simple">
+<li><p><em>Options</em> : bicg, bicgstab, cg, bicg_scipy, bicgstab_scipy, cg_scipy, cgs_scipy, gmres_scipy, lgmres_scipy, minres_scipy, qmr_scipy</p></li>
+<li><p><em>Default</em> : cg</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="simple" id="propagator-tol">
+<dt><strong>tol</strong></dt><dd><p>The relative tolerance for the linear solver used for the Crank-Nicolson propagator.</p>
+<ul class="simple">
+<li><p><em>Options</em> :</p></li>
+<li><p><em>Default</em> : 1e-10</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="simple" id="propagator-maxiter">
+<dt><strong>maxiter</strong></dt><dd><p>The max amount of iteration steps for the linear solver used for the Crank-Nicolson propagator.</p>
+<ul class="simple">
+<li><p><em>Options</em> :</p></li>
+<li><p><em>Default</em> : 100</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="simple" id="propagator-atol">
+<dt><strong>atol</strong></dt><dd><p>The absolute tolerance for the linear solver used for the Crank-Nicolson propagator.</p>
+<ul class="simple">
+<li><p><em>Options</em> :</p></li>
+<li><p><em>Default</em> : None</p></li>
+</ul>
+</dd>
+</dl>
+</section>
+<section id="td">
+<h2>TD<a class="headerlink" href="#td" title="Link to this heading">¶</a></h2>
+<blockquote>
+<div><p>Control the TDDFT parameters that lie outside the propagator class.</p>
+</div></blockquote>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#td-outfile"><span class="std std-ref">outfile</span></a></p></td>
+<td><p><a class="reference internal" href="#td-timestep"><span class="std std-ref">timestep</span></a></p></td>
+<td><p><a class="reference internal" href="#td-tmax"><span class="std std-ref">tmax</span></a></p></td>
+<td><p><a class="reference internal" href="#td-max-pc"><span class="std std-ref">max_pc</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#td-tol-pc"><span class="std std-ref">tol_pc</span></a></p></td>
+<td><p><a class="reference internal" href="#td-atol-pc"><span class="std std-ref">atol_pc</span></a></p></td>
+<td><p><a class="reference internal" href="#td-direc"><span class="std std-ref">direc</span></a></p></td>
+<td><p><a class="reference internal" href="#td-strength"><span class="std std-ref">strength</span></a></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#td-max-runtime"><span class="std std-ref">max_runtime</span></a></p></td>
+<td><p><a class="reference internal" href="#td-restart"><span class="std std-ref">restart</span></a></p></td>
+<td><p><a class="reference internal" href="#td-restart-input"><span class="std std-ref">restart_input</span></a></p></td>
+<td><p><a class="reference internal" href="#td-save-interval"><span class="std std-ref">save_interval</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#td-correction"><span class="std std-ref">correction</span></a></p></td>
+<td><p><a class="reference internal" href="#td-vector-potential"><span class="std std-ref">vector_potential</span></a></p></td>
+<td><p><a class="reference internal" href="#td-propagate-vector-potential"><span class="std std-ref">propagate_vector_potential</span></a></p></td>
+<td><p><a class="reference internal" href="#td-omega"><span class="std std-ref">omega</span></a></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#td-z-split"><span class="std std-ref">z_split</span></a></p></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<dl class="simple" id="td-outfile">
+<dt><strong>outfile</strong></dt><dd><p>The prefix of the output files.</p>
+<ul class="simple">
+<li><p><em>Options</em> :</p></li>
+<li><p><em>Default</em> : td_out</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="simple" id="td-timestep">
+<dt><strong>timestep</strong></dt><dd><p>The time step in atomic units.</p>
+<ul class="simple">
+<li><p><em>Options</em> :</p></li>
+<li><p><em>Default</em> : 0.001</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="simple" id="td-tmax">
+<dt><strong>tmax</strong></dt><dd><p>The total amount of time in atomic units.</p>
+<ul class="simple">
+<li><p><em>Options</em> :</p></li>
+<li><p><em>Default</em> : 1</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="simple" id="td-max-pc">
+<dt><strong>max_pc</strong></dt><dd><p>The max amount of the predictor-corrector steps.</p>
+<ul class="simple">
+<li><p><em>Options</em> :</p></li>
+<li><p><em>Default</em> : 2</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="simple" id="td-tol-pc">
+<dt><strong>tol_pc</strong></dt><dd><p>The relative tolerance for the predictor-corrector.</p>
+<ul class="simple">
+<li><p><em>Options</em> :</p></li>
+<li><p><em>Default</em> : 1e-08</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="simple" id="td-atol-pc">
+<dt><strong>atol_pc</strong></dt><dd><p>The absolute tolerance for the predictor-corrector.</p>
+<ul class="simple">
+<li><p><em>Options</em> :</p></li>
+<li><p><em>Default</em> : 1e-10</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="simple" id="td-direc">
+<dt><strong>direc</strong></dt><dd><p>The direction of the initial kick. 0, 1, 2 stands for x-, y-, z-direction, respectively.</p>
+<ul class="simple">
+<li><p><em>Options</em> : 0 or x, 1 or y, 2 or z</p></li>
+<li><p><em>Default</em> : 0</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="simple" id="td-strength">
+<dt><strong>strength</strong></dt><dd><p>The strength of the initial kick in atomic units.</p>
+<ul class="simple">
+<li><p><em>Options</em> :</p></li>
+<li><p><em>Default</em> : 0.001</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="simple" id="td-max-runtime">
+<dt><strong>max_runtime</strong></dt><dd><p>Max amount of running time in seconds before the program saves the intermediate result and quitting.</p>
+<ul class="simple">
+<li><p><em>Options</em> :</p></li>
+<li><p><em>Default</em> : 0</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="simple" id="td-restart">
+<dt><strong>restart</strong></dt><dd><p>Restart the propagation from a previously saved intermediate result.</p>
+<ul class="simple">
+<li><p><em>Options</em> : True, False</p></li>
+<li><p><em>Default</em> : False</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="simple" id="td-restart-input">
+<dt><strong>restart_input</strong></dt><dd><p>Input file for restart data.</p>
+<ul class="simple">
+<li><p><em>Options</em> :</p></li>
+<li><p><em>Default</em> : restart_data.npy</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="simple" id="td-save-interval">
+<dt><strong>save_interval</strong></dt><dd><p>The number of time step interval between two saves of states.</p>
+<ul class="simple">
+<li><p><em>Options</em> :</p></li>
+<li><p><em>Default</em> : 1000</p></li>
+</ul>
+</dd>
+</dl>
+<p id="td-correction"><strong>correction</strong></p>
+<blockquote>
+<div><ul class="simple">
+<li><p><em>Options</em> : True, False</p></li>
+<li><p><em>Default</em> : False</p></li>
+</ul>
+</div></blockquote>
+<dl class="simple" id="td-vector-potential">
+<dt><strong>vector_potential</strong></dt><dd><p>If true, use vector potential for the initial kick.</p>
+<ul class="simple">
+<li><p><em>Options</em> : True, False</p></li>
+<li><p><em>Default</em> : False</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="simple" id="td-propagate-vector-potential">
+<dt><strong>propagate_vector_potential</strong></dt><dd><p>Only matters if vector_potential is true. If true, propagate the vector potential.</p>
+<ul class="simple">
+<li><p><em>Options</em> : True, False</p></li>
+<li><p><em>Default</em> : True</p></li>
+</ul>
+</dd>
+</dl>
+<p id="td-omega"><strong>omega</strong></p>
+<blockquote>
+<div><ul class="simple">
+<li><p><em>Options</em> :</p></li>
+<li><p><em>Default</em> : 0</p></li>
+</ul>
+</div></blockquote>
+<p id="td-z-split"><strong>z_split</strong></p>
+<blockquote>
+<div><ul class="simple">
+<li><p><em>Options</em> :</p></li>
+<li><p><em>Default</em> : 0</p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="casida">
+<h2>CASIDA<a class="headerlink" href="#casida" title="Link to this heading">¶</a></h2>
+<blockquote>
+<div><p>Control of the CASIDA.</p>
+</div></blockquote>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#casida-numeig"><span class="std std-ref">numeig</span></a></p></td>
+<td><p><a class="reference internal" href="#casida-diagonalize"><span class="std std-ref">diagonalize</span></a></p></td>
+<td><p><a class="reference internal" href="#casida-tda"><span class="std std-ref">tda</span></a></p></td>
+</tr>
+</tbody>
+</table>
+<dl class="simple" id="casida-numeig">
+<dt><strong>numeig</strong></dt><dd><p>Number of eigenstates used in constructing casida matrix.</p>
+<ul class="simple">
+<li><p><em>Options</em> :</p></li>
+<li><p><em>Default</em> : None</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="simple" id="casida-diagonalize">
+<dt><strong>diagonalize</strong></dt><dd><p>If true, diagonalize the Hamiltonian before construct the Casida matrix. If false, read the eigenstates from a saved file.</p>
+<ul class="simple">
+<li><p><em>Options</em> : True, False</p></li>
+<li><p><em>Default</em> : True</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="simple" id="casida-tda">
+<dt><strong>tda</strong></dt><dd><p>Use Tamm-Dancoff approximation.</p>
+<ul class="simple">
+<li><p><em>Options</em> : True, False</p></li>
+<li><p><em>Default</em> : False</p></li>
+</ul>
+</dd>
+</dl>
+</section>
+<section id="nonadiabatic">
+<h2>NONADIABATIC<a class="headerlink" href="#nonadiabatic" title="Link to this heading">¶</a></h2>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#nonadiabatic-nonadiabatic"><span class="std std-ref">nonadiabatic</span></a></p></td>
+<td><p><a class="reference internal" href="#nonadiabatic-cutoff"><span class="std std-ref">cutoff</span></a></p></td>
+<td><p><a class="reference internal" href="#nonadiabatic-rho-cutoff"><span class="std std-ref">rho_cutoff</span></a></p></td>
+<td><p><a class="reference internal" href="#nonadiabatic-k"><span class="std std-ref">k</span></a></p></td>
+</tr>
+</tbody>
+</table>
+<dl class="simple" id="nonadiabatic-nonadiabatic">
+<dt><strong>nonadiabatic</strong></dt><dd><p>Name of nonadiabatic Pauli potential.</p>
+<ul class="simple">
+<li><p><em>Options</em> :</p></li>
+<li><p><em>Default</em> : None</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="simple" id="nonadiabatic-cutoff">
+<dt><strong>cutoff</strong></dt><dd><p>If :math:’k_F’ is smaller than the cutoff, treat it equal to the cutoff.</p>
+<ul class="simple">
+<li><p><em>Options</em> :</p></li>
+<li><p><em>Default</em> : 0.01</p></li>
+</ul>
+</dd>
+</dl>
+<p id="nonadiabatic-rho-cutoff"><strong>rho_cutoff</strong></p>
+<blockquote>
+<div><ul class="simple">
+<li><p><em>Options</em> :</p></li>
+<li><p><em>Default</em> : 0.001</p></li>
+</ul>
+</div></blockquote>
+<p id="nonadiabatic-k"><strong>k</strong></p>
+<blockquote>
+<div><ul class="simple">
+<li><p><em>Options</em> :</p></li>
+<li><p><em>Default</em> : 2</p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="nonadiabatic2">
+<h2>NONADIABATIC2<a class="headerlink" href="#nonadiabatic2" title="Link to this heading">¶</a></h2>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#nonadiabatic2-copy"><span class="std std-ref">copy</span></a></p></td>
+<td><p><a class="reference internal" href="#nonadiabatic2-active"><span class="std std-ref">active</span></a></p></td>
+<td><p><a class="reference internal" href="#nonadiabatic2-nonadiabatic"><span class="std std-ref">nonadiabatic</span></a></p></td>
+<td><p><a class="reference internal" href="#nonadiabatic2-cutoff"><span class="std std-ref">cutoff</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#nonadiabatic2-rho-cutoff"><span class="std std-ref">rho_cutoff</span></a></p></td>
+<td><p><a class="reference internal" href="#nonadiabatic2-k"><span class="std std-ref">k</span></a></p></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p id="nonadiabatic2-copy"><strong>copy</strong></p>
+<blockquote>
+<div><ul class="simple">
+<li><p><em>Options</em> :</p></li>
+<li><p><em>Default</em> : NONADIABATIC</p></li>
+</ul>
+</div></blockquote>
+<p id="nonadiabatic2-active"><strong>active</strong></p>
+<blockquote>
+<div><ul class="simple">
+<li><p><em>Options</em> : True, False</p></li>
+<li><p><em>Default</em> : False</p></li>
+</ul>
+</div></blockquote>
+<dl class="simple" id="nonadiabatic2-nonadiabatic">
+<dt><strong>nonadiabatic</strong></dt><dd><p>Name of nonadiabatic Pauli potential.</p>
+<ul class="simple">
+<li><p><em>Options</em> :</p></li>
+<li><p><em>Default</em> : None</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="simple" id="nonadiabatic2-cutoff">
+<dt><strong>cutoff</strong></dt><dd><p>If :math:’k_F’ is smaller than the cutoff, treat it equal to the cutoff.</p>
+<ul class="simple">
+<li><p><em>Options</em> :</p></li>
+<li><p><em>Default</em> : 0.01</p></li>
+</ul>
+</dd>
+</dl>
+<p id="nonadiabatic2-rho-cutoff"><strong>rho_cutoff</strong></p>
+<blockquote>
+<div><ul class="simple">
+<li><p><em>Options</em> :</p></li>
+<li><p><em>Default</em> : 0.001</p></li>
+</ul>
+</div></blockquote>
+<p id="nonadiabatic2-k"><strong>k</strong></p>
+<blockquote>
+<div><ul class="simple">
+<li><p><em>Options</em> :</p></li>
+<li><p><em>Default</em> : 2</p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="inversion">
+<h2>INVERSION<a class="headerlink" href="#inversion" title="Link to this heading">¶</a></h2>
+<blockquote>
+<div><p>Control of the INVERSION.</p>
+</div></blockquote>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#inversion-rho-in"><span class="std std-ref">rho_in</span></a></p></td>
+<td><p><a class="reference internal" href="#inversion-v-out"><span class="std std-ref">v_out</span></a></p></td>
+</tr>
+</tbody>
+</table>
+<dl class="simple" id="inversion-rho-in">
+<dt><strong>rho_in</strong></dt><dd><p>Input file for the density.</p>
+<ul class="simple">
+<li><p><em>Options</em> :</p></li>
+<li><p><em>Default</em> : None</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="simple" id="inversion-v-out">
+<dt><strong>v_out</strong></dt><dd><p>Output file for the potential.</p>
+<ul class="simple">
+<li><p><em>Options</em> :</p></li>
+<li><p><em>Default</em> : None</p></li>
+</ul>
+</dd>
+</dl>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="tutorials.html" class="btn btn-neutral float-left" title="Tutorials" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="ofdft/optimize.html" class="btn btn-neutral float-right" title="Optimization of Density" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2019-2025, Pavanello Research Group.
+      <span class="lastupdated">Last updated on Thursday, 31 Jul 2025 17:03:53.
+      </span></p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+  
+<button onclick="topFunction()" id="btn" title="Go to top">Top</button>
+
+<script>
+var mybutton = document.getElementById("btn");
+
+window.onscroll = function() {scrollFunction()};
+
+function scrollFunction() {
+  if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+    mybutton.style.display = "block";
+  } else {
+    mybutton.style.display = "none";
+  }
+}
+
+function topFunction() {
+  document.body.scrollTop = 0;
+  document.documentElement.scrollTop = 0;
+}
+</script>
+
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,24 +1,23 @@
+
+
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en" data-content_root="../../">
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Relaxation of Structure &mdash; DFTpy 2.0.0 documentation</title>
-      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
-      <link rel="stylesheet" href="../../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" type="text/css" />
-    <link rel="shortcut icon" href="../../_static/dftpy.ico"/>
-  <!--[if lt IE 9]>
-    <script src="../../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
+  <title>Relaxation of Structure &mdash; DFTpy 2.2.0dev documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=9b3c20d5" />
+      <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+
   
-        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
-        <script src="../../_static/jquery.js"></script>
-        <script src="../../_static/underscore.js"></script>
-        <script src="../../_static/doctools.js"></script>
-        <script src="../../_static/design-tabs.js"></script>
-        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="shortcut icon" href="../../_static/dftpy.ico"/>
+      <script src="../../_static/documentation_options.js?v=15cefba6"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+      <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
@@ -31,12 +30,16 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="../../index.html" class="icon icon-home"> DFTpy
-            <img src="../../_static/dftpy.png" class="logo" alt="Logo"/>
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            DFTpy
+              <img src="../../_static/dftpy.png" class="logo" alt="Logo"/>
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -78,9 +81,9 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="../tutorials.html">Tutorials</a> &raquo;</li>
-      <li>Relaxation of Structure</li>
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../tutorials.html">Tutorials</a></li>
+      <li class="breadcrumb-item active">Relaxation of Structure</li>
       <li class="wy-breadcrumbs-aside">
         
 			<a href=../../genindex.html>Index</a>
@@ -100,49 +103,25 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  
-<style>
-/* CSS overrides for sphinx_rtd_theme */
-
-/* 24px margin */
-.nbinput.nblast.container,
-.nboutput.nblast.container {
-    margin-bottom: 19px;  /* padding has already 5px */
-}
-
-/* ... except between code cells! */
-.nblast.container + .nbinput.container {
-    margin-top: -19px;
-}
-
-.admonition > p:before {
-    margin-right: 4px;  /* make room for the exclamation icon */
-}
-
-/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
-.math {
-    text-align: unset;
-}
-</style>
-<section id="relaxation-of-structure">
-<span id="relax"></span><h1>Relaxation of Structure<a class="headerlink" href="#relaxation-of-structure" title="Permalink to this headline">¶</a></h1>
+  <section id="relaxation-of-structure">
+<span id="relax"></span><h1>Relaxation of Structure<a class="headerlink" href="#relaxation-of-structure" title="Link to this heading">¶</a></h1>
 <p>Perform the structure relaxation is also easy with <a class="reference external" href="https://gitlab.com/ase/ase">ASE</a>.
 This is one example to relax the force of given structure:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
-<span class="kn">import</span> <span class="nn">pathlib</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">from</span> <span class="nn">ase.calculators.interface</span> <span class="kn">import</span> <span class="n">Calculator</span>
-<span class="kn">from</span> <span class="nn">ase.lattice.cubic</span> <span class="kn">import</span> <span class="n">FaceCenteredCubic</span>
-<span class="kn">from</span> <span class="nn">ase.optimize</span> <span class="kn">import</span> <span class="n">BFGS</span><span class="p">,</span> <span class="n">LBFGS</span><span class="p">,</span> <span class="n">FIRE</span>
-<span class="kn">from</span> <span class="nn">ase.optimize.sciopt</span> <span class="kn">import</span> <span class="n">SciPyFminBFGS</span><span class="p">,</span> <span class="n">SciPyFminCG</span>
-<span class="kn">from</span> <span class="nn">ase.constraints</span> <span class="kn">import</span> <span class="n">StrainFilter</span><span class="p">,</span> <span class="n">UnitCellFilter</span>
-<span class="kn">from</span> <span class="nn">ase.io.trajectory</span> <span class="kn">import</span> <span class="n">Trajectory</span>
-<span class="kn">from</span> <span class="nn">ase</span> <span class="kn">import</span> <span class="n">units</span>
-<span class="kn">import</span> <span class="nn">ase.io</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pathlib</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">ase.calculators.interface</span><span class="w"> </span><span class="kn">import</span> <span class="n">Calculator</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">ase.lattice.cubic</span><span class="w"> </span><span class="kn">import</span> <span class="n">FaceCenteredCubic</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">ase.optimize</span><span class="w"> </span><span class="kn">import</span> <span class="n">BFGS</span><span class="p">,</span> <span class="n">LBFGS</span><span class="p">,</span> <span class="n">FIRE</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">ase.optimize.sciopt</span><span class="w"> </span><span class="kn">import</span> <span class="n">SciPyFminBFGS</span><span class="p">,</span> <span class="n">SciPyFminCG</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">ase.constraints</span><span class="w"> </span><span class="kn">import</span> <span class="n">StrainFilter</span><span class="p">,</span> <span class="n">UnitCellFilter</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">ase.io.trajectory</span><span class="w"> </span><span class="kn">import</span> <span class="n">Trajectory</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">ase</span><span class="w"> </span><span class="kn">import</span> <span class="n">units</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">ase.io</span>
 
-<span class="kn">from</span> <span class="nn">dftpy.config</span> <span class="kn">import</span> <span class="n">DefaultOption</span><span class="p">,</span> <span class="n">OptionFormat</span>
-<span class="kn">from</span> <span class="nn">dftpy.interface</span> <span class="kn">import</span> <span class="n">OptimizeDensityConf</span>
-<span class="kn">from</span> <span class="nn">dftpy.api.api4ase</span> <span class="kn">import</span> <span class="n">DFTpyCalculator</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">dftpy.config</span><span class="w"> </span><span class="kn">import</span> <span class="n">DefaultOption</span><span class="p">,</span> <span class="n">OptionFormat</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">dftpy.interface</span><span class="w"> </span><span class="kn">import</span> <span class="n">OptimizeDensityConf</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">dftpy.api.api4ase</span><span class="w"> </span><span class="kn">import</span> <span class="n">DFTpyCalculator</span>
 
 <span class="c1">############################## initial config ##############################</span>
 <span class="n">conf</span> <span class="o">=</span> <span class="n">DefaultOption</span><span class="p">()</span>
@@ -189,8 +168,8 @@ This is one example to relax the force of given structure:</p>
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2019-2023, Pavanello Research Group.
-      <span class="lastupdated">Last updated on Thursday, 31 Jul 2025 14:01:42.
+    <p>&#169; Copyright 2019-2025, Pavanello Research Group.
+      <span class="lastupdated">Last updated on Thursday, 31 Jul 2025 17:03:53.
       </span></p>
   </div>
 

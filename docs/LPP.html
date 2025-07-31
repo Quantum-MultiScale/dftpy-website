@@ -1,24 +1,23 @@
+
+
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en" data-content_root="./">
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Local Pseudopotentials &mdash; DFTpy 2.0.0 documentation</title>
-      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="_static/custom.css" type="text/css" />
-      <link rel="stylesheet" href="_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" type="text/css" />
-    <link rel="shortcut icon" href="_static/dftpy.ico"/>
-  <!--[if lt IE 9]>
-    <script src="_static/js/html5shiv.min.js"></script>
-  <![endif]-->
+  <title>Local Pseudopotentials &mdash; DFTpy 2.2.0dev documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/custom.css?v=9b3c20d5" />
+      <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+
   
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-        <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
-        <script src="_static/doctools.js"></script>
-        <script src="_static/design-tabs.js"></script>
-        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="shortcut icon" href="_static/dftpy.ico"/>
+      <script src="_static/documentation_options.js?v=15cefba6"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="_static/design-tabs.js?v=f930bc37"></script>
+      <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -31,12 +30,16 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="index.html" class="icon icon-home"> DFTpy
-            <img src="_static/dftpy.png" class="logo" alt="Logo"/>
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            DFTpy
+              <img src="_static/dftpy.png" class="logo" alt="Logo"/>
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -69,8 +72,8 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
-      <li>Local Pseudopotentials</li>
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Local Pseudopotentials</li>
       <li class="wy-breadcrumbs-aside">
         
 			<a href=genindex.html>Index</a>
@@ -90,34 +93,10 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  
-<style>
-/* CSS overrides for sphinx_rtd_theme */
-
-/* 24px margin */
-.nbinput.nblast.container,
-.nboutput.nblast.container {
-    margin-bottom: 19px;  /* padding has already 5px */
-}
-
-/* ... except between code cells! */
-.nblast.container + .nbinput.container {
-    margin-top: -19px;
-}
-
-.admonition > p:before {
-    margin-right: 4px;  /* make room for the exclamation icon */
-}
-
-/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
-.math {
-    text-align: unset;
-}
-</style>
-<section id="local-pseudopotentials">
-<h1>Local Pseudopotentials<a class="headerlink" href="#local-pseudopotentials" title="Permalink to this headline">¶</a></h1>
+  <section id="local-pseudopotentials">
+<h1>Local Pseudopotentials<a class="headerlink" href="#local-pseudopotentials" title="Link to this heading">¶</a></h1>
 <section id="some-background">
-<h2>Some background<a class="headerlink" href="#some-background" title="Permalink to this headline">¶</a></h2>
+<h2>Some background<a class="headerlink" href="#some-background" title="Link to this heading">¶</a></h2>
 <p>Orbital-Free Density Functional Theory (OF-DFT) is an electronic structure method based solely on the electron density. In Kohn-Sham DFT pseudopotentials typically include a nonlocal part, which requires the Kohn-Sham orbitals to be evaluated. Due to the absence of Kohn-Sham orbitals in OF-DFT, only local pseudopotentials can be employed.</p>
 <p>Several local pseudopotentials have been developed and successfully applied to selected elements. A fairly exhaustive list:</p>
 <ul class="simple">
@@ -128,7 +107,7 @@
 <p>The <a class="reference external" href="https://sites.rutgers.edu/prg">PRG</a> recently derived a new set of local pseudopotentials for transition metal elements which is available below (PGBRV and PPSL as they are based on the <a class="reference external" href="https://www.physics.rutgers.edu/gbrv/">GBRV</a> and <a class="reference external" href="https://dalcorso.github.io/pslibrary/">PSL</a> ultrasoft pseudopotentials). The new pseudos can be constructed for any element by following this <a class="reference internal" href="tutorials/jupyter/lpps.html"><span class="doc">tutorial</span></a>. The formalism behind this new class of pseudopotentials is described <a href="#id1"><span class="problematic" id="id2">`here &lt;&gt;`_</span></a>.</p>
 </section>
 <section id="download-lpps">
-<h2>Download LPPs<a class="headerlink" href="#download-lpps" title="Permalink to this headline">¶</a></h2>
+<h2>Download LPPs<a class="headerlink" href="#download-lpps" title="Link to this heading">¶</a></h2>
 <style>
 .periodic-table {
     display: grid;
@@ -675,8 +654,8 @@ document.addEventListener("DOMContentLoaded", function () {
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2019-2023, Pavanello Research Group.
-      <span class="lastupdated">Last updated on Thursday, 31 Jul 2025 14:01:42.
+    <p>&#169; Copyright 2019-2025, Pavanello Research Group.
+      <span class="lastupdated">Last updated on Thursday, 31 Jul 2025 17:03:53.
       </span></p>
   </div>
 

@@ -1,24 +1,23 @@
+
+
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en" data-content_root="../../">
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Use of Propagator &mdash; DFTpy 2.0.0 documentation</title>
-      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
-      <link rel="stylesheet" href="../../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" type="text/css" />
-    <link rel="shortcut icon" href="../../_static/dftpy.ico"/>
-  <!--[if lt IE 9]>
-    <script src="../../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
+  <title>Use of Propagator &mdash; DFTpy 2.2.0dev documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=9b3c20d5" />
+      <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+
   
-        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
-        <script src="../../_static/jquery.js"></script>
-        <script src="../../_static/underscore.js"></script>
-        <script src="../../_static/doctools.js"></script>
-        <script src="../../_static/design-tabs.js"></script>
-        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="shortcut icon" href="../../_static/dftpy.ico"/>
+      <script src="../../_static/documentation_options.js?v=15cefba6"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+      <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
@@ -31,12 +30,16 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="../../index.html" class="icon icon-home"> DFTpy
-            <img src="../../_static/dftpy.png" class="logo" alt="Logo"/>
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            DFTpy
+              <img src="../../_static/dftpy.png" class="logo" alt="Logo"/>
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -76,9 +79,9 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="../tutorials.html">Tutorials</a> &raquo;</li>
-      <li>Use of Propagator</li>
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../tutorials.html">Tutorials</a></li>
+      <li class="breadcrumb-item active">Use of Propagator</li>
       <li class="wy-breadcrumbs-aside">
         
 			<a href=../../genindex.html>Index</a>
@@ -98,32 +101,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  
-<style>
-/* CSS overrides for sphinx_rtd_theme */
-
-/* 24px margin */
-.nbinput.nblast.container,
-.nboutput.nblast.container {
-    margin-bottom: 19px;  /* padding has already 5px */
-}
-
-/* ... except between code cells! */
-.nblast.container + .nbinput.container {
-    margin-top: -19px;
-}
-
-.admonition > p:before {
-    margin-right: 4px;  /* make room for the exclamation icon */
-}
-
-/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
-.math {
-    text-align: unset;
-}
-</style>
-<section id="use-of-propagator">
-<span id="propagate"></span><h1>Use of Propagator<a class="headerlink" href="#use-of-propagator" title="Permalink to this headline">¶</a></h1>
+  <section id="use-of-propagator">
+<span id="propagate"></span><h1>Use of Propagator<a class="headerlink" href="#use-of-propagator" title="Link to this heading">¶</a></h1>
 <p>Here we provide an example of calculating the dipole moments using OF-TDDFT with the config files.</p>
 <p>Suppose we have a GaAs cluster with its density optimized to the ground state. At t=0 we apply a kick at x-direction and
 we want to calculate the dipole moment of the cluster at t=0.1 a.u.</p>
@@ -172,62 +151,62 @@ we want to calculate the dipole moment of the cluster at t=0.1 a.u.</p>
 </pre></div>
 </div>
 <p>Then we run the following command:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ python -m dftpy optimize.ini
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>python<span class="w"> </span>-m<span class="w"> </span>dftpy<span class="w"> </span>optimize.ini
 </pre></div>
 </div>
 <p>which will generate a density file names density in the working directory.</p>
 <p>The next step is to run the propagation. We create another config file named propagate.ini:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>JOB<span class="o">]</span>
-<span class="nv">task</span> <span class="o">=</span> Propagate
+<span class="nv">task</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>Propagate
 
 <span class="o">[</span>PATH<span class="o">]</span>
-<span class="nv">pppath</span> <span class="o">=</span> ../DATA/
-<span class="nv">cellpath</span> <span class="o">=</span> ../DATA/
+<span class="nv">pppath</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>../DATA/
+<span class="nv">cellpath</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>../DATA/
 
 <span class="o">[</span>PP<span class="o">]</span>
-<span class="nv">Ga</span> <span class="o">=</span> Ga_lda.oe04.recpot
-<span class="nv">As</span> <span class="o">=</span> As_lda.oe04.recpot
+<span class="nv">Ga</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>Ga_lda.oe04.recpot
+<span class="nv">As</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>As_lda.oe04.recpot
 
 <span class="o">[</span>CELL<span class="o">]</span>
-<span class="nv">cellfile</span> <span class="o">=</span> GaAs_random.vasp
-<span class="nv">elename</span> <span class="o">=</span> Ga As
-<span class="nv">zval</span> <span class="o">=</span> <span class="m">3</span>.0 <span class="m">5</span>.0
-<span class="nv">format</span> <span class="o">=</span> vasp
+<span class="nv">cellfile</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>GaAs_random.vasp
+<span class="nv">elename</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>Ga<span class="w"> </span>As
+<span class="nv">zval</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">3</span>.0<span class="w"> </span><span class="m">5</span>.0
+<span class="nv">format</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>vasp
 
 <span class="o">[</span>GRID<span class="o">]</span>
-<span class="nv">spacing</span> <span class="o">=</span> <span class="m">0</span>.25
-<span class="nv">gfull</span> <span class="o">=</span> True
+<span class="nv">spacing</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span>.25
+<span class="nv">gfull</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>True
 
 <span class="o">[</span>DENSITY<span class="o">]</span>
-<span class="nv">densityini</span> <span class="o">=</span> Read
-<span class="nv">densityfile</span> <span class="o">=</span> density
+<span class="nv">densityini</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>Read
+<span class="nv">densityfile</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>density
 
 <span class="o">[</span>EXC<span class="o">]</span>
-<span class="nv">xc</span> <span class="o">=</span> LDA
+<span class="nv">xc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>LDA
 
 <span class="o">[</span>KEDF<span class="o">]</span>
-<span class="p">;</span> Pauli KEDF
-<span class="nv">kedf</span> <span class="o">=</span> TF
+<span class="p">;</span><span class="w"> </span>Pauli<span class="w"> </span>KEDF
+<span class="nv">kedf</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>TF
 
 <span class="o">[</span>PROPAGAROR<span class="o">]</span>
-<span class="nb">type</span> <span class="o">=</span> crank-nicolson
-<span class="nv">int_t</span> <span class="o">=</span> <span class="m">1</span>.0e-3
-<span class="nv">linearsolver</span> <span class="o">=</span> bicgstab
-<span class="nv">tol</span> <span class="o">=</span> <span class="m">1</span>.0e-10
-<span class="nv">maxiter</span> <span class="o">=</span> <span class="m">100</span>
+<span class="nb">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>crank-nicolson
+<span class="nv">int_t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span>.0e-3
+<span class="nv">linearsolver</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>bicgstab
+<span class="nv">tol</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span>.0e-10
+<span class="nv">maxiter</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">100</span>
 
 <span class="o">[</span>TD<span class="o">]</span>
-<span class="nv">outfile</span> <span class="o">=</span> td_out
-<span class="nv">tmax</span> <span class="o">=</span> <span class="m">0</span>.1
-<span class="nv">order</span> <span class="o">=</span> <span class="m">100</span>
-<span class="nv">direct</span> <span class="o">=</span> x
-<span class="nv">strength</span> <span class="o">=</span> <span class="m">1</span>.0e-3
+<span class="nv">outfile</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>td_out
+<span class="nv">tmax</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span>.1
+<span class="nv">order</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">100</span>
+<span class="nv">direct</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>x
+<span class="nv">strength</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span>.0e-3
 </pre></div>
 </div>
 <p>One thing to keep in mind is when running the propagate job, the kedf is the Pauli KEDF (i.e. total KESF minus the von
 Weizsacker term).</p>
 <p>Then we run the following command:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ python -m dftpy propagate.ini
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>python<span class="w"> </span>-m<span class="w"> </span>dftpy<span class="w"> </span>propagate.ini
 </pre></div>
 </div>
 <p>It will generate three files: td_out_E, td_out_mu, td_out_j, which contains the energy of the electrons, the dipole
@@ -245,8 +224,8 @@ moment, and the integrated current of each time step, respectively.</p>
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2019-2023, Pavanello Research Group.
-      <span class="lastupdated">Last updated on Thursday, 31 Jul 2025 14:01:42.
+    <p>&#169; Copyright 2019-2025, Pavanello Research Group.
+      <span class="lastupdated">Last updated on Thursday, 31 Jul 2025 17:03:53.
       </span></p>
   </div>
 

@@ -1,26 +1,26 @@
+
+
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en" data-content_root="../../">
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Build your own optimized local pseudopotential (LPP) &mdash; DFTpy 2.0.0 documentation</title>
-      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
-      <link rel="stylesheet" href="../../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" type="text/css" />
-    <link rel="shortcut icon" href="../../_static/dftpy.ico"/>
-  <!--[if lt IE 9]>
-    <script src="../../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
+  <title>Build your own optimized local pseudopotential (LPP) &mdash; DFTpy 2.2.0dev documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=9b3c20d5" />
+      <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/nbsphinx-code-cells.css?v=2aa19091" />
+
   
-        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
-        <script src="../../_static/jquery.js"></script>
-        <script src="../../_static/underscore.js"></script>
-        <script src="../../_static/doctools.js"></script>
-        <script src="../../_static/design-tabs.js"></script>
-        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-        <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
-        <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="shortcut icon" href="../../_static/dftpy.ico"/>
+      <script src="../../_static/documentation_options.js?v=15cefba6"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+      <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+      <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+      <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" /> 
@@ -31,12 +31,16 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="../../index.html" class="icon icon-home"> DFTpy
-            <img src="../../_static/dftpy.png" class="logo" alt="Logo"/>
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            DFTpy
+              <img src="../../_static/dftpy.png" class="logo" alt="Logo"/>
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -65,8 +69,8 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
-      <li>Build your own optimized local pseudopotential (LPP)</li>
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Build your own optimized local pseudopotential (LPP)</li>
       <li class="wy-breadcrumbs-aside">
         
 			<a href=../../genindex.html>Index</a>
@@ -83,286 +87,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  
-<style>
-/* CSS for nbsphinx extension */
-
-/* remove conflicting styling from Sphinx themes */
-div.nbinput.container div.prompt *,
-div.nboutput.container div.prompt *,
-div.nbinput.container div.input_area pre,
-div.nboutput.container div.output_area pre,
-div.nbinput.container div.input_area .highlight,
-div.nboutput.container div.output_area .highlight {
-    border: none;
-    padding: 0;
-    margin: 0;
-    box-shadow: none;
-}
-
-div.nbinput.container > div[class*=highlight],
-div.nboutput.container > div[class*=highlight] {
-    margin: 0;
-}
-
-div.nbinput.container div.prompt *,
-div.nboutput.container div.prompt * {
-    background: none;
-}
-
-div.nboutput.container div.output_area .highlight,
-div.nboutput.container div.output_area pre {
-    background: unset;
-}
-
-div.nboutput.container div.output_area div.highlight {
-    color: unset;  /* override Pygments text color */
-}
-
-/* avoid gaps between output lines */
-div.nboutput.container div[class*=highlight] pre {
-    line-height: normal;
-}
-
-/* input/output containers */
-div.nbinput.container,
-div.nboutput.container {
-    display: -webkit-flex;
-    display: flex;
-    align-items: flex-start;
-    margin: 0;
-    width: 100%;
-}
-@media (max-width: 540px) {
-    div.nbinput.container,
-    div.nboutput.container {
-        flex-direction: column;
-    }
-}
-
-/* input container */
-div.nbinput.container {
-    padding-top: 5px;
-}
-
-/* last container */
-div.nblast.container {
-    padding-bottom: 5px;
-}
-
-/* input prompt */
-div.nbinput.container div.prompt pre {
-    color: #307FC1;
-}
-
-/* output prompt */
-div.nboutput.container div.prompt pre {
-    color: #BF5B3D;
-}
-
-/* all prompts */
-div.nbinput.container div.prompt,
-div.nboutput.container div.prompt {
-    width: 4.5ex;
-    padding-top: 5px;
-    position: relative;
-    user-select: none;
-}
-
-div.nbinput.container div.prompt > div,
-div.nboutput.container div.prompt > div {
-    position: absolute;
-    right: 0;
-    margin-right: 0.3ex;
-}
-
-@media (max-width: 540px) {
-    div.nbinput.container div.prompt,
-    div.nboutput.container div.prompt {
-        width: unset;
-        text-align: left;
-        padding: 0.4em;
-    }
-    div.nboutput.container div.prompt.empty {
-        padding: 0;
-    }
-
-    div.nbinput.container div.prompt > div,
-    div.nboutput.container div.prompt > div {
-        position: unset;
-    }
-}
-
-/* disable scrollbars on prompts */
-div.nbinput.container div.prompt pre,
-div.nboutput.container div.prompt pre {
-    overflow: hidden;
-}
-
-/* input/output area */
-div.nbinput.container div.input_area,
-div.nboutput.container div.output_area {
-    -webkit-flex: 1;
-    flex: 1;
-    overflow: auto;
-}
-@media (max-width: 540px) {
-    div.nbinput.container div.input_area,
-    div.nboutput.container div.output_area {
-        width: 100%;
-    }
-}
-
-/* input area */
-div.nbinput.container div.input_area {
-    border: 1px solid #e0e0e0;
-    border-radius: 2px;
-    /*background: #f5f5f5;*/
-}
-
-/* override MathJax center alignment in output cells */
-div.nboutput.container div[class*=MathJax] {
-    text-align: left !important;
-}
-
-/* override sphinx.ext.imgmath center alignment in output cells */
-div.nboutput.container div.math p {
-    text-align: left;
-}
-
-/* standard error */
-div.nboutput.container div.output_area.stderr {
-    background: #fdd;
-}
-
-/* ANSI colors */
-.ansi-black-fg { color: #3E424D; }
-.ansi-black-bg { background-color: #3E424D; }
-.ansi-black-intense-fg { color: #282C36; }
-.ansi-black-intense-bg { background-color: #282C36; }
-.ansi-red-fg { color: #E75C58; }
-.ansi-red-bg { background-color: #E75C58; }
-.ansi-red-intense-fg { color: #B22B31; }
-.ansi-red-intense-bg { background-color: #B22B31; }
-.ansi-green-fg { color: #00A250; }
-.ansi-green-bg { background-color: #00A250; }
-.ansi-green-intense-fg { color: #007427; }
-.ansi-green-intense-bg { background-color: #007427; }
-.ansi-yellow-fg { color: #DDB62B; }
-.ansi-yellow-bg { background-color: #DDB62B; }
-.ansi-yellow-intense-fg { color: #B27D12; }
-.ansi-yellow-intense-bg { background-color: #B27D12; }
-.ansi-blue-fg { color: #208FFB; }
-.ansi-blue-bg { background-color: #208FFB; }
-.ansi-blue-intense-fg { color: #0065CA; }
-.ansi-blue-intense-bg { background-color: #0065CA; }
-.ansi-magenta-fg { color: #D160C4; }
-.ansi-magenta-bg { background-color: #D160C4; }
-.ansi-magenta-intense-fg { color: #A03196; }
-.ansi-magenta-intense-bg { background-color: #A03196; }
-.ansi-cyan-fg { color: #60C6C8; }
-.ansi-cyan-bg { background-color: #60C6C8; }
-.ansi-cyan-intense-fg { color: #258F8F; }
-.ansi-cyan-intense-bg { background-color: #258F8F; }
-.ansi-white-fg { color: #C5C1B4; }
-.ansi-white-bg { background-color: #C5C1B4; }
-.ansi-white-intense-fg { color: #A1A6B2; }
-.ansi-white-intense-bg { background-color: #A1A6B2; }
-
-.ansi-default-inverse-fg { color: #FFFFFF; }
-.ansi-default-inverse-bg { background-color: #000000; }
-
-.ansi-bold { font-weight: bold; }
-.ansi-underline { text-decoration: underline; }
-
-
-div.nbinput.container div.input_area div[class*=highlight] > pre,
-div.nboutput.container div.output_area div[class*=highlight] > pre,
-div.nboutput.container div.output_area div[class*=highlight].math,
-div.nboutput.container div.output_area.rendered_html,
-div.nboutput.container div.output_area > div.output_javascript,
-div.nboutput.container div.output_area:not(.rendered_html) > img{
-    padding: 5px;
-    margin: 0;
-}
-
-/* fix copybtn overflow problem in chromium (needed for 'sphinx_copybutton') */
-div.nbinput.container div.input_area > div[class^='highlight'],
-div.nboutput.container div.output_area > div[class^='highlight']{
-    overflow-y: hidden;
-}
-
-/* hide copybtn icon on prompts (needed for 'sphinx_copybutton') */
-.prompt .copybtn {
-    display: none;
-}
-
-/* Some additional styling taken form the Jupyter notebook CSS */
-.jp-RenderedHTMLCommon table,
-div.rendered_html table {
-  border: none;
-  border-collapse: collapse;
-  border-spacing: 0;
-  color: black;
-  font-size: 12px;
-  table-layout: fixed;
-}
-.jp-RenderedHTMLCommon thead,
-div.rendered_html thead {
-  border-bottom: 1px solid black;
-  vertical-align: bottom;
-}
-.jp-RenderedHTMLCommon tr,
-.jp-RenderedHTMLCommon th,
-.jp-RenderedHTMLCommon td,
-div.rendered_html tr,
-div.rendered_html th,
-div.rendered_html td {
-  text-align: right;
-  vertical-align: middle;
-  padding: 0.5em 0.5em;
-  line-height: normal;
-  white-space: normal;
-  max-width: none;
-  border: none;
-}
-.jp-RenderedHTMLCommon th,
-div.rendered_html th {
-  font-weight: bold;
-}
-.jp-RenderedHTMLCommon tbody tr:nth-child(odd),
-div.rendered_html tbody tr:nth-child(odd) {
-  background: #f5f5f5;
-}
-.jp-RenderedHTMLCommon tbody tr:hover,
-div.rendered_html tbody tr:hover {
-  background: rgba(66, 165, 245, 0.2);
-}
-
-/* CSS overrides for sphinx_rtd_theme */
-
-/* 24px margin */
-.nbinput.nblast.container,
-.nboutput.nblast.container {
-    margin-bottom: 19px;  /* padding has already 5px */
-}
-
-/* ... except between code cells! */
-.nblast.container + .nbinput.container {
-    margin-top: -19px;
-}
-
-.admonition > p:before {
-    margin-right: 4px;  /* make room for the exclamation icon */
-}
-
-/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
-.math {
-    text-align: unset;
-}
-</style>
-<section id="Build-your-own-optimized-local-pseudopotential-(LPP)">
-<h1>Build your own optimized local pseudopotential (LPP)<a class="headerlink" href="#Build-your-own-optimized-local-pseudopotential-(LPP)" title="Permalink to this headline">¶</a></h1>
+  <section id="Build-your-own-optimized-local-pseudopotential-(LPP)">
+<h1>Build your own optimized local pseudopotential (LPP)<a class="headerlink" href="#Build-your-own-optimized-local-pseudopotential-(LPP)" title="Link to this heading">¶</a></h1>
 <p>In this tutorial you will be able to build you own LPP for Au.</p>
 <ul class="simple">
 <li><p>Run a KS calculation to get the electronic density using <a class="reference external" href="http://qepy.rutgers.edu/">QEpy</a></p></li>
@@ -371,15 +97,15 @@ div.rendered_html tbody tr:hover {
 </ul>
 </section>
 <section id="QEpy">
-<h1>QEpy<a class="headerlink" href="#QEpy" title="Permalink to this headline">¶</a></h1>
+<h1>QEpy<a class="headerlink" href="#QEpy" title="Link to this heading">¶</a></h1>
 <p>First we need to generate the target electron density using QEpy, for that we will need to load the following modules</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">from</span> <span class="nn">qepy.io</span> <span class="kn">import</span> <span class="n">QEInput</span>
-<span class="kn">from</span> <span class="nn">qepy.driver</span> <span class="kn">import</span> <span class="n">Driver</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import numpy as np
+from qepy.io import QEInput
+from qepy.driver import Driver
 </pre></div>
 </div>
 </div>
@@ -388,8 +114,8 @@ div.rendered_html tbody tr:hover {
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">ase.build</span> <span class="kn">import</span> <span class="n">bulk</span>
-<span class="n">atoms</span> <span class="o">=</span> <span class="n">bulk</span><span class="p">(</span><span class="s1">&#39;Au&#39;</span><span class="p">,</span> <span class="s1">&#39;fcc&#39;</span><span class="p">,</span> <span class="n">a</span><span class="o">=</span><span class="mf">4.078</span><span class="p">)</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>from ase.build import bulk
+atoms = bulk(&#39;Au&#39;, &#39;fcc&#39;, a=4.078)
 </pre></div>
 </div>
 </div>
@@ -398,23 +124,23 @@ div.rendered_html tbody tr:hover {
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">qe_options</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s1">&#39;&amp;control&#39;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s1">&#39;calculation&#39;</span><span class="p">:</span> <span class="s2">&quot;&#39;scf&#39;&quot;</span><span class="p">,</span>
-        <span class="s1">&#39;prefix&#39;</span><span class="p">:</span> <span class="s2">&quot;&#39;tmp&#39;&quot;</span><span class="p">,</span>
-        <span class="s1">&#39;pseudo_dir&#39;</span><span class="p">:</span> <span class="s2">&quot;&#39;../DATA&#39;&quot;</span><span class="p">},</span>
-    <span class="s1">&#39;&amp;system&#39;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s1">&#39;ibrav&#39;</span> <span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-        <span class="s1">&#39;degauss&#39;</span><span class="p">:</span> <span class="mf">0.01</span><span class="p">,</span>
-        <span class="s1">&#39;ecutwfc&#39;</span><span class="p">:</span> <span class="mi">50</span><span class="p">,</span>
-        <span class="s1">&#39;ecutrho&#39;</span><span class="p">:</span> <span class="mi">300</span><span class="p">,</span>
-        <span class="s1">&#39;occupations&#39;</span><span class="p">:</span> <span class="s2">&quot;&#39;smearing&#39;&quot;</span>
-    <span class="p">},</span>
-    <span class="s1">&#39;&amp;electrons&#39;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s1">&#39;conv_thr&#39;</span> <span class="p">:</span> <span class="mf">1.0e-8</span><span class="p">},</span>
-     <span class="s1">&#39;atomic_species&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Au 196.96657 au_lda_v1.uspp.F.UPF&#39;</span><span class="p">],</span>
-     <span class="s1">&#39;k_points automatic&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;11 11 11 0 0 0&#39;</span><span class="p">],</span>
-<span class="p">}</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>qe_options = {
+    &#39;&amp;control&#39;: {
+        &#39;calculation&#39;: &quot;&#39;scf&#39;&quot;,
+        &#39;prefix&#39;: &quot;&#39;tmp&#39;&quot;,
+        &#39;pseudo_dir&#39;: &quot;&#39;../DATA&#39;&quot;},
+    &#39;&amp;system&#39;: {
+        &#39;ibrav&#39; : 0,
+        &#39;degauss&#39;: 0.01,
+        &#39;ecutwfc&#39;: 50,
+        &#39;ecutrho&#39;: 300,
+        &#39;occupations&#39;: &quot;&#39;smearing&#39;&quot;
+    },
+    &#39;&amp;electrons&#39;: {
+        &#39;conv_thr&#39; : 1.0e-8},
+     &#39;atomic_species&#39;: [&#39;Au 196.96657 au_lda_v1.uspp.F.UPF&#39;],
+     &#39;k_points automatic&#39;: [&#39;11 11 11 0 0 0&#39;],
+}
 </pre></div>
 </div>
 </div>
@@ -422,7 +148,7 @@ div.rendered_html tbody tr:hover {
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">driver</span> <span class="o">=</span> <span class="n">Driver</span><span class="p">(</span><span class="n">qe_options</span><span class="o">=</span><span class="n">qe_options</span><span class="p">,</span> <span class="n">atoms</span><span class="o">=</span><span class="n">atoms</span><span class="p">,</span> <span class="n">logfile</span><span class="o">=</span><span class="s1">&#39;tmp.out&#39;</span><span class="p">)</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>driver = Driver(qe_options=qe_options, atoms=atoms, logfile=&#39;tmp.out&#39;)
 </pre></div>
 </div>
 </div>
@@ -430,7 +156,7 @@ div.rendered_html tbody tr:hover {
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">driver</span><span class="o">.</span><span class="n">calc_energy</span><span class="p">()</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>driver.calc_energy()
 </pre></div>
 </div>
 </div>
@@ -444,7 +170,7 @@ div.rendered_html tbody tr:hover {
 </pre></div></div>
 </div>
 <section id="Collect-the-electron-density-for-comparison">
-<h2>Collect the electron density for comparison<a class="headerlink" href="#Collect-the-electron-density-for-comparison" title="Permalink to this headline">¶</a></h2>
+<h2>Collect the electron density for comparison<a class="headerlink" href="#Collect-the-electron-density-for-comparison" title="Link to this heading">¶</a></h2>
 <ul class="simple">
 <li><p>First retrieve the Quantum ESPRESSO density as a Fortran-ordered numpy array.</p></li>
 <li><p>Then transform it into a DFTpy <code class="docutils literal notranslate"><span class="pre">DirectField</span></code> which is a class to handle real-space grid functions.</p></li>
@@ -454,7 +180,7 @@ div.rendered_html tbody tr:hover {
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">density</span> <span class="o">=</span> <span class="n">driver</span><span class="o">.</span><span class="n">get_density</span><span class="p">()</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>density = driver.get_density()
 </pre></div>
 </div>
 </div>
@@ -462,31 +188,31 @@ div.rendered_html tbody tr:hover {
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rho_ks</span> <span class="o">=</span> <span class="n">driver</span><span class="o">.</span><span class="n">data2field</span><span class="p">(</span><span class="n">density</span><span class="p">)</span>
-<span class="n">ions</span> <span class="o">=</span> <span class="n">driver</span><span class="o">.</span><span class="n">get_dftpy_ions</span><span class="p">()</span>
-<span class="n">rho_ks</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;../DATA/rho_target.xsf&#39;</span><span class="p">,</span> <span class="n">ions</span><span class="o">=</span><span class="n">ions</span><span class="p">)</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>rho_ks = driver.data2field(density)
+ions = driver.get_dftpy_ions()
+rho_ks.write(&#39;../DATA/rho_target.xsf&#39;, ions=ions)
 </pre></div>
 </div>
 </div>
 </section>
 </section>
 <section id="DFTpy:-optimize-the-LPP">
-<h1>DFTpy: optimize the LPP<a class="headerlink" href="#DFTpy:-optimize-the-LPP" title="Permalink to this headline">¶</a></h1>
+<h1>DFTpy: optimize the LPP<a class="headerlink" href="#DFTpy:-optimize-the-LPP" title="Link to this heading">¶</a></h1>
 <p>In this section we will build a smooth Local pseudopotential with DFTpy modules</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">dftpy.ions</span> <span class="kn">import</span> <span class="n">Ions</span>
-<span class="kn">from</span> <span class="nn">dftpy.field</span> <span class="kn">import</span> <span class="n">DirectField</span>
-<span class="kn">from</span> <span class="nn">dftpy.grid</span> <span class="kn">import</span> <span class="n">DirectGrid</span>
-<span class="kn">from</span> <span class="nn">dftpy.functional</span> <span class="kn">import</span> <span class="n">LocalPseudo</span><span class="p">,</span> <span class="n">Functional</span><span class="p">,</span> <span class="n">TotalFunctional</span>
-<span class="kn">from</span> <span class="nn">dftpy.formats</span> <span class="kn">import</span> <span class="n">io</span>
-<span class="kn">from</span> <span class="nn">dftpy.optimization</span> <span class="kn">import</span> <span class="n">Optimization</span>
-<span class="kn">from</span> <span class="nn">dftpy.mpi</span> <span class="kn">import</span> <span class="n">sprint</span>
-<span class="kn">from</span> <span class="nn">dftpy.functional.pseudo.psp</span> <span class="kn">import</span> <span class="n">PSP</span>
-<span class="kn">from</span> <span class="nn">dftpy.constants</span> <span class="kn">import</span> <span class="n">environ</span>
-<span class="kn">from</span> <span class="nn">scipy.optimize</span> <span class="kn">import</span> <span class="n">minimize</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>from dftpy.ions import Ions
+from dftpy.field import DirectField
+from dftpy.grid import DirectGrid
+from dftpy.functional import LocalPseudo, Functional, TotalFunctional
+from dftpy.formats import io
+from dftpy.optimization import Optimization
+from dftpy.mpi import sprint
+from dftpy.functional.pseudo.psp import PSP
+from dftpy.constants import environ
+from scipy.optimize import minimize
 </pre></div>
 </div>
 </div>
@@ -495,9 +221,9 @@ div.rendered_html tbody tr:hover {
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ions</span><span class="p">,</span> <span class="n">rho_target</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">io</span><span class="o">.</span><span class="n">read_all</span><span class="p">(</span><span class="s1">&#39;../DATA/rho_target.xsf&#39;</span><span class="p">)</span>
-<span class="n">grid</span> <span class="o">=</span> <span class="n">rho_target</span><span class="o">.</span><span class="n">grid</span>
-<span class="n">PP_list</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;Au&#39;</span><span class="p">:</span> <span class="s1">&#39;../DATA/au_lda_v1.uspp.F.UPF&#39;</span><span class="p">}</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>ions, rho_target, _ = io.read_all(&#39;../DATA/rho_target.xsf&#39;)
+grid = rho_target.grid
+PP_list = {&#39;Au&#39;: &#39;../DATA/au_lda_v1.uspp.F.UPF&#39;}
 </pre></div>
 </div>
 </div>
@@ -505,9 +231,9 @@ div.rendered_html tbody tr:hover {
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">MaxPoints</span><span class="o">=</span><span class="mi">1000</span> <span class="c1"># number of points in the one-dimensional PP function</span>
-<span class="n">PSEUDO</span> <span class="o">=</span> <span class="n">LocalPseudo</span><span class="p">(</span><span class="n">grid</span> <span class="o">=</span> <span class="n">grid</span><span class="p">,</span> <span class="n">ions</span><span class="o">=</span><span class="n">ions</span><span class="p">,</span> <span class="n">PP_list</span><span class="o">=</span><span class="n">PP_list</span><span class="p">,</span> <span class="n">MaxPoints</span><span class="o">=</span><span class="n">MaxPoints</span><span class="p">)</span>
-<span class="n">rho_ini</span> <span class="o">=</span> <span class="n">rho_target</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>MaxPoints=1000 # number of points in the one-dimensional PP function
+PSEUDO = LocalPseudo(grid = grid, ions=ions, PP_list=PP_list, MaxPoints=MaxPoints)
+rho_ini = rho_target.copy()
 </pre></div>
 </div>
 </div>
@@ -520,39 +246,39 @@ setting key: Au -&gt; ../DATA/au_lda_v1.uspp.F.UPF
 </pre></div></div>
 </div>
 <section id="Load-the-needed-density-functionals">
-<h2>Load the needed density functionals<a class="headerlink" href="#Load-the-needed-density-functionals" title="Permalink to this headline">¶</a></h2>
+<h2>Load the needed density functionals<a class="headerlink" href="#Load-the-needed-density-functionals" title="Link to this heading">¶</a></h2>
 <p>Here we use TF + 0.2 vW, however you can choose any functional. We find the LPPs from TF+0.2vW to be transferable for use with other functionals</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">KE</span> <span class="o">=</span> <span class="n">Functional</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;KEDF&#39;</span><span class="p">,</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;TFvW&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
-<span class="n">XC</span> <span class="o">=</span> <span class="n">Functional</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;XC&#39;</span><span class="p">,</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;LDA&#39;</span><span class="p">,</span> <span class="n">libxc</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-<span class="n">HARTREE</span> <span class="o">=</span> <span class="n">Functional</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;HARTREE&#39;</span><span class="p">)</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>KE = Functional(type=&#39;KEDF&#39;,name=&#39;TFvW&#39;, y=0.2)
+XC = Functional(type=&#39;XC&#39;,name=&#39;LDA&#39;, libxc=False)
+HARTREE = Functional(type=&#39;HARTREE&#39;)
 </pre></div>
 </div>
 </div>
 </section>
 <section id="Define-the-total-energy-functional">
-<h2>Define the total energy functional<a class="headerlink" href="#Define-the-total-energy-functional" title="Permalink to this headline">¶</a></h2>
+<h2>Define the total energy functional<a class="headerlink" href="#Define-the-total-energy-functional" title="Link to this heading">¶</a></h2>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">evaluator</span> <span class="o">=</span> <span class="n">TotalFunctional</span><span class="p">(</span><span class="n">KE</span><span class="o">=</span><span class="n">KE</span><span class="p">,</span> <span class="n">XC</span><span class="o">=</span><span class="n">XC</span><span class="p">,</span> <span class="n">HARTREE</span><span class="o">=</span><span class="n">HARTREE</span><span class="p">,</span> <span class="n">PSEUDO</span><span class="o">=</span><span class="n">PSEUDO</span><span class="p">)</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>evaluator = TotalFunctional(KE=KE, XC=XC, HARTREE=HARTREE, PSEUDO=PSEUDO)
 </pre></div>
 </div>
 </div>
 </section>
 <section id="Optimize-the-electron-density-with-DFTpy">
-<h2>Optimize the electron density with DFTpy<a class="headerlink" href="#Optimize-the-electron-density-with-DFTpy" title="Permalink to this headline">¶</a></h2>
+<h2>Optimize the electron density with DFTpy<a class="headerlink" href="#Optimize-the-electron-density-with-DFTpy" title="Link to this heading">¶</a></h2>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">optimization_options</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;econv&#39;</span> <span class="p">:</span> <span class="mf">1e-6</span><span class="o">*</span><span class="n">ions</span><span class="o">.</span><span class="n">nat</span><span class="p">}</span>
-<span class="n">opt</span> <span class="o">=</span> <span class="n">Optimization</span><span class="p">(</span><span class="n">EnergyEvaluator</span><span class="o">=</span><span class="n">evaluator</span><span class="p">,</span> <span class="n">optimization_options</span> <span class="o">=</span> <span class="n">optimization_options</span><span class="p">,</span> <span class="n">optimization_method</span> <span class="o">=</span> <span class="s1">&#39;TN&#39;</span><span class="p">)</span>
-<span class="n">rho</span> <span class="o">=</span> <span class="n">opt</span><span class="o">.</span><span class="n">optimize_rho</span><span class="p">(</span><span class="n">guess_rho</span><span class="o">=</span><span class="n">rho_ini</span><span class="p">)</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>optimization_options = {&#39;econv&#39; : 1e-6*ions.nat}
+opt = Optimization(EnergyEvaluator=evaluator, optimization_options = optimization_options, optimization_method = &#39;TN&#39;)
+rho = opt.optimize_rho(guess_rho=rho_ini)
 </pre></div>
 </div>
 </div>
@@ -579,18 +305,18 @@ Chemical potential (eV)  : 26.18277314569915
 </div>
 <p>The density obtained is from the local part of the GBRV PP and thus it is far from the KS density</p>
 <section id="LPP-optimization">
-<h3>LPP optimization<a class="headerlink" href="#LPP-optimization" title="Permalink to this headline">¶</a></h3>
+<h3>LPP optimization<a class="headerlink" href="#LPP-optimization" title="Link to this heading">¶</a></h3>
 <p>The delta_pp function is a polynomial which coefficients {a} are optimized to reproduce the KS electron density.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">delta_pp</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">rcut</span><span class="p">,</span> <span class="n">a</span><span class="p">):</span>
-    <span class="n">d</span> <span class="o">=</span> <span class="n">r</span> <span class="o">-</span> <span class="n">rcut</span>
-    <span class="n">b</span> <span class="o">=</span> <span class="p">(</span><span class="mi">3</span><span class="o">*</span><span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">rcut</span><span class="o">-</span><span class="mi">4</span><span class="o">*</span><span class="n">a</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">rcut</span><span class="o">**</span><span class="mi">2</span><span class="o">+</span><span class="mi">5</span><span class="o">*</span><span class="n">a</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">*</span><span class="n">rcut</span><span class="o">**</span><span class="mi">3</span><span class="p">)</span><span class="o">/</span><span class="mf">2.0</span>
-    <span class="n">v</span> <span class="o">=</span> <span class="n">b</span><span class="o">*</span><span class="n">d</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">d</span><span class="o">**</span><span class="mi">3</span> <span class="o">+</span> <span class="n">a</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">d</span><span class="o">**</span><span class="mi">4</span><span class="o">+</span><span class="n">a</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">*</span><span class="n">d</span><span class="o">**</span><span class="mi">5</span>
-    <span class="n">v</span><span class="p">[</span><span class="n">r</span><span class="o">&gt;</span><span class="n">rcut</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.0</span>
-    <span class="k">return</span> <span class="n">v</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>def delta_pp(r, rcut, a):
+    d = r - rcut
+    b = (3*a[0]*rcut-4*a[1]*rcut**2+5*a[2]*rcut**3)/2.0
+    v = b*d**2 + a[0]*d**3 + a[1]*d**4+a[2]*d**5
+    v[r&gt;rcut] = 0.0
+    return v
 </pre></div>
 </div>
 </div>
@@ -599,14 +325,14 @@ Chemical potential (eV)  : 26.18277314569915
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">lpp2vloc</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">ions</span><span class="p">,</span> <span class="n">grid</span><span class="p">,</span> <span class="n">zval</span><span class="o">=</span><span class="mf">0.0</span><span class="p">):</span>
-    <span class="n">engine</span> <span class="o">=</span> <span class="n">PSP</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
-    <span class="n">engine</span><span class="o">.</span><span class="n">r</span> <span class="o">=</span> <span class="n">r</span>
-    <span class="n">engine</span><span class="o">.</span><span class="n">v</span> <span class="o">=</span> <span class="n">v</span>
-    <span class="n">engine</span><span class="o">.</span><span class="n">_zval</span> <span class="o">=</span> <span class="n">zval</span>
-    <span class="n">pseudo</span> <span class="o">=</span> <span class="n">LocalPseudo</span><span class="p">(</span><span class="n">grid</span> <span class="o">=</span> <span class="n">grid</span><span class="p">,</span> <span class="n">ions</span><span class="o">=</span><span class="n">ions</span><span class="p">,</span> <span class="n">PP_list</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;Au&#39;</span><span class="p">:</span><span class="n">engine</span><span class="p">},</span> <span class="n">MaxPoints</span><span class="o">=</span><span class="n">MaxPoints</span><span class="p">)</span>
-    <span class="n">pseudo</span><span class="o">.</span><span class="n">local_PP</span><span class="p">()</span>
-    <span class="k">return</span> <span class="n">pseudo</span><span class="o">.</span><span class="n">_vreal</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>def lpp2vloc(r, v, ions, grid, zval=0.0):
+    engine = PSP(None)
+    engine.r = r
+    engine.v = v
+    engine._zval = zval
+    pseudo = LocalPseudo(grid = grid, ions=ions, PP_list={&#39;Au&#39;:engine}, MaxPoints=MaxPoints)
+    pseudo.local_PP()
+    return pseudo._vreal
 </pre></div>
 </div>
 </div>
@@ -614,26 +340,26 @@ Chemical potential (eV)  : 26.18277314569915
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">grid</span> <span class="o">=</span> <span class="n">rho_target</span><span class="o">.</span><span class="n">grid</span>
-<span class="n">rcut</span> <span class="o">=</span> <span class="mf">2.35</span> <span class="c1"># Taken from the GBRV PP cutoff radius</span>
-<span class="n">r</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">rcut</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
-<span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>grid = rho_target.grid
+rcut = 2.35 # Taken from the GBRV PP cutoff radius
+r = np.linspace(0, rcut, 100)
+a = np.zeros(3)
 
-<span class="n">ext</span> <span class="o">=</span> <span class="n">Functional</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;EXT&#39;</span><span class="p">)</span>
-<span class="n">evaluator</span><span class="o">.</span><span class="n">UpdateFunctional</span><span class="p">(</span><span class="n">newFuncDict</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;EXT&#39;</span><span class="p">:</span> <span class="n">ext</span><span class="p">})</span>
+ext = Functional(type=&#39;EXT&#39;)
+evaluator.UpdateFunctional(newFuncDict={&#39;EXT&#39;: ext})
 
-<span class="n">opt</span> <span class="o">=</span> <span class="n">Optimization</span><span class="p">(</span><span class="n">EnergyEvaluator</span><span class="o">=</span><span class="n">evaluator</span><span class="p">)</span>
+opt = Optimization(EnergyEvaluator=evaluator)
 
-<span class="n">rho_ini</span> <span class="o">=</span> <span class="n">rho_target</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
-<span class="n">environ</span><span class="p">[</span><span class="s1">&#39;LOGLEVEL&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">4</span>
-<span class="k">def</span> <span class="nf">delta_rho</span><span class="p">(</span><span class="n">a</span><span class="p">):</span>
-    <span class="n">v</span> <span class="o">=</span> <span class="n">delta_pp</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">rcut</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span>
-    <span class="n">ext</span><span class="o">.</span><span class="n">v</span> <span class="o">=</span> <span class="n">lpp2vloc</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">ions</span><span class="p">,</span> <span class="n">grid</span><span class="p">)</span>
-    <span class="n">rho</span> <span class="o">=</span> <span class="n">opt</span><span class="o">.</span><span class="n">optimize_rho</span><span class="p">(</span><span class="n">guess_rho</span><span class="o">=</span><span class="n">rho_ini</span><span class="p">)</span>
-    <span class="n">rho_ini</span><span class="p">[:]</span><span class="o">=</span><span class="n">rho</span>
-    <span class="n">diff</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">rho</span> <span class="o">-</span> <span class="n">rho_target</span><span class="p">))</span><span class="o">.</span><span class="n">integral</span><span class="p">()</span>
-    <span class="c1"># print(&#39;aa:&#39;, a, diff)</span>
-    <span class="k">return</span> <span class="n">diff</span>
+rho_ini = rho_target.copy()
+environ[&#39;LOGLEVEL&#39;] = 4
+def delta_rho(a):
+    v = delta_pp(r, rcut, a)
+    ext.v = lpp2vloc(r, v, ions, grid)
+    rho = opt.optimize_rho(guess_rho=rho_ini)
+    rho_ini[:]=rho
+    diff = 0.5 * (np.abs(rho - rho_target)).integral()
+    # print(&#39;aa:&#39;, a, diff)
+    return diff
 </pre></div>
 </div>
 </div>
@@ -642,8 +368,8 @@ Chemical potential (eV)  : 26.18277314569915
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">res</span> <span class="o">=</span> <span class="n">minimize</span><span class="p">(</span><span class="n">delta_rho</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;Powell&#39;</span><span class="p">,</span> <span class="n">options</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;ftol&#39;</span><span class="p">:</span> <span class="mf">1.0e-4</span><span class="p">})</span>
-<span class="n">environ</span><span class="p">[</span><span class="s1">&#39;LOGLEVEL&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">2</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>res = minimize(delta_rho, a, method=&#39;Powell&#39;, options={&#39;ftol&#39;: 1.0e-4})
+environ[&#39;LOGLEVEL&#39;] = 2
 </pre></div>
 </div>
 </div>
@@ -651,18 +377,18 @@ Chemical potential (eV)  : 26.18277314569915
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="n">res</span><span class="o">.</span><span class="n">x</span>
-<span class="n">key</span> <span class="o">=</span> <span class="s1">&#39;Au&#39;</span>
-<span class="n">r</span> <span class="o">=</span> <span class="n">PSEUDO</span><span class="o">.</span><span class="n">readpp</span><span class="o">.</span><span class="n">pp</span><span class="p">[</span><span class="n">key</span><span class="p">]</span><span class="o">.</span><span class="n">r</span>
-<span class="n">vl</span> <span class="o">=</span> <span class="n">PSEUDO</span><span class="o">.</span><span class="n">readpp</span><span class="o">.</span><span class="n">pp</span><span class="p">[</span><span class="n">key</span><span class="p">]</span><span class="o">.</span><span class="n">v</span>
-<span class="n">v</span> <span class="o">=</span> <span class="n">delta_pp</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">rcut</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span>
-<span class="n">v</span> <span class="o">+=</span> <span class="n">vl</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>a = res.x
+key = &#39;Au&#39;
+r = PSEUDO.readpp.pp[key].r
+vl = PSEUDO.readpp.pp[key].v
+v = delta_pp(r, rcut, a)
+v += vl
 
-<span class="n">engine</span> <span class="o">=</span> <span class="n">PSP</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
-<span class="n">engine</span><span class="o">.</span><span class="n">r</span> <span class="o">=</span> <span class="n">r</span>
-<span class="n">engine</span><span class="o">.</span><span class="n">v</span> <span class="o">=</span> <span class="n">v</span>
-<span class="n">engine</span><span class="o">.</span><span class="n">info</span><span class="p">[</span><span class="s1">&#39;atomicnum&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">79</span> <span class="c1"># From GBRV PP</span>
-<span class="n">engine</span><span class="o">.</span><span class="n">_zval</span> <span class="o">=</span> <span class="mf">11.0</span> <span class="c1"># From GBRV PP</span>
+engine = PSP(None)
+engine.r = r
+engine.v = v
+engine.info[&#39;atomicnum&#39;] = 79 # From GBRV PP
+engine._zval = 11.0 # From GBRV PP
 </pre></div>
 </div>
 </div>
@@ -671,19 +397,19 @@ Chemical potential (eV)  : 26.18277314569915
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">r</span><span class="p">,</span><span class="n">v</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;New LPP&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">r</span><span class="p">,</span><span class="n">vl</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Original LPP&#39;</span><span class="p">)</span>
-<span class="n">rcut</span> <span class="o">=</span> <span class="n">rcut</span>
-<span class="n">r1</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">start</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span><span class="n">stop</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span><span class="n">num</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">vlines</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">rcut</span><span class="p">,</span><span class="n">ymin</span><span class="o">=-</span><span class="mi">100</span><span class="p">,</span><span class="n">ymax</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span><span class="n">colors</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">r1</span><span class="p">,</span><span class="n">delta_pp</span><span class="p">(</span><span class="n">r1</span><span class="p">,</span><span class="n">rcut</span><span class="p">,</span><span class="n">a</span><span class="p">),</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;$v_</span><span class="si">{LPP}</span><span class="s1">(r)$&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="o">-</span><span class="mi">15</span><span class="p">,</span><span class="mi">5</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">5</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Local part of PP of Au&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;v(r)&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;r&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import matplotlib.pyplot as plt
+plt.plot(r,v, label=&#39;New LPP&#39;)
+plt.plot(r,vl, label=&#39;Original LPP&#39;)
+rcut = rcut
+r1=np.linspace(start=0.01,stop=20,num=1000)
+plt.vlines(x=rcut,ymin=-100,ymax=100,colors=&#39;k&#39;)
+plt.plot(r1,delta_pp(r1,rcut,a), label=&#39;$v_{LPP}(r)$&#39;)
+plt.ylim(-15,5)
+plt.xlim(0,5)
+plt.title(&#39;Local part of PP of Au&#39;)
+plt.ylabel(&#39;v(r)&#39;)
+plt.xlabel(&#39;r&#39;)
+plt.legend()
 </pre></div>
 </div>
 </div>
@@ -708,7 +434,7 @@ Chemical potential (eV)  : 26.18277314569915
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">engine</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;Au_pgbrv02.psp8&#39;</span><span class="p">)</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>engine.write(&#39;Au_pgbrv02.psp8&#39;)
 </pre></div>
 </div>
 </div>
@@ -724,8 +450,8 @@ Chemical potential (eV)  : 26.18277314569915
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2019-2023, Pavanello Research Group.
-      <span class="lastupdated">Last updated on Thursday, 31 Jul 2025 14:01:42.
+    <p>&#169; Copyright 2019-2025, Pavanello Research Group.
+      <span class="lastupdated">Last updated on Thursday, 31 Jul 2025 17:03:53.
       </span></p>
   </div>
 
