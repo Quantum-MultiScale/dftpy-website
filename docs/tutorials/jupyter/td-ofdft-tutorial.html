@@ -23,7 +23,9 @@
       <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
-    <link rel="search" title="Search" href="../../search.html" /> 
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Stable releases" href="../../releases.html" />
+    <link rel="prev" title="Optimization" href="density_optimization.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -46,12 +48,30 @@
   </form>
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <ul>
+              <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../../contact.html">Contact</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../install.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../ofdft.html">How does DFTpy work?</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../LPP.html">Local Pseudopotentials</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../tutorials.html">Tutorials</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../tutorials.html">Tutorials</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../tutorials.html#config-of-dftpy-script">Config of DFTpy script</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorials.html#ofdft">OFDFT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorials.html#local-pseudopotentials">Local Pseudopotentials</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorials.html#spin-unrestricted-calculation">Spin unrestricted calculation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorials.html#tddft">TDDFT</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../tutorials.html#do-it-on-a-jupyter-notebook">Do it on a Jupyter Notebook!</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="density_optimization.html">Optimization</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">TD-OFDFT Tutorials</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#A-simple-example-using-adiabatic-TFW-functional">A simple example using adiabatic TFW functional</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Introduction-of-the-predictor-corrector">Introduction of the predictor-corrector</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Using-nonadiabatic-functionals">Using nonadiabatic functionals</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Starting-with-more-accurate-ground-state-density">Starting with more accurate ground-state density</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="../../releases.html">Stable releases</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../faq.html">Frequently Asked Questions</a></li>
 </ul>
@@ -70,6 +90,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../tutorials.html">Tutorials</a></li>
       <li class="breadcrumb-item active">TD-OFDFT Tutorials</li>
       <li class="wy-breadcrumbs-aside">
         
@@ -81,7 +102,10 @@
         
       </li>
     
-  </ul>
+  </ul><div class="rst-breadcrumbs-buttons" role="navigation" aria-label="Sequential page navigation">
+        <a href="density_optimization.html" class="btn btn-neutral float-left" title="Optimization" accesskey="p"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../../releases.html" class="btn btn-neutral float-right" title="Stable releases" accesskey="n">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+  </div>
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
@@ -697,13 +721,16 @@ plt.show()
 
            </div>
           </div>
-          <footer>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="density_optimization.html" class="btn btn-neutral float-left" title="Optimization" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../../releases.html" class="btn btn-neutral float-right" title="Stable releases" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
 
   <hr/>
 
   <div role="contentinfo">
     <p>&#169; Copyright 2019-2025, Pavanello Research Group.
-      <span class="lastupdated">Last updated on Thursday, 31 Jul 2025 17:03:53.
+      <span class="lastupdated">Last updated on Thursday, 31 Jul 2025 17:24:02.
       </span></p>
   </div>
 

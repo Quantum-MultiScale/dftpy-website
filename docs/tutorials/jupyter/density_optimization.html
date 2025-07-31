@@ -23,7 +23,9 @@
       <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
-    <link rel="search" title="Search" href="../../search.html" /> 
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="TD-OFDFT Tutorials" href="td-ofdft-tutorial.html" />
+    <link rel="prev" title="Use of Propagator" href="../tddft/propagate.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -46,12 +48,38 @@
   </form>
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <ul>
+              <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../../contact.html">Contact</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../install.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../ofdft.html">How does DFTpy work?</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../LPP.html">Local Pseudopotentials</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../tutorials.html">Tutorials</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../tutorials.html">Tutorials</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../tutorials.html#config-of-dftpy-script">Config of DFTpy script</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorials.html#ofdft">OFDFT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorials.html#local-pseudopotentials">Local Pseudopotentials</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorials.html#spin-unrestricted-calculation">Spin unrestricted calculation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorials.html#tddft">TDDFT</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../tutorials.html#do-it-on-a-jupyter-notebook">Do it on a Jupyter Notebook!</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Optimization</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#import-some-modules">import some modules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pseudopotential-file">pseudopotential file</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#build-the-ions-or-read-from-file">build the ions or read from file</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#make-a-grid">make a grid</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#build-local-pseudo,-and-generate-guess-density">build local pseudo, and generate guess density</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#instance-KEDF,-XC-and-HARTREE-functionals">instance KEDF, XC and HARTREE functionals</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#instance-DFTpy-evaluator">instance DFTpy evaluator</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#instance-and-execute-DFTpy-density-optimizer">instance and execute DFTpy density optimizer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#evaluate-final-energy">evaluate final energy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#print-the-timing">print the timing</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Visualize-with-scikit-image-and-matplotlib">Visualize with scikit-image and matplotlib</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Visualize-with-VESTA">Visualize with VESTA</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="td-ofdft-tutorial.html">TD-OFDFT Tutorials</a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="../../releases.html">Stable releases</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../faq.html">Frequently Asked Questions</a></li>
 </ul>
@@ -70,6 +98,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../tutorials.html">Tutorials</a></li>
       <li class="breadcrumb-item active">Optimization</li>
       <li class="wy-breadcrumbs-aside">
         
@@ -81,7 +110,10 @@
         
       </li>
     
-  </ul>
+  </ul><div class="rst-breadcrumbs-buttons" role="navigation" aria-label="Sequential page navigation">
+        <a href="../tddft/propagate.html" class="btn btn-neutral float-left" title="Use of Propagator" accesskey="p"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="td-ofdft-tutorial.html" class="btn btn-neutral float-right" title="TD-OFDFT Tutorials" accesskey="n">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+  </div>
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
@@ -333,13 +365,16 @@ save ./.dftpy.xsf in darwin platform
 
            </div>
           </div>
-          <footer>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../tddft/propagate.html" class="btn btn-neutral float-left" title="Use of Propagator" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="td-ofdft-tutorial.html" class="btn btn-neutral float-right" title="TD-OFDFT Tutorials" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
 
   <hr/>
 
   <div role="contentinfo">
     <p>&#169; Copyright 2019-2025, Pavanello Research Group.
-      <span class="lastupdated">Last updated on Thursday, 31 Jul 2025 17:03:53.
+      <span class="lastupdated">Last updated on Thursday, 31 Jul 2025 17:24:02.
       </span></p>
   </div>
 
