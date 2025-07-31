@@ -21,7 +21,9 @@
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
-    <link rel="search" title="Search" href="search.html" /> 
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Tutorials" href="tutorials/tutorials.html" />
+    <link rel="prev" title="How does DFTpy work?" href="ofdft.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -40,12 +42,18 @@
   </form>
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <ul>
+              <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="contact.html">Contact</a></li>
 <li class="toctree-l1"><a class="reference internal" href="install.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="ofdft.html">How does DFTpy work?</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Local Pseudopotentials (LPPs) for OF-DFT</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#some-background">Some background</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#download-lpps">Download LPPs</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="tutorials/tutorials.html">Tutorials</a></li>
 <li class="toctree-l1"><a class="reference internal" href="releases.html">Stable releases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="faq.html">Frequently Asked Questions</a></li>
 </ul>
 
         </div>
@@ -73,7 +81,10 @@
         
       </li>
     
-  </ul>
+  </ul><div class="rst-breadcrumbs-buttons" role="navigation" aria-label="Sequential page navigation">
+        <a href="ofdft.html" class="btn btn-neutral float-left" title="How does DFTpy work?" accesskey="p"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="tutorials/tutorials.html" class="btn btn-neutral float-right" title="Tutorials" accesskey="n">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+  </div>
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
@@ -105,6 +116,8 @@
 </style>
 <section id="local-pseudopotentials-lpps-for-of-dft">
 <h1>Local Pseudopotentials (LPPs) for OF-DFT<a class="headerlink" href="#local-pseudopotentials-lpps-for-of-dft" title="Permalink to this headline">¶</a></h1>
+<section id="some-background">
+<h2>Some background<a class="headerlink" href="#some-background" title="Permalink to this headline">¶</a></h2>
 <p>Orbital-Free Density Functional Theory (OF-DFT) is an electronic structure method based solely on the electron density. In Kohn-Sham DFT pseudopotentials typically include a nonlocal part, which requires the Kohn-Sham orbitals to be evaluated. Due to the absence of Kohn-Sham orbitals in OF-DFT, only local pseudopotentials can be employed.</p>
 <p>Several local pseudopotentials have been developed and successfully applied to selected elements. A fairly exhaustive list:</p>
 <ul class="simple">
@@ -113,6 +126,9 @@
 <li><p>Optimized Effective Local Pseudopotentials (<a class="reference external" href="https://doi.org/10.1063/1.4944989">OEPP</a>)</p></li>
 </ul>
 <p>The <a class="reference external" href="https://sites.rutgers.edu/prg">PRG</a> recently derived a new set of local pseudopotentials for transition metal elements which is available below (PGBRV and PPSL as they are based on the <a class="reference external" href="https://www.physics.rutgers.edu/gbrv/">GBRV</a> and <a class="reference external" href="https://dalcorso.github.io/pslibrary/">PSL</a> ultrasoft pseudopotentials). The new pseudos can be constructed for any element by following this <a class="reference internal" href="tutorials/jupyter/lpps.html"><span class="doc">tutorial</span></a>. The formalism behind this new class of pseudopotentials is described <a href="#id1"><span class="problematic" id="id2">`here &lt;&gt;`_</span></a>.</p>
+</section>
+<section id="download-lpps">
+<h2>Download LPPs<a class="headerlink" href="#download-lpps" title="Permalink to this headline">¶</a></h2>
 <style>
 .periodic-table {
     display: grid;
@@ -647,17 +663,21 @@ document.addEventListener("DOMContentLoaded", function () {
     updateLinks(select.value); // initialize
 });
 </script></section>
+</section>
 
 
            </div>
           </div>
-          <footer>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="ofdft.html" class="btn btn-neutral float-left" title="How does DFTpy work?" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="tutorials/tutorials.html" class="btn btn-neutral float-right" title="Tutorials" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
 
   <hr/>
 
   <div role="contentinfo">
     <p>&#169; Copyright 2019-2023, Pavanello Research Group.
-      <span class="lastupdated">Last updated on Thursday, 31 Jul 2025 13:33:46.
+      <span class="lastupdated">Last updated on Thursday, 31 Jul 2025 13:50:17.
       </span></p>
   </div>
 
