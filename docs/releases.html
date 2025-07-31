@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>DFTpy: Density Functional Theory with Python &mdash; DFTpy 2.0.0 documentation</title>
+  <title>Stable releases &mdash; DFTpy 2.0.0 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/custom.css" type="text/css" />
       <link rel="stylesheet" href="_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" type="text/css" />
@@ -22,7 +22,7 @@
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Contact" href="contact.html" /> 
+    <link rel="prev" title="Use of Propagator" href="tutorials/tddft/propagate.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -30,7 +30,7 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="#" class="icon icon-home"> DFTpy
+            <a href="index.html" class="icon icon-home"> DFTpy
             <img src="_static/dftpy.png" class="logo" alt="Logo"/>
           </a>
 <div role="search">
@@ -41,12 +41,16 @@
   </form>
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <ul>
+              <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="contact.html">Contact</a></li>
 <li class="toctree-l1"><a class="reference internal" href="install.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="ofdft.html">How does DFTpy work?</a></li>
 <li class="toctree-l1"><a class="reference internal" href="tutorials/tutorials.html">Tutorials</a></li>
-<li class="toctree-l1"><a class="reference internal" href="releases.html">Stable releases</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Stable releases</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#version-2-1-2">Version 2.1.2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#version-2-0">Version 2.0</a></li>
+</ul>
+</li>
 </ul>
 
         </div>
@@ -55,27 +59,27 @@
 
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="#">DFTpy</a>
+          <a href="index.html">DFTpy</a>
       </nav>
 
       <div class="wy-nav-content">
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="#" class="icon icon-home"></a> &raquo;</li>
-      <li>DFTpy: Density Functional Theory with Python</li>
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>Stable releases</li>
       <li class="wy-breadcrumbs-aside">
         
 			<a href=genindex.html>Index</a>
 		
           
-			<a href="https://gitlab.com/pavanello-research-group/dftpy/tree/master/doc/index.rst">Source</a>
+			<a href="https://gitlab.com/pavanello-research-group/dftpy/tree/master/doc/releases.rst">Source</a>
           
         
       </li>
     
   </ul><div class="rst-breadcrumbs-buttons" role="navigation" aria-label="Sequential page navigation">
-        <a href="contact.html" class="btn btn-neutral float-right" title="Contact" accesskey="n">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="tutorials/tddft/propagate.html" class="btn btn-neutral float-left" title="Use of Propagator" accesskey="p"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
   </div>
   <hr/>
 </div>
@@ -106,54 +110,63 @@
     text-align: unset;
 }
 </style>
-<section id="dftpy-density-functional-theory-with-python">
-<h1>DFTpy: Density Functional Theory with Python<a class="headerlink" href="#dftpy-density-functional-theory-with-python" title="Permalink to this headline">¶</a></h1>
-<p><a class="reference external" href="https://dftpy.rutgers.edu">DFTpy</a> is an orbital-free Density Functional Theory code based on a plane-wave expansion of the electron density entirely coded in <a class="reference external" href="https://www.python.org">Python</a>. DFTpy makes it easy to develop nonstandard workflows and new electronic structure methods.</p>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="contact.html">Contact</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="contact.html#dftpy-developers">DFTpy Developers</a></li>
-<li class="toctree-l2"><a class="reference internal" href="contact.html#on-line">On-line</a></li>
-<li class="toctree-l2"><a class="reference internal" href="contact.html#github">GitHub</a></li>
-<li class="toctree-l2"><a class="reference internal" href="contact.html#references">References</a></li>
+<section id="stable-releases">
+<h1>Stable releases<a class="headerlink" href="#stable-releases" title="Permalink to this headline">¶</a></h1>
+<section id="version-2-1-2">
+<h2>Version 2.1.2<a class="headerlink" href="#version-2-1-2" title="Permalink to this headline">¶</a></h2>
+<p>Release date: November 2024</p>
+<dl>
+<dt>Download:</dt><dd><ul class="simple">
+<li><p><a class="reference external" href="https://github.com/Quantum-MultiScale/DFTpy/archive/refs/tags/v2.1.2.zip">GitHub link</a></p></li>
 </ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="install.html">Installation</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="install.html#requirements">Requirements</a></li>
-<li class="toctree-l2"><a class="reference internal" href="install.html#installation-with-pip">Installation with pip</a></li>
-<li class="toctree-l2"><a class="reference internal" href="install.html#installation-from-source">Installation from source</a></li>
+<p>In this version:
+- Various bugfixes</p>
+</dd>
+</dl>
+</section>
+<section id="version-2-0">
+<h2>Version 2.0<a class="headerlink" href="#version-2-0" title="Permalink to this headline">¶</a></h2>
+<p>Release date: June 2022</p>
+<dl>
+<dt>Download:</dt><dd><ul class="simple">
+<li><p><a class="reference external" href="https://gitlab.com/pavanello-research-group/dftpy/-/tags/dftpy-2.0">GitLab link</a></p></li>
 </ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="ofdft.html">How does DFTpy work?</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="ofdft.html#orbital-free-dft">Orbital-Free DFT</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ofdft.html#time-dependent-orbital-free-dft">Time-Dependent Orbital-Free DFT</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ofdft.html#short-note-on-the-implementation">Short note on the implementation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ofdft.html#references">References</a></li>
+</dd>
+<dt>This version supports:</dt><dd><ul class="simple">
+<li><p>Parallel execution with <a class="reference external" href="https://mpi4py.readthedocs.io/en/stable/">mpi4pi</a></p></li>
+<li><p>Supported non-standard GGAs, such as <a class="reference external" href="https://journals.aps.org/prb/abstract/10.1103/PhysRevB.98.041111">LKT</a></p></li>
+<li><p>New td-OF-DFT code for real-time propagation and Casida</p></li>
+<li><p>Nonadiabatic Pauli potential with the <a class="reference external" href="https://journals.aps.org/prb/abstract/10.1103/PhysRevB.104.235110">JP</a> functional</p></li>
+<li><p>Extensive upgrade of documentation and docstrings</p></li>
 </ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="tutorials/tutorials.html">Tutorials</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="tutorials/tutorials.html#config-of-dftpy-script">Config of DFTpy script</a></li>
-<li class="toctree-l2"><a class="reference internal" href="tutorials/tutorials.html#ofdft">OFDFT</a></li>
-<li class="toctree-l2"><a class="reference internal" href="tutorials/tutorials.html#local-pseudopotentials">Local Pseudopotentials</a></li>
-<li class="toctree-l2"><a class="reference internal" href="tutorials/tutorials.html#spin-unrestricted-calculation">Spin unrestricted calculation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="tutorials/tutorials.html#tddft">TDDFT</a></li>
-<li class="toctree-l2"><a class="reference internal" href="tutorials/tutorials.html#do-it-on-a-jupyter-notebook">Do it on a Jupyter Notebook!</a></li>
+<p>Version 1.0</p>
+</dd>
+</dl>
+<hr class="docutils" />
+<p>Release date: January 2020</p>
+<dl class="simple">
+<dt>Download:</dt><dd><ul class="simple">
+<li><p><a class="reference external" href="https://gitlab.com/pavanello-research-group/dftpy/-/tags/dftpy-1.0">GitLab link</a></p></li>
 </ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="releases.html">Stable releases</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="releases.html#version-2-1-2">Version 2.1.2</a></li>
-<li class="toctree-l2"><a class="reference internal" href="releases.html#version-2-0">Version 2.0</a></li>
+</dd>
+<dt>This version supports:</dt><dd><ul class="simple">
+<li><p>OFDFT electron density optimization</p></li>
+<li><p>Latest nonlocal KEDFs</p></li>
+<li><p>Ab initio dynamics</p></li>
+<li><p>Hydrodynamic DFT (TD-OFDFT)</p></li>
+<li><p>I/O for plotting and to several file formats</p></li>
+<li><p>Several examples (also on Jupyter notebooks)</p></li>
 </ul>
-</li>
-</ul>
-</div>
+</dd>
+</dl>
+</section>
 </section>
 
 
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="contact.html" class="btn btn-neutral float-right" title="Contact" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="tutorials/tddft/propagate.html" class="btn btn-neutral float-left" title="Use of Propagator" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
 
   <hr/>

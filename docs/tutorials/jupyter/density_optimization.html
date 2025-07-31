@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Optimization &mdash; DFTpy 2.0.0 documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" type="text/css" />
+    <link rel="shortcut icon" href="../../_static/dftpy.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/design-tabs.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+        <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../index.html" class="icon icon-home"> DFTpy
+            <img src="../../_static/dftpy.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../contact.html">Contact</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ofdft.html">How does DFTpy work?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../releases.html">Stable releases</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">DFTpy</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>Optimization</li>
+      <li class="wy-breadcrumbs-aside">
+        
+			<a href=../../genindex.html>Index</a>
+		
+          
+			<a href="https://gitlab.com/pavanello-research-group/dftpy/tree/master/doc/tutorials/jupyter/density_optimization.ipynb">Source</a>
+          
+        
+      </li>
+    
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  
+<style>
+/* CSS for nbsphinx extension */
+
+/* remove conflicting styling from Sphinx themes */
+div.nbinput.container div.prompt *,
+div.nboutput.container div.prompt *,
+div.nbinput.container div.input_area pre,
+div.nboutput.container div.output_area pre,
+div.nbinput.container div.input_area .highlight,
+div.nboutput.container div.output_area .highlight {
+    border: none;
+    padding: 0;
+    margin: 0;
+    box-shadow: none;
+}
+
+div.nbinput.container > div[class*=highlight],
+div.nboutput.container > div[class*=highlight] {
+    margin: 0;
+}
+
+div.nbinput.container div.prompt *,
+div.nboutput.container div.prompt * {
+    background: none;
+}
+
+div.nboutput.container div.output_area .highlight,
+div.nboutput.container div.output_area pre {
+    background: unset;
+}
+
+div.nboutput.container div.output_area div.highlight {
+    color: unset;  /* override Pygments text color */
+}
+
+/* avoid gaps between output lines */
+div.nboutput.container div[class*=highlight] pre {
+    line-height: normal;
+}
+
+/* input/output containers */
+div.nbinput.container,
+div.nboutput.container {
+    display: -webkit-flex;
+    display: flex;
+    align-items: flex-start;
+    margin: 0;
+    width: 100%;
+}
+@media (max-width: 540px) {
+    div.nbinput.container,
+    div.nboutput.container {
+        flex-direction: column;
+    }
+}
+
+/* input container */
+div.nbinput.container {
+    padding-top: 5px;
+}
+
+/* last container */
+div.nblast.container {
+    padding-bottom: 5px;
+}
+
+/* input prompt */
+div.nbinput.container div.prompt pre {
+    color: #307FC1;
+}
+
+/* output prompt */
+div.nboutput.container div.prompt pre {
+    color: #BF5B3D;
+}
+
+/* all prompts */
+div.nbinput.container div.prompt,
+div.nboutput.container div.prompt {
+    width: 4.5ex;
+    padding-top: 5px;
+    position: relative;
+    user-select: none;
+}
+
+div.nbinput.container div.prompt > div,
+div.nboutput.container div.prompt > div {
+    position: absolute;
+    right: 0;
+    margin-right: 0.3ex;
+}
+
+@media (max-width: 540px) {
+    div.nbinput.container div.prompt,
+    div.nboutput.container div.prompt {
+        width: unset;
+        text-align: left;
+        padding: 0.4em;
+    }
+    div.nboutput.container div.prompt.empty {
+        padding: 0;
+    }
+
+    div.nbinput.container div.prompt > div,
+    div.nboutput.container div.prompt > div {
+        position: unset;
+    }
+}
+
+/* disable scrollbars on prompts */
+div.nbinput.container div.prompt pre,
+div.nboutput.container div.prompt pre {
+    overflow: hidden;
+}
+
+/* input/output area */
+div.nbinput.container div.input_area,
+div.nboutput.container div.output_area {
+    -webkit-flex: 1;
+    flex: 1;
+    overflow: auto;
+}
+@media (max-width: 540px) {
+    div.nbinput.container div.input_area,
+    div.nboutput.container div.output_area {
+        width: 100%;
+    }
+}
+
+/* input area */
+div.nbinput.container div.input_area {
+    border: 1px solid #e0e0e0;
+    border-radius: 2px;
+    /*background: #f5f5f5;*/
+}
+
+/* override MathJax center alignment in output cells */
+div.nboutput.container div[class*=MathJax] {
+    text-align: left !important;
+}
+
+/* override sphinx.ext.imgmath center alignment in output cells */
+div.nboutput.container div.math p {
+    text-align: left;
+}
+
+/* standard error */
+div.nboutput.container div.output_area.stderr {
+    background: #fdd;
+}
+
+/* ANSI colors */
+.ansi-black-fg { color: #3E424D; }
+.ansi-black-bg { background-color: #3E424D; }
+.ansi-black-intense-fg { color: #282C36; }
+.ansi-black-intense-bg { background-color: #282C36; }
+.ansi-red-fg { color: #E75C58; }
+.ansi-red-bg { background-color: #E75C58; }
+.ansi-red-intense-fg { color: #B22B31; }
+.ansi-red-intense-bg { background-color: #B22B31; }
+.ansi-green-fg { color: #00A250; }
+.ansi-green-bg { background-color: #00A250; }
+.ansi-green-intense-fg { color: #007427; }
+.ansi-green-intense-bg { background-color: #007427; }
+.ansi-yellow-fg { color: #DDB62B; }
+.ansi-yellow-bg { background-color: #DDB62B; }
+.ansi-yellow-intense-fg { color: #B27D12; }
+.ansi-yellow-intense-bg { background-color: #B27D12; }
+.ansi-blue-fg { color: #208FFB; }
+.ansi-blue-bg { background-color: #208FFB; }
+.ansi-blue-intense-fg { color: #0065CA; }
+.ansi-blue-intense-bg { background-color: #0065CA; }
+.ansi-magenta-fg { color: #D160C4; }
+.ansi-magenta-bg { background-color: #D160C4; }
+.ansi-magenta-intense-fg { color: #A03196; }
+.ansi-magenta-intense-bg { background-color: #A03196; }
+.ansi-cyan-fg { color: #60C6C8; }
+.ansi-cyan-bg { background-color: #60C6C8; }
+.ansi-cyan-intense-fg { color: #258F8F; }
+.ansi-cyan-intense-bg { background-color: #258F8F; }
+.ansi-white-fg { color: #C5C1B4; }
+.ansi-white-bg { background-color: #C5C1B4; }
+.ansi-white-intense-fg { color: #A1A6B2; }
+.ansi-white-intense-bg { background-color: #A1A6B2; }
+
+.ansi-default-inverse-fg { color: #FFFFFF; }
+.ansi-default-inverse-bg { background-color: #000000; }
+
+.ansi-bold { font-weight: bold; }
+.ansi-underline { text-decoration: underline; }
+
+
+div.nbinput.container div.input_area div[class*=highlight] > pre,
+div.nboutput.container div.output_area div[class*=highlight] > pre,
+div.nboutput.container div.output_area div[class*=highlight].math,
+div.nboutput.container div.output_area.rendered_html,
+div.nboutput.container div.output_area > div.output_javascript,
+div.nboutput.container div.output_area:not(.rendered_html) > img{
+    padding: 5px;
+    margin: 0;
+}
+
+/* fix copybtn overflow problem in chromium (needed for 'sphinx_copybutton') */
+div.nbinput.container div.input_area > div[class^='highlight'],
+div.nboutput.container div.output_area > div[class^='highlight']{
+    overflow-y: hidden;
+}
+
+/* hide copybtn icon on prompts (needed for 'sphinx_copybutton') */
+.prompt .copybtn {
+    display: none;
+}
+
+/* Some additional styling taken form the Jupyter notebook CSS */
+.jp-RenderedHTMLCommon table,
+div.rendered_html table {
+  border: none;
+  border-collapse: collapse;
+  border-spacing: 0;
+  color: black;
+  font-size: 12px;
+  table-layout: fixed;
+}
+.jp-RenderedHTMLCommon thead,
+div.rendered_html thead {
+  border-bottom: 1px solid black;
+  vertical-align: bottom;
+}
+.jp-RenderedHTMLCommon tr,
+.jp-RenderedHTMLCommon th,
+.jp-RenderedHTMLCommon td,
+div.rendered_html tr,
+div.rendered_html th,
+div.rendered_html td {
+  text-align: right;
+  vertical-align: middle;
+  padding: 0.5em 0.5em;
+  line-height: normal;
+  white-space: normal;
+  max-width: none;
+  border: none;
+}
+.jp-RenderedHTMLCommon th,
+div.rendered_html th {
+  font-weight: bold;
+}
+.jp-RenderedHTMLCommon tbody tr:nth-child(odd),
+div.rendered_html tbody tr:nth-child(odd) {
+  background: #f5f5f5;
+}
+.jp-RenderedHTMLCommon tbody tr:hover,
+div.rendered_html tbody tr:hover {
+  background: rgba(66, 165, 245, 0.2);
+}
+
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<section id="Optimization">
+<h1>Optimization<a class="headerlink" href="#Optimization" title="Permalink to this headline">¶</a></h1>
+<section id="import-some-modules">
+<h2>import some modules<a class="headerlink" href="#import-some-modules" title="Permalink to this headline">¶</a></h2>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">dftpy.ions</span> <span class="kn">import</span> <span class="n">Ions</span>
+<span class="kn">from</span> <span class="nn">dftpy.field</span> <span class="kn">import</span> <span class="n">DirectField</span>
+<span class="kn">from</span> <span class="nn">dftpy.grid</span> <span class="kn">import</span> <span class="n">DirectGrid</span>
+<span class="kn">from</span> <span class="nn">dftpy.functional</span> <span class="kn">import</span> <span class="n">LocalPseudo</span><span class="p">,</span> <span class="n">Functional</span><span class="p">,</span> <span class="n">TotalFunctional</span>
+<span class="kn">from</span> <span class="nn">dftpy.formats</span> <span class="kn">import</span> <span class="n">io</span>
+<span class="kn">from</span> <span class="nn">dftpy.math_utils</span> <span class="kn">import</span> <span class="n">ecut2nr</span>
+<span class="kn">from</span> <span class="nn">dftpy.time_data</span> <span class="kn">import</span> <span class="n">TimeData</span>
+<span class="kn">from</span> <span class="nn">dftpy.optimization</span> <span class="kn">import</span> <span class="n">Optimization</span>
+<span class="kn">from</span> <span class="nn">dftpy.mpi</span> <span class="kn">import</span> <span class="n">sprint</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="pseudopotential-file">
+<h2>pseudopotential file<a class="headerlink" href="#pseudopotential-file" title="Permalink to this headline">¶</a></h2>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">path_pp</span><span class="o">=</span><span class="s1">&#39;../DATA/&#39;</span>
+<span class="n">file1</span><span class="o">=</span><span class="s1">&#39;Al_lda.oe01.recpot&#39;</span>
+<span class="n">PP_list</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;Al&#39;</span><span class="p">:</span> <span class="n">path_pp</span><span class="o">+</span><span class="n">file1</span><span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="build-the-ions-or-read-from-file">
+<h2>build the ions or read from file<a class="headerlink" href="#build-the-ions-or-read-from-file" title="Permalink to this headline">¶</a></h2>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">ase.build</span> <span class="kn">import</span> <span class="n">bulk</span>
+<span class="n">atoms</span> <span class="o">=</span> <span class="n">bulk</span><span class="p">(</span><span class="s1">&#39;Al&#39;</span><span class="p">,</span> <span class="s1">&#39;fcc&#39;</span><span class="p">,</span> <span class="n">a</span><span class="o">=</span><span class="mf">4.05</span><span class="p">,</span> <span class="n">cubic</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">ions</span> <span class="o">=</span> <span class="n">Ions</span><span class="o">.</span><span class="n">from_ase</span><span class="p">(</span><span class="n">atoms</span><span class="p">)</span>
+<span class="c1"># ions = io.read(posfile)</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="make-a-grid">
+<h2>make a grid<a class="headerlink" href="#make-a-grid" title="Permalink to this headline">¶</a></h2>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">nr</span> <span class="o">=</span> <span class="n">ecut2nr</span><span class="p">(</span><span class="n">ecut</span><span class="o">=</span><span class="mi">35</span><span class="p">,</span> <span class="n">lattice</span><span class="o">=</span><span class="n">ions</span><span class="o">.</span><span class="n">cell</span><span class="p">)</span>
+<span class="n">grid</span> <span class="o">=</span> <span class="n">DirectGrid</span><span class="p">(</span><span class="n">lattice</span><span class="o">=</span><span class="n">ions</span><span class="o">.</span><span class="n">cell</span><span class="p">,</span> <span class="n">nr</span><span class="o">=</span><span class="n">nr</span><span class="p">)</span>
+<span class="n">sprint</span><span class="p">(</span><span class="s1">&#39;The final grid size is &#39;</span><span class="p">,</span> <span class="n">nr</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+The final grid size is  [20 20 20]
+</pre></div></div>
+</div>
+</section>
+<section id="build-local-pseudo,-and-generate-guess-density">
+<h2>build local pseudo, and generate guess density<a class="headerlink" href="#build-local-pseudo,-and-generate-guess-density" title="Permalink to this headline">¶</a></h2>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">PSEUDO</span> <span class="o">=</span> <span class="n">LocalPseudo</span><span class="p">(</span><span class="n">grid</span> <span class="o">=</span> <span class="n">grid</span><span class="p">,</span> <span class="n">ions</span><span class="o">=</span><span class="n">ions</span><span class="p">,</span> <span class="n">PP_list</span><span class="o">=</span><span class="n">PP_list</span><span class="p">)</span>
+
+<span class="n">rho_ini</span> <span class="o">=</span> <span class="n">DirectField</span><span class="p">(</span><span class="n">grid</span><span class="o">=</span><span class="n">grid</span><span class="p">)</span>
+<span class="n">rho_ini</span><span class="p">[:]</span> <span class="o">=</span> <span class="n">ions</span><span class="o">.</span><span class="n">get_ncharges</span><span class="p">()</span><span class="o">/</span><span class="n">ions</span><span class="o">.</span><span class="n">cell</span><span class="o">.</span><span class="n">volume</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+setting key: Al -&gt; ../DATA/Al_lda.oe01.recpot
+</pre></div></div>
+</div>
+</section>
+<section id="instance-KEDF,-XC-and-HARTREE-functionals">
+<h2>instance KEDF, XC and HARTREE functionals<a class="headerlink" href="#instance-KEDF,-XC-and-HARTREE-functionals" title="Permalink to this headline">¶</a></h2>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">KE</span> <span class="o">=</span> <span class="n">Functional</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;KEDF&#39;</span><span class="p">,</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;TFvW&#39;</span><span class="p">)</span>
+<span class="n">XC</span> <span class="o">=</span> <span class="n">Functional</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;XC&#39;</span><span class="p">,</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;LDA&#39;</span><span class="p">)</span>
+<span class="n">HARTREE</span> <span class="o">=</span> <span class="n">Functional</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;HARTREE&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="instance-DFTpy-evaluator">
+<h2>instance DFTpy evaluator<a class="headerlink" href="#instance-DFTpy-evaluator" title="Permalink to this headline">¶</a></h2>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">evaluator</span> <span class="o">=</span> <span class="n">TotalFunctional</span><span class="p">(</span><span class="n">KE</span><span class="o">=</span><span class="n">KE</span><span class="p">,</span> <span class="n">XC</span><span class="o">=</span><span class="n">XC</span><span class="p">,</span> <span class="n">HARTREE</span><span class="o">=</span><span class="n">HARTREE</span><span class="p">,</span> <span class="n">PSEUDO</span><span class="o">=</span><span class="n">PSEUDO</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="instance-and-execute-DFTpy-density-optimizer">
+<h2>instance and execute DFTpy density optimizer<a class="headerlink" href="#instance-and-execute-DFTpy-density-optimizer" title="Permalink to this headline">¶</a></h2>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">optimization_options</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;econv&#39;</span> <span class="p">:</span> <span class="mf">1e-6</span><span class="o">*</span><span class="n">ions</span><span class="o">.</span><span class="n">nat</span><span class="p">}</span>
+<span class="n">opt</span> <span class="o">=</span> <span class="n">Optimization</span><span class="p">(</span><span class="n">EnergyEvaluator</span><span class="o">=</span><span class="n">evaluator</span><span class="p">,</span> <span class="n">optimization_options</span> <span class="o">=</span> <span class="n">optimization_options</span><span class="p">,</span>
+        <span class="n">optimization_method</span> <span class="o">=</span> <span class="s1">&#39;TN&#39;</span><span class="p">)</span>
+
+<span class="n">rho</span> <span class="o">=</span> <span class="n">opt</span><span class="o">.</span><span class="n">optimize_rho</span><span class="p">(</span><span class="n">guess_rho</span><span class="o">=</span><span class="n">rho_ini</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Step    Energy(a.u.)            dE              dP              Nd      Nls     Time(s)
+0       -8.090977710718E+00     -8.090978E+00   7.877088E-01    1       1       1.902819E-02
+1       -8.273226052119E+00     -1.822483E-01   7.033208E-02    2       1       3.294325E-02
+2       -8.280858141000E+00     -7.632089E-03   4.803522E-03    7       1       5.704927E-02
+3       -8.281101062862E+00     -2.429219E-04   3.640550E-04    5       1       7.545233E-02
+4       -8.281135978745E+00     -3.491588E-05   3.590863E-05    6       1       9.528708E-02
+5       -8.281138625688E+00     -2.646943E-06   2.500624E-06    5       1       1.117182E-01
+6       -8.281138996216E+00     -3.705278E-07   4.567996E-08    8       1       1.352971E-01
+#### Density Optimization Converged ####
+Chemical potential (a.u.): 0.30115196532053357
+Chemical potential (eV)  : 8.194762380333897
+</pre></div></div>
+</div>
+</section>
+<section id="evaluate-final-energy">
+<h2>evaluate final energy<a class="headerlink" href="#evaluate-final-energy" title="Permalink to this headline">¶</a></h2>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">energy</span> <span class="o">=</span> <span class="n">evaluator</span><span class="o">.</span><span class="n">Energy</span><span class="p">(</span><span class="n">rho</span><span class="o">=</span><span class="n">rho</span><span class="p">,</span> <span class="n">ions</span><span class="o">=</span><span class="n">ions</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Energy (a.u.)&#39;</span><span class="p">,</span> <span class="n">energy</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Energy (a.u.) -8.2811389962163
+</pre></div></div>
+</div>
+</section>
+<section id="print-the-timing">
+<h2>print the timing<a class="headerlink" href="#print-the-timing" title="Permalink to this headline">¶</a></h2>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">TimeData</span><span class="o">.</span><span class="n">output</span><span class="p">(</span><span class="n">lprint</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">sort</span><span class="o">=</span><span class="s1">&#39;cost&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+--------------------------------Time information--------------------------------
+Label                       Cost(s)                 Number          Avg. Cost(s)
+ewald.Energy_corr           0.0001                  1               0.0001
+CBspline._calc_PME_Qarray   0.0016                  1               0.0016
+ewald.Energy_rec_PME        0.0025                  1               0.0025
+LocalPseudo.local_PP        0.0045                  1               0.0045
+ewald.Energy_real_fast2     0.0054                  1               0.0054
+TF                          0.0066                  41              0.0002
+ewald.energy                0.0080                  41              0.0002
+LDA                         0.0125                  41              0.0003
+FFT                         0.0320                  84              0.0004
+InvFFT                      0.0359                  83              0.0004
+Hartree.compute             0.0364                  41              0.0009
+vW                          0.0458                  41              0.0011
+Optimize                    0.1377                  1               0.1377
+</pre></div></div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rho</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;rho.xsf&#39;</span><span class="p">,</span> <span class="n">ions</span><span class="o">=</span><span class="n">ions</span><span class="p">)</span>
+<span class="n">rho</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;rho.cube&#39;</span><span class="p">,</span> <span class="n">ions</span><span class="o">=</span><span class="n">ions</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="Visualize-with-scikit-image-and-matplotlib">
+<h2>Visualize with scikit-image and matplotlib<a class="headerlink" href="#Visualize-with-scikit-image-and-matplotlib" title="Permalink to this headline">¶</a></h2>
+<p>!pip install scikit-image matplotlib</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">dftpy.visualize</span> <span class="kn">import</span> <span class="n">view</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="Visualize-with-VESTA">
+<h2>Visualize with VESTA<a class="headerlink" href="#Visualize-with-VESTA" title="Permalink to this headline">¶</a></h2>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">view</span><span class="p">(</span><span class="n">ions</span><span class="o">=</span><span class="n">ions</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">rho</span><span class="p">,</span> <span class="n">viewer</span><span class="o">=</span><span class="s1">&#39;vesta&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+save ./.dftpy.xsf in darwin platform
+</pre></div></div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2019-2023, Pavanello Research Group.
+      <span class="lastupdated">Last updated on Thursday, 31 Jul 2025 13:22:25.
+      </span></p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+  
+<button onclick="topFunction()" id="btn" title="Go to top">Top</button>
+
+<script>
+var mybutton = document.getElementById("btn");
+
+window.onscroll = function() {scrollFunction()};
+
+function scrollFunction() {
+  if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+    mybutton.style.display = "block";
+  } else {
+    mybutton.style.display = "none";
+  }
+}
+
+function topFunction() {
+  document.body.scrollTop = 0;
+  document.documentElement.scrollTop = 0;
+}
+</script>
+
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

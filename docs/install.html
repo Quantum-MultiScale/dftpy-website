@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>DFTpy: Density Functional Theory with Python &mdash; DFTpy 2.0.0 documentation</title>
+  <title>Installation &mdash; DFTpy 2.0.0 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/custom.css" type="text/css" />
       <link rel="stylesheet" href="_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" type="text/css" />
@@ -22,7 +22,8 @@
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Contact" href="contact.html" /> 
+    <link rel="next" title="How does DFTpy work?" href="ofdft.html" />
+    <link rel="prev" title="Contact" href="contact.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -30,7 +31,7 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="#" class="icon icon-home"> DFTpy
+            <a href="index.html" class="icon icon-home"> DFTpy
             <img src="_static/dftpy.png" class="logo" alt="Logo"/>
           </a>
 <div role="search">
@@ -41,9 +42,14 @@
   </form>
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <ul>
+              <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="contact.html">Contact</a></li>
-<li class="toctree-l1"><a class="reference internal" href="install.html">Installation</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#requirements">Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#installation-with-pip">Installation with pip</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#installation-from-source">Installation from source</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="ofdft.html">How does DFTpy work?</a></li>
 <li class="toctree-l1"><a class="reference internal" href="tutorials/tutorials.html">Tutorials</a></li>
 <li class="toctree-l1"><a class="reference internal" href="releases.html">Stable releases</a></li>
@@ -55,27 +61,28 @@
 
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="#">DFTpy</a>
+          <a href="index.html">DFTpy</a>
       </nav>
 
       <div class="wy-nav-content">
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="#" class="icon icon-home"></a> &raquo;</li>
-      <li>DFTpy: Density Functional Theory with Python</li>
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>Installation</li>
       <li class="wy-breadcrumbs-aside">
         
 			<a href=genindex.html>Index</a>
 		
           
-			<a href="https://gitlab.com/pavanello-research-group/dftpy/tree/master/doc/index.rst">Source</a>
+			<a href="https://gitlab.com/pavanello-research-group/dftpy/tree/master/doc/install.rst">Source</a>
           
         
       </li>
     
   </ul><div class="rst-breadcrumbs-buttons" role="navigation" aria-label="Sequential page navigation">
-        <a href="contact.html" class="btn btn-neutral float-right" title="Contact" accesskey="n">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="contact.html" class="btn btn-neutral float-left" title="Contact" accesskey="p"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="ofdft.html" class="btn btn-neutral float-right" title="How does DFTpy work?" accesskey="n">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
   </div>
   <hr/>
 </div>
@@ -106,54 +113,61 @@
     text-align: unset;
 }
 </style>
-<section id="dftpy-density-functional-theory-with-python">
-<h1>DFTpy: Density Functional Theory with Python<a class="headerlink" href="#dftpy-density-functional-theory-with-python" title="Permalink to this headline">¶</a></h1>
-<p><a class="reference external" href="https://dftpy.rutgers.edu">DFTpy</a> is an orbital-free Density Functional Theory code based on a plane-wave expansion of the electron density entirely coded in <a class="reference external" href="https://www.python.org">Python</a>. DFTpy makes it easy to develop nonstandard workflows and new electronic structure methods.</p>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="contact.html">Contact</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="contact.html#dftpy-developers">DFTpy Developers</a></li>
-<li class="toctree-l2"><a class="reference internal" href="contact.html#on-line">On-line</a></li>
-<li class="toctree-l2"><a class="reference internal" href="contact.html#github">GitHub</a></li>
-<li class="toctree-l2"><a class="reference internal" href="contact.html#references">References</a></li>
+<section id="installation">
+<span id="download-and-install"></span><h1>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h1>
+<section id="requirements">
+<h2>Requirements<a class="headerlink" href="#requirements" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="https://www.python.org/">Python</a> &gt;= 3.6</p></li>
+<li><p><a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/">NumPy</a> &gt;= 1.8.0</p></li>
+<li><p><a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/">SciPy</a> &gt;= 0.18.0</p></li>
+<li><p><a class="reference external" href="https://gitlab.com/ase/ase">ASE</a>  &gt;= 3.22.0</p></li>
+<li><p><a class="reference external" href="https://github.com/martinblech/xmltodict">xmltodict</a> &gt;= 0.12.0</p></li>
 </ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="install.html">Installation</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="install.html#requirements">Requirements</a></li>
-<li class="toctree-l2"><a class="reference internal" href="install.html#installation-with-pip">Installation with pip</a></li>
-<li class="toctree-l2"><a class="reference internal" href="install.html#installation-from-source">Installation from source</a></li>
+<p>Optional:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://tddft.org/programs/libxc/">pylibxc</a> (for using exchange-correlation functionals other than LDA)</p></li>
+<li><p><a class="reference external" href="https://pyfftw.readthedocs.io/en/latest/">pyFFTW</a>  (for Fast Fourier Transform)</p></li>
+<li><p><a class="reference external" href="https://github.com/simonpintarelli/upf_to_json">upf_to_json</a> (For UPF pseudopotential)</p></li>
+<li><p><a class="reference external" href="https://bitbucket.org/mpi4py/mpi4py">mpi4py</a> (MPI for python)</p></li>
+<li><p><a class="reference external" href="https://bitbucket.org/mpi4py/mpi4py-fft">mpi4py-fft</a> (Fast Fourier Transforms with MPI)</p></li>
 </ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="ofdft.html">How does DFTpy work?</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="ofdft.html#orbital-free-dft">Orbital-Free DFT</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ofdft.html#time-dependent-orbital-free-dft">Time-Dependent Orbital-Free DFT</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ofdft.html#short-note-on-the-implementation">Short note on the implementation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ofdft.html#references">References</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="tutorials/tutorials.html">Tutorials</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="tutorials/tutorials.html#config-of-dftpy-script">Config of DFTpy script</a></li>
-<li class="toctree-l2"><a class="reference internal" href="tutorials/tutorials.html#ofdft">OFDFT</a></li>
-<li class="toctree-l2"><a class="reference internal" href="tutorials/tutorials.html#local-pseudopotentials">Local Pseudopotentials</a></li>
-<li class="toctree-l2"><a class="reference internal" href="tutorials/tutorials.html#spin-unrestricted-calculation">Spin unrestricted calculation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="tutorials/tutorials.html#tddft">TDDFT</a></li>
-<li class="toctree-l2"><a class="reference internal" href="tutorials/tutorials.html#do-it-on-a-jupyter-notebook">Do it on a Jupyter Notebook!</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="releases.html">Stable releases</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="releases.html#version-2-1-2">Version 2.1.2</a></li>
-<li class="toctree-l2"><a class="reference internal" href="releases.html#version-2-0">Version 2.0</a></li>
-</ul>
-</li>
-</ul>
+</section>
+<section id="installation-with-pip">
+<h2>Installation with pip<a class="headerlink" href="#installation-with-pip" title="Permalink to this headline">¶</a></h2>
+<p>Using pip can easy install the release version of DFTpy from <a class="reference external" href="https://pypi.org/project/dftpy">PyPI</a>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ python -m pip install dftpy
+</pre></div>
 </div>
+</section>
+<section id="installation-from-source">
+<h2>Installation from source<a class="headerlink" href="#installation-from-source" title="Permalink to this headline">¶</a></h2>
+<p>You can get the source from <a class="reference external" href="https://gitlab.com/pavanello-research-group/dftpy">gitlab</a>.:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ git clone https://gitlab.com/pavanello-research-group/dftpy.git
+$ python -m pip install ./dftpy
+</pre></div>
+</div>
+<p>Or in one line:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ python -m pip install git+https://gitlab.com/pavanello-research-group/dftpy.git
+</pre></div>
+</div>
+<p>You also can install all the optional packages with:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ python -m pip install ./dftpy[all]
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Because <code class="docutils literal notranslate"><span class="pre">DFTpy</span></code> still under active development, non-backward-compatible changes can happen at any time. Please, clone the lastest release often.</p>
+</div>
+</section>
 </section>
 
 
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="contact.html" class="btn btn-neutral float-right" title="Contact" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="contact.html" class="btn btn-neutral float-left" title="Contact" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="ofdft.html" class="btn btn-neutral float-right" title="How does DFTpy work?" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
