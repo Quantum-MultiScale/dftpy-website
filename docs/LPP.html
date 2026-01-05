@@ -97,14 +97,15 @@
 <h1>Local Pseudopotentials<a class="headerlink" href="#local-pseudopotentials" title="Link to this heading">¶</a></h1>
 <section id="some-background">
 <h2>Some background<a class="headerlink" href="#some-background" title="Link to this heading">¶</a></h2>
-<p>Orbital-Free Density Functional Theory (OF-DFT) is an electronic structure method based solely on the electron density. In Kohn-Sham DFT pseudopotentials typically include a nonlocal part, which requires the Kohn-Sham orbitals to be evaluated. Due to the absence of Kohn-Sham orbitals in OF-DFT, only local pseudopotentials can be employed.</p>
+<p>Orbital-Free Density Functional Theory (OF-DFT) is an electronic structure method based solely on the electron density. In Kohn-Sham DFT pseudopotentials typically include a nonlocal part, which requires the Kohn-Sham orbitals to be evaluated. Due to the absence of Kohn-Sham orbitals in OF-DFT, only local pseudopotentials (LPPs) can be employed.</p>
 <p>Several local pseudopotentials have been developed and successfully applied to selected elements. A fairly exhaustive list:</p>
 <ul class="simple">
 <li><p>Bulk-derived Local Pseudopotentials (<a class="reference external" href="https://doi.org/10.1103/PhysRevB.69.125109">BLPs</a>)</p></li>
 <li><p>High-quality Local Pseudopotentials (<a class="reference external" href="https://pubs.acs.org/doi/10.1021/acs.jctc.4c00101">HQLPP</a>)</p></li>
 <li><p>Optimized Effective Local Pseudopotentials (<a class="reference external" href="https://doi.org/10.1063/1.4944989">OEPP</a>)</p></li>
+<li><p>Pseudized nonlocal pseudopotentials OF-DFT (<a class="reference external" href="https://arxiv.org/abs/2511.19892">PGBRV PPSL</a>)</p></li>
 </ul>
-<p>The <a class="reference external" href="https://sites.rutgers.edu/prg">PRG</a> recently derived a new set of local pseudopotentials for transition metal elements which is available below (PGBRV and PPSL as they are based on the <a class="reference external" href="https://www.physics.rutgers.edu/gbrv/">GBRV</a> and <a class="reference external" href="https://dalcorso.github.io/pslibrary/">PSL</a> ultrasoft pseudopotentials). The new pseudos can be constructed for any element by following this <a class="reference internal" href="tutorials/jupyter/lpps.html"><span class="doc">tutorial</span></a>. The formalism behind this new class of pseudopotentials is described <a href="#id1"><span class="problematic" id="id2">`here &lt;&gt;`_</span></a>.</p>
+<p>The <a class="reference external" href="https://sites.rutgers.edu/prg">PRG</a> recently derived a new set of local pseudopotentials for transition metal elements which is available below (PGBRV and PPSL as they are based on the <a class="reference external" href="https://www.physics.rutgers.edu/gbrv/">GBRV</a> and <a class="reference external" href="https://dalcorso.github.io/pslibrary/">PSL</a> ultrasoft pseudopotentials). The new pseudos can be constructed for any element by following this <a class="reference internal" href="tutorials/jupyter/lpps.html"><span class="doc">tutorial</span></a>. The formalism behind this new class of pseudopotentials is described <a class="reference external" href="https://arxiv.org/abs/2511.19892">here</a>.</p>
 </section>
 <section id="download-lpps">
 <h2>Download LPPs<a class="headerlink" href="#download-lpps" title="Link to this heading">¶</a></h2>
@@ -153,9 +154,9 @@
     <option value="HQLPP_recpot">HQLPP_recpot</option>
     <option value="BLPS_lda">BLPS_lda</option>
     <option value="BLPS_gga">BLPS_gga</option>
-    <option value="OEPP_recpot">EOPP_recpot</option>
-    <option value="OEPP_upf">EOPP_upf</option>
-    <option value="OEPP_cpi">EOPP_cpi</option>
+    <option value="OEPP_recpot">OEPP_recpot</option>
+    <option value="OEPP_upf">OEPP_upf</option>
+    <option value="OEPP_cpi">OEPP_cpi</option>
 </select>
 
 <div class="periodic-table">
@@ -655,7 +656,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   <div role="contentinfo">
     <p>&#169; Copyright 2019-2025, Pavanello Research Group.
-      <span class="lastupdated">Last updated on Thursday, 31 Jul 2025 17:31:26.
+      <span class="lastupdated">Last updated on Monday, 05 Jan 2026 17:48:00.
       </span></p>
   </div>
 
