@@ -8,8 +8,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Tutorials &mdash; DFTpy 2.2.0dev documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
-      <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=9b3c20d5" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+      <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=06adf165" />
 
   
     <link rel="shortcut icon" href="../_static/dftpy.ico"/>
@@ -65,21 +66,18 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#local-pseudopotentials">Local Pseudopotentials</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="jupyter/lpps.html">Build your own optimized local pseudopotential (LPP)</a></li>
-<li class="toctree-l3"><a class="reference internal" href="jupyter/lpps.html#QEpy">QEpy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="jupyter/lpps.html#KS-reference-density">KS reference density</a></li>
 <li class="toctree-l3"><a class="reference internal" href="jupyter/lpps.html#DFTpy:-optimize-the-LPP">DFTpy: optimize the LPP</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="#spin-unrestricted-calculation">Spin unrestricted calculation</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="jupyter/Al-nspin_dftpy_dev.html">Spin unrestricted calculations with DFTpy</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#tddft">TDDFT</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="tddft/propagate.html">Use of Propagator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="jupyter/td-ofdft-tutorial.html">Real time TD-OFDFT Tutorials</a></li>
+<li class="toctree-l3"><a class="reference internal" href="jupyter/lr-ofdft-tutorial.html">Linear response TD-OFDFT Tutorials</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#do-it-on-a-jupyter-notebook">Do it on a Jupyter Notebook!</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="jupyter/density_optimization.html">Optimization</a></li>
-<li class="toctree-l3"><a class="reference internal" href="jupyter/td-ofdft-tutorial.html">TD-OFDFT Tutorials</a></li>
 </ul>
 </li>
 </ul>
@@ -147,16 +145,8 @@
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="jupyter/lpps.html">Build your own optimized local pseudopotential (LPP)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="jupyter/lpps.html#QEpy">QEpy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="jupyter/lpps.html#KS-reference-density">KS reference density</a></li>
 <li class="toctree-l1"><a class="reference internal" href="jupyter/lpps.html#DFTpy:-optimize-the-LPP">DFTpy: optimize the LPP</a></li>
-</ul>
-</div>
-</section>
-<section id="spin-unrestricted-calculation">
-<h2>Spin unrestricted calculation<a class="headerlink" href="#spin-unrestricted-calculation" title="Link to this heading">¶</a></h2>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="jupyter/Al-nspin_dftpy_dev.html">Spin unrestricted calculations with DFTpy</a></li>
 </ul>
 </div>
 </section>
@@ -165,16 +155,28 @@
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="tddft/propagate.html">Use of Propagator</a></li>
+<li class="toctree-l1"><a class="reference internal" href="jupyter/td-ofdft-tutorial.html">Real time TD-OFDFT Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="jupyter/lr-ofdft-tutorial.html">Linear response TD-OFDFT Tutorials</a></li>
 </ul>
 </div>
 </section>
 <section id="do-it-on-a-jupyter-notebook">
 <h2>Do it on a Jupyter Notebook!<a class="headerlink" href="#do-it-on-a-jupyter-notebook" title="Link to this heading">¶</a></h2>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="jupyter/density_optimization.html">Optimization</a></li>
-<li class="toctree-l1"><a class="reference internal" href="jupyter/td-ofdft-tutorial.html">TD-OFDFT Tutorials</a></li>
+<p>These notebooks are also built into this manual. To work on your machine, grab the <code class="docutils literal notranslate"><span class="pre">.ipynb</span></code> from
+<a class="reference external" href="https://github.com/Quantum-MultiScale/DFTpy">GitHub</a> (<strong>⋯ → Download</strong> on the file page). To try them in <strong>Google Colab</strong>, use the Colab links below. Install DFTpy with <code class="docutils literal notranslate"><span class="pre">pip</span></code> (often <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">dftpy</span></code> or <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">'dftpy[...]'</span></code> per the project). For <strong>LibXC + pylibxc</strong> (e.g. Casida with LibXC functionals), Colab is Ubuntu-based: install the system development package so the C library and headers exist, then install the Python bindings:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Run in Colab before importing Casida / LibXC-dependent code</span>
+<span class="err">!</span><span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">update</span> <span class="o">-</span><span class="n">qq</span> <span class="o">&amp;&amp;</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">install</span> <span class="o">-</span><span class="n">qq</span> <span class="n">libxc</span><span class="o">-</span><span class="n">dev</span>
+<span class="err">!</span><span class="n">pip</span> <span class="n">install</span> <span class="o">-</span><span class="n">q</span> <span class="n">pylibxc</span>
+</pre></div>
+</div>
+<p>If <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">pylibxc</span></code> fails (no wheel for that Colab image), build <code class="docutils literal notranslate"><span class="pre">pylibxc</span></code> from the <a class="reference external" href="https://gitlab.com/libxc/libxc">LibXC</a> source tree after <code class="docutils literal notranslate"><span class="pre">libxc-dev</span></code> is installed, or use a conda env with <code class="docutils literal notranslate"><span class="pre">libxc</span></code> / <code class="docutils literal notranslate"><span class="pre">pylibxc</span></code> instead. Other optional deps: <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">h5py</span></code> for HDF5 examples.</p>
+<ul class="simple">
+<li><p><strong>Density optimization</strong> — <a class="reference external" href="https://github.com/Quantum-MultiScale/DFTpy/blob/master/examples/notebooks/density_optimization.ipynb">GitHub</a> · <a class="reference external" href="https://colab.research.google.com/github/Quantum-MultiScale/DFTpy/blob/master/examples/notebooks/density_optimization.ipynb">Colab</a></p></li>
+<li><p><strong>LPP optimization (LPPS)</strong> — <a class="reference external" href="https://github.com/Quantum-MultiScale/DFTpy/blob/master/examples/Pseudopotentials/lpps.ipynb">GitHub</a> · <a class="reference external" href="https://colab.research.google.com/github/Quantum-MultiScale/DFTpy/blob/master/examples/Pseudopotentials/lpps.ipynb">Colab</a></p></li>
+<li><p><strong>Real-time TD-OFDFT</strong> — <a class="reference external" href="https://github.com/Quantum-MultiScale/DFTpy/blob/master/examples/notebooks/td-ofdft-tutorial.ipynb">GitHub</a> · <a class="reference external" href="https://colab.research.google.com/github/Quantum-MultiScale/DFTpy/blob/master/examples/notebooks/td-ofdft-tutorial.ipynb">Colab</a></p></li>
+<li><p><strong>Linear-response TD-OFDFT (Casida)</strong> — <a class="reference external" href="https://github.com/Quantum-MultiScale/DFTpy/blob/master/examples/notebooks/lr-ofdft-tutorial.ipynb">GitHub</a> · <a class="reference external" href="https://colab.research.google.com/github/Quantum-MultiScale/DFTpy/blob/master/examples/notebooks/lr-ofdft-tutorial.ipynb">Colab</a></p></li>
 </ul>
+<div class="toctree-wrapper compound">
 </div>
 </section>
 </section>
@@ -191,7 +193,7 @@
 
   <div role="contentinfo">
     <p>&#169; Copyright 2019-2025, Pavanello Research Group.
-      <span class="lastupdated">Last updated on Thursday, 31 Jul 2025 17:31:26.
+      <span class="lastupdated">Last updated on Tuesday, 14 Apr 2026 18:17:13.
       </span></p>
   </div>
 

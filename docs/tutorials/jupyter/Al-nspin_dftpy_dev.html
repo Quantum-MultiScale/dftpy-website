@@ -8,9 +8,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Spin unrestricted calculations with DFTpy &mdash; DFTpy 2.2.0dev documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
-      <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=9b3c20d5" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
       <link rel="stylesheet" type="text/css" href="../../_static/nbsphinx-code-cells.css?v=2aa19091" />
+      <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=06adf165" />
 
   
     <link rel="shortcut icon" href="../../_static/dftpy.ico"/>
@@ -23,9 +24,7 @@
       <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
-    <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Use of Propagator" href="../tddft/propagate.html" />
-    <link rel="prev" title="Build your own optimized local pseudopotential (LPP)" href="lpps.html" /> 
+    <link rel="search" title="Search" href="../../search.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -48,26 +47,12 @@
   </form>
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <ul class="current">
+              <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../contact.html">Contact</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../install.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../ofdft.html">How does DFTpy work?</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../LPP.html">Local Pseudopotentials</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="../tutorials.html">Tutorials</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="../tutorials.html#config-of-dftpy-script">Config of DFTpy script</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../tutorials.html#ofdft">OFDFT</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../tutorials.html#local-pseudopotentials">Local Pseudopotentials</a></li>
-<li class="toctree-l2 current"><a class="reference internal" href="../tutorials.html#spin-unrestricted-calculation">Spin unrestricted calculation</a><ul class="current">
-<li class="toctree-l3 current"><a class="current reference internal" href="#">Spin unrestricted calculations with DFTpy</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#Changing-the-number-of-beta-and-alpha-lectrons">Changing the number of beta and alpha lectrons</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="../tutorials.html#tddft">TDDFT</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../tutorials.html#do-it-on-a-jupyter-notebook">Do it on a Jupyter Notebook!</a></li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials.html">Tutorials</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../releases.html">Stable releases</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../faq.html">Frequently Asked Questions</a></li>
 </ul>
@@ -86,7 +71,6 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
-          <li class="breadcrumb-item"><a href="../tutorials.html">Tutorials</a></li>
       <li class="breadcrumb-item active">Spin unrestricted calculations with DFTpy</li>
       <li class="wy-breadcrumbs-aside">
         
@@ -98,10 +82,7 @@
         
       </li>
     
-  </ul><div class="rst-breadcrumbs-buttons" role="navigation" aria-label="Sequential page navigation">
-        <a href="lpps.html" class="btn btn-neutral float-left" title="Build your own optimized local pseudopotential (LPP)" accesskey="p"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="../tddft/propagate.html" class="btn btn-neutral float-right" title="Use of Propagator" accesskey="n">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-  </div>
+  </ul>
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
@@ -115,9 +96,9 @@
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import numpy as np
-from ase.build import bulk
-import matplotlib.pyplot as plt
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">ase.build</span><span class="w"> </span><span class="kn">import</span> <span class="n">bulk</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
 </pre></div>
 </div>
 </div>
@@ -126,15 +107,15 @@ import matplotlib.pyplot as plt
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>from dftpy.api.api4ase import DFTpyCalculator
-from dftpy.config import DefaultOption, OptionFormat
-from dftpy.functional import LocalPseudo, Functional, TotalFunctional
-from dftpy.optimization import Optimization
-from dftpy.ions import Ions
-from dftpy.field import DirectField
-from dftpy.grid import DirectGrid
-from dftpy.math_utils import ecut2nr
-from dftpy.formats import io
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">dftpy.api.api4ase</span><span class="w"> </span><span class="kn">import</span> <span class="n">DFTpyCalculator</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">dftpy.config</span><span class="w"> </span><span class="kn">import</span> <span class="n">DefaultOption</span><span class="p">,</span> <span class="n">OptionFormat</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">dftpy.functional</span><span class="w"> </span><span class="kn">import</span> <span class="n">LocalPseudo</span><span class="p">,</span> <span class="n">Functional</span><span class="p">,</span> <span class="n">TotalFunctional</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">dftpy.optimization</span><span class="w"> </span><span class="kn">import</span> <span class="n">Optimization</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">dftpy.ions</span><span class="w"> </span><span class="kn">import</span> <span class="n">Ions</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">dftpy.field</span><span class="w"> </span><span class="kn">import</span> <span class="n">DirectField</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">dftpy.grid</span><span class="w"> </span><span class="kn">import</span> <span class="n">DirectGrid</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">dftpy.math_utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">ecut2nr</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">dftpy.formats</span><span class="w"> </span><span class="kn">import</span> <span class="n">io</span>
 </pre></div>
 </div>
 </div>
@@ -142,14 +123,14 @@ from dftpy.formats import io
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>def scale_density(rho, m):
-    if rho.rank != 2:
-        raise Exception(&quot;Rho must be rank 2&quot;)
-    nelec = rho.integral()
-    nnelec = nelec + np.array([m/2.0,-m/2.0])
-    rho[0] *=  nnelec[0]/nelec[0]
-    rho[1] *=  nnelec[1]/nelec[1]
-    return rho
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">scale_density</span><span class="p">(</span><span class="n">rho</span><span class="p">,</span> <span class="n">m</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">rho</span><span class="o">.</span><span class="n">rank</span> <span class="o">!=</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;Rho must be rank 2&quot;</span><span class="p">)</span>
+    <span class="n">nelec</span> <span class="o">=</span> <span class="n">rho</span><span class="o">.</span><span class="n">integral</span><span class="p">()</span>
+    <span class="n">nnelec</span> <span class="o">=</span> <span class="n">nelec</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">m</span><span class="o">/</span><span class="mf">2.0</span><span class="p">,</span><span class="o">-</span><span class="n">m</span><span class="o">/</span><span class="mf">2.0</span><span class="p">])</span>
+    <span class="n">rho</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*=</span>  <span class="n">nnelec</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">/</span><span class="n">nelec</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">rho</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*=</span>  <span class="n">nnelec</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">/</span><span class="n">nelec</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">rho</span>
 </pre></div>
 </div>
 </div>
@@ -158,8 +139,8 @@ from dftpy.formats import io
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>atoms = bulk(&#39;Al&#39;, &#39;fcc&#39;, a=4.05)
-ions = Ions.from_ase(atoms)
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">atoms</span> <span class="o">=</span> <span class="n">bulk</span><span class="p">(</span><span class="s1">&#39;Al&#39;</span><span class="p">,</span> <span class="s1">&#39;fcc&#39;</span><span class="p">,</span> <span class="n">a</span><span class="o">=</span><span class="mf">4.05</span><span class="p">)</span>
+<span class="n">ions</span> <span class="o">=</span> <span class="n">Ions</span><span class="o">.</span><span class="n">from_ase</span><span class="p">(</span><span class="n">atoms</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -168,10 +149,10 @@ ions = Ions.from_ase(atoms)
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>XC = Functional(type=&#39;XC&#39;,name=&#39;LDA&#39;, libxc=False)
-HARTREE = Functional(type=&#39;HARTREE&#39;)
-KEDF = Functional(type=&#39;KEDF&#39;, name=&#39;TFvW&#39;, y=1)
-opt_options = {&#39;econv&#39; : 1e-7*ions.nat, &#39;maxiter&#39;: 50}
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">XC</span> <span class="o">=</span> <span class="n">Functional</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;XC&#39;</span><span class="p">,</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;LDA&#39;</span><span class="p">,</span> <span class="n">libxc</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">HARTREE</span> <span class="o">=</span> <span class="n">Functional</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;HARTREE&#39;</span><span class="p">)</span>
+<span class="n">KEDF</span> <span class="o">=</span> <span class="n">Functional</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;KEDF&#39;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;TFvW&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">opt_options</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;econv&#39;</span> <span class="p">:</span> <span class="mf">1e-7</span><span class="o">*</span><span class="n">ions</span><span class="o">.</span><span class="n">nat</span><span class="p">,</span> <span class="s1">&#39;maxiter&#39;</span><span class="p">:</span> <span class="mi">50</span><span class="p">}</span>
 </pre></div>
 </div>
 </div>
@@ -180,8 +161,8 @@ opt_options = {&#39;econv&#39; : 1e-7*ions.nat, &#39;maxiter&#39;: 50}
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[31]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>path = &quot;../DATA&quot;
-PP_list = {&#39;Al&#39;:&#39;al.lda.recpot&#39;}
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">path</span> <span class="o">=</span> <span class="s2">&quot;../DATA&quot;</span>
+<span class="n">PP_list</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;Al&#39;</span><span class="p">:</span><span class="s1">&#39;al.lda.recpot&#39;</span><span class="p">}</span>
 </pre></div>
 </div>
 </div>
@@ -189,11 +170,11 @@ PP_list = {&#39;Al&#39;:&#39;al.lda.recpot&#39;}
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[32]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>nr = ecut2nr(ecut=90, lattice=ions.cell)
-grid = DirectGrid(lattice=ions.cell, nr=nr)
-PSEUDO = LocalPseudo(grid=grid, ions=ions, PP_list=PP_list)
-rho = DirectField(grid=grid,rank=2)
-rho[:] = ions.get_ncharges() / ions.cell.volume / rho.rank
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">nr</span> <span class="o">=</span> <span class="n">ecut2nr</span><span class="p">(</span><span class="n">ecut</span><span class="o">=</span><span class="mi">90</span><span class="p">,</span> <span class="n">lattice</span><span class="o">=</span><span class="n">ions</span><span class="o">.</span><span class="n">cell</span><span class="p">)</span>
+<span class="n">grid</span> <span class="o">=</span> <span class="n">DirectGrid</span><span class="p">(</span><span class="n">lattice</span><span class="o">=</span><span class="n">ions</span><span class="o">.</span><span class="n">cell</span><span class="p">,</span> <span class="n">nr</span><span class="o">=</span><span class="n">nr</span><span class="p">)</span>
+<span class="n">PSEUDO</span> <span class="o">=</span> <span class="n">LocalPseudo</span><span class="p">(</span><span class="n">grid</span><span class="o">=</span><span class="n">grid</span><span class="p">,</span> <span class="n">ions</span><span class="o">=</span><span class="n">ions</span><span class="p">,</span> <span class="n">PP_list</span><span class="o">=</span><span class="n">PP_list</span><span class="p">)</span>
+<span class="n">rho</span> <span class="o">=</span> <span class="n">DirectField</span><span class="p">(</span><span class="n">grid</span><span class="o">=</span><span class="n">grid</span><span class="p">,</span><span class="n">rank</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">rho</span><span class="p">[:]</span> <span class="o">=</span> <span class="n">ions</span><span class="o">.</span><span class="n">get_ncharges</span><span class="p">()</span> <span class="o">/</span> <span class="n">ions</span><span class="o">.</span><span class="n">cell</span><span class="o">.</span><span class="n">volume</span> <span class="o">/</span> <span class="n">rho</span><span class="o">.</span><span class="n">rank</span>
 </pre></div>
 </div>
 </div>
@@ -211,7 +192,7 @@ setting key: Al -&gt; al.lda.recpot
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[33]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>rho = scale_density(rho,0.1)
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rho</span> <span class="o">=</span> <span class="n">scale_density</span><span class="p">(</span><span class="n">rho</span><span class="p">,</span><span class="mf">0.1</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -219,7 +200,7 @@ setting key: Al -&gt; al.lda.recpot
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[34]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>rho.integral()
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rho</span><span class="o">.</span><span class="n">integral</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -237,8 +218,8 @@ array([1.55, 1.45])
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[35]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>evaluator = TotalFunctional(KE=KEDF, XC=XC, HARTREE=HARTREE, PSEUDO=PSEUDO)
-opt = Optimization(EnergyEvaluator=evaluator, optimization_method=&#39;TN&#39;, optimization_options=opt_options)
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">evaluator</span> <span class="o">=</span> <span class="n">TotalFunctional</span><span class="p">(</span><span class="n">KE</span><span class="o">=</span><span class="n">KEDF</span><span class="p">,</span> <span class="n">XC</span><span class="o">=</span><span class="n">XC</span><span class="p">,</span> <span class="n">HARTREE</span><span class="o">=</span><span class="n">HARTREE</span><span class="p">,</span> <span class="n">PSEUDO</span><span class="o">=</span><span class="n">PSEUDO</span><span class="p">)</span>
+<span class="n">opt</span> <span class="o">=</span> <span class="n">Optimization</span><span class="p">(</span><span class="n">EnergyEvaluator</span><span class="o">=</span><span class="n">evaluator</span><span class="p">,</span> <span class="n">optimization_method</span><span class="o">=</span><span class="s1">&#39;TN&#39;</span><span class="p">,</span> <span class="n">optimization_options</span><span class="o">=</span><span class="n">opt_options</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -246,7 +227,7 @@ opt = Optimization(EnergyEvaluator=evaluator, optimization_method=&#39;TN&#39;, 
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[36]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>rho = opt.optimize_rho(guess_rho=rho)
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rho</span> <span class="o">=</span> <span class="n">opt</span><span class="o">.</span><span class="n">optimize_rho</span><span class="p">(</span><span class="n">guess_rho</span><span class="o">=</span><span class="n">rho</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -274,7 +255,7 @@ Chemical potential (eV)  : [7.76468977 7.87933132]
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[37]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>evaluator.Energy(rho)
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">evaluator</span><span class="o">.</span><span class="n">Energy</span><span class="p">(</span><span class="n">rho</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -293,16 +274,13 @@ Chemical potential (eV)  : [7.76468977 7.87933132]
 
            </div>
           </div>
-          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="lpps.html" class="btn btn-neutral float-left" title="Build your own optimized local pseudopotential (LPP)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="../tddft/propagate.html" class="btn btn-neutral float-right" title="Use of Propagator" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-    </div>
+          <footer>
 
   <hr/>
 
   <div role="contentinfo">
     <p>&#169; Copyright 2019-2025, Pavanello Research Group.
-      <span class="lastupdated">Last updated on Thursday, 31 Jul 2025 17:31:26.
+      <span class="lastupdated">Last updated on Tuesday, 14 Apr 2026 18:17:13.
       </span></p>
   </div>
 

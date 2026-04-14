@@ -8,8 +8,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Molecular Dynamics Simulation &mdash; DFTpy 2.2.0dev documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
-      <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=9b3c20d5" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=06adf165" />
 
   
     <link rel="shortcut icon" href="../../_static/dftpy.ico"/>
@@ -59,7 +60,6 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../tutorials.html#local-pseudopotentials">Local Pseudopotentials</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../tutorials.html#spin-unrestricted-calculation">Spin unrestricted calculation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../tutorials.html#tddft">TDDFT</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../tutorials.html#do-it-on-a-jupyter-notebook">Do it on a Jupyter Notebook!</a></li>
 </ul>
@@ -122,7 +122,9 @@ This is one example to run NVT (canonical ensemble) simulation:</p>
 <span class="kn">from</span><span class="w"> </span><span class="nn">dftpy.config</span><span class="w"> </span><span class="kn">import</span> <span class="n">DefaultOption</span><span class="p">,</span> <span class="n">OptionFormat</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">dftpy.interface</span><span class="w"> </span><span class="kn">import</span> <span class="n">OptimizeDensityConf</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">dftpy.api.api4ase</span><span class="w"> </span><span class="kn">import</span> <span class="n">DFTpyCalculator</span>
-
+<span class="kn">from</span><span class="w"> </span><span class="nn">dftpy.mpi</span><span class="w"> </span><span class="kn">import</span> <span class="n">MP</span><span class="p">,</span> <span class="n">sprint</span>
+<span class="c1"># MPI / parallel setup </span>
+<span class="n">mp</span> <span class="o">=</span> <span class="n">MP</span><span class="p">(</span><span class="n">parallel</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span> <span class="c1"># Set parallel=True to run in parallel</span>
 <span class="c1">############################## initial config ##############################</span>
 <span class="n">conf</span> <span class="o">=</span> <span class="n">DefaultOption</span><span class="p">()</span>
 <span class="n">conf</span><span class="p">[</span><span class="s1">&#39;PATH&#39;</span><span class="p">][</span><span class="s1">&#39;pppath&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;./&#39;</span>
@@ -143,7 +145,7 @@ This is one example to run NVT (canonical ensemble) simulation:</p>
                           <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">size</span><span class="p">,</span> <span class="n">size</span><span class="p">,</span> <span class="n">size</span><span class="p">),</span>
                           <span class="n">pbc</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
-<span class="n">calc</span> <span class="o">=</span> <span class="n">DFTpyCalculator</span><span class="p">(</span><span class="n">config</span> <span class="o">=</span> <span class="n">conf</span><span class="p">)</span>
+<span class="n">calc</span> <span class="o">=</span> <span class="n">DFTpyCalculator</span><span class="p">(</span><span class="n">config</span> <span class="o">=</span> <span class="n">conf</span><span class="p">)</span> <span class="c1"># DFTpy can be run in parallel using the MPI interface, as follows: DFTpyCalculator(config = conf, mp=mp) </span>
 <span class="n">atoms</span><span class="o">.</span><span class="n">set_calculator</span><span class="p">(</span><span class="n">calc</span><span class="p">)</span>
 
 <span class="n">MaxwellBoltzmannDistribution</span><span class="p">(</span><span class="n">atoms</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">force_temp</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
@@ -197,7 +199,7 @@ This is one example to run NVT (canonical ensemble) simulation:</p>
 
   <div role="contentinfo">
     <p>&#169; Copyright 2019-2025, Pavanello Research Group.
-      <span class="lastupdated">Last updated on Thursday, 31 Jul 2025 17:31:26.
+      <span class="lastupdated">Last updated on Tuesday, 14 Apr 2026 18:17:13.
       </span></p>
   </div>
 

@@ -1,0 +1,403 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Linear response TD-OFDFT Tutorials &mdash; DFTpy 2.2.0dev documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/nbsphinx-code-cells.css?v=2aa19091" />
+      <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=06adf165" />
+
+  
+    <link rel="shortcut icon" href="../../_static/dftpy.ico"/>
+      <script src="../../_static/documentation_options.js?v=15cefba6"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+      <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+      <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+      <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Optimization" href="density_optimization.html" />
+    <link rel="prev" title="Real time TD-OFDFT Tutorials" href="td-ofdft-tutorial.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            DFTpy
+              <img src="../../_static/dftpy.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../contact.html">Contact</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ofdft.html">How does DFTpy work?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../LPP.html">Local Pseudopotentials</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../tutorials.html">Tutorials</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../tutorials.html#config-of-dftpy-script">Config of DFTpy script</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorials.html#ofdft">OFDFT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorials.html#local-pseudopotentials">Local Pseudopotentials</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../tutorials.html#tddft">TDDFT</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../tddft/propagate.html">Use of Propagator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="td-ofdft-tutorial.html">Real time TD-OFDFT Tutorials</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Linear response TD-OFDFT Tutorials</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorials.html#do-it-on-a-jupyter-notebook">Do it on a Jupyter Notebook!</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../releases.html">Stable releases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../faq.html">Frequently Asked Questions</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">DFTpy</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../tutorials.html">Tutorials</a></li>
+      <li class="breadcrumb-item active">Linear response TD-OFDFT Tutorials</li>
+      <li class="wy-breadcrumbs-aside">
+        
+			<a href=../../genindex.html>Index</a>
+		
+          
+			<a href="https://gitlab.com/pavanello-research-group/dftpy/tree/master/doc/tutorials/jupyter/lr-ofdft-tutorial.ipynb">Source</a>
+          
+        
+      </li>
+    
+  </ul><div class="rst-breadcrumbs-buttons" role="navigation" aria-label="Sequential page navigation">
+        <a href="td-ofdft-tutorial.html" class="btn btn-neutral float-left" title="Real time TD-OFDFT Tutorials" accesskey="p"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="density_optimization.html" class="btn btn-neutral float-right" title="Optimization" accesskey="n">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+  </div>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="Linear-response-TD-OFDFT-Tutorials">
+<h1>Linear response TD-OFDFT Tutorials<a class="headerlink" href="#Linear-response-TD-OFDFT-Tutorials" title="Link to this heading">¶</a></h1>
+<p>This tutorial shows how to run Casida TD-OFDFT calculations with DFTpy. It uses the same setup as the companion <a class="reference internal" href="td-ofdft-tutorial.html"><span class="doc">Real time TD-OFDFT tutorial</span></a> (save the RT traces / <code class="docutils literal notranslate"><span class="pre">td_ofdft_rt_reference.h5</span></code> there if you want to compare spectra here). You will learn:</p>
+<ul class="simple">
+<li><p>How to run Casida TD-OFDFT calculations</p></li>
+</ul>
+<p>First we need to load the necesary modules</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">mpl</span>
+
+<span class="n">mpl</span><span class="o">.</span><span class="n">rcParams</span><span class="o">.</span><span class="n">update</span><span class="p">(</span>
+    <span class="p">{</span>
+        <span class="s2">&quot;font.family&quot;</span><span class="p">:</span> <span class="s2">&quot;serif&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;font.serif&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;Times New Roman&quot;</span><span class="p">,</span> <span class="s2">&quot;Times&quot;</span><span class="p">,</span> <span class="s2">&quot;DejaVu Serif&quot;</span><span class="p">],</span>
+        <span class="s2">&quot;font.size&quot;</span><span class="p">:</span> <span class="mi">14</span><span class="p">,</span>
+        <span class="s2">&quot;axes.titlesize&quot;</span><span class="p">:</span> <span class="mi">16</span><span class="p">,</span>
+        <span class="s2">&quot;axes.labelsize&quot;</span><span class="p">:</span> <span class="mi">15</span><span class="p">,</span>
+        <span class="s2">&quot;xtick.labelsize&quot;</span><span class="p">:</span> <span class="mi">14</span><span class="p">,</span>
+        <span class="s2">&quot;ytick.labelsize&quot;</span><span class="p">:</span> <span class="mi">14</span><span class="p">,</span>
+        <span class="s2">&quot;legend.fontsize&quot;</span><span class="p">:</span> <span class="mi">14</span><span class="p">,</span>
+        <span class="s2">&quot;axes.unicode_minus&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="p">}</span>
+<span class="p">)</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">dftpy.grid</span><span class="w"> </span><span class="kn">import</span> <span class="n">DirectGrid</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">dftpy.field</span><span class="w"> </span><span class="kn">import</span> <span class="n">DirectField</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">dftpy.functional</span><span class="w"> </span><span class="kn">import</span> <span class="n">Functional</span><span class="p">,</span> <span class="n">TotalFunctional</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">dftpy.optimization</span><span class="w"> </span><span class="kn">import</span> <span class="n">Optimization</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">dftpy.constants</span><span class="w"> </span><span class="kn">import</span> <span class="n">LEN_CONV</span><span class="p">,</span> <span class="n">ENERGY_CONV</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">dftpy.formats.vasp</span><span class="w"> </span><span class="kn">import</span> <span class="n">read_POSCAR</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">dftpy.td.hamiltonian</span><span class="w"> </span><span class="kn">import</span> <span class="n">Hamiltonian</span>
+
+<span class="c1"># Load the Casida modules</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">dftpy.td.casida</span><span class="w"> </span><span class="kn">import</span> <span class="n">Casida</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">dftpy.td.interface</span><span class="w"> </span><span class="kn">import</span> <span class="n">CasidaRunner</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">dftpy.td.hamiltonian</span><span class="w"> </span><span class="kn">import</span> <span class="n">Hamiltonian</span>
+</pre></div>
+</div>
+</div>
+<p>Set up the systems and the initial density</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><br/><br/><span></span><span class="n">DATA</span><span class="o">=</span><span class="s1">&#39;../DATA/&#39;</span>
+<span class="n">structure_file</span> <span class="o">=</span> <span class="n">DATA</span><span class="o">+</span><span class="s1">&#39;Mg8.vasp&#39;</span>
+<span class="n">atoms</span> <span class="o">=</span> <span class="n">read_POSCAR</span><span class="p">(</span><span class="n">structure_file</span><span class="p">,</span> <span class="n">names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Mg&#39;</span><span class="p">])</span>
+<span class="n">PP_list</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;Mg&#39;</span><span class="p">:</span><span class="n">DATA</span><span class="o">+</span><span class="s1">&#39;Mg_OEPP_PZ.UPF&#39;</span><span class="p">}</span>
+<span class="n">nr</span> <span class="o">=</span> <span class="p">[</span><span class="mi">36</span><span class="p">,</span> <span class="mi">36</span><span class="p">,</span> <span class="mi">32</span><span class="p">]</span>
+<span class="n">grid</span> <span class="o">=</span> <span class="n">DirectGrid</span><span class="p">(</span><span class="n">atoms</span><span class="o">.</span><span class="n">cell</span><span class="p">,</span> <span class="n">nr</span><span class="p">)</span>
+<span class="n">nelec</span> <span class="o">=</span> <span class="mi">16</span>
+<span class="n">rho_ini</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">nr</span><span class="p">)</span>
+<span class="n">rho_ini</span> <span class="o">=</span> <span class="n">DirectField</span><span class="p">(</span><span class="n">grid</span><span class="o">=</span><span class="n">grid</span><span class="p">,</span> <span class="n">griddata_3d</span><span class="o">=</span><span class="n">rho_ini</span><span class="p">)</span>
+<span class="n">rho_ini</span> <span class="o">=</span> <span class="n">rho_ini</span> <span class="o">/</span> <span class="n">rho_ini</span><span class="o">.</span><span class="n">integral</span><span class="p">()</span> <span class="o">*</span> <span class="n">nelec</span>
+<br/><br/></pre></div>
+</div>
+</div>
+<p>Build the total energy density functional and get the ground state density</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ke</span> <span class="o">=</span> <span class="n">Functional</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;KEDF&#39;</span><span class="p">,</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;TFvW&#39;</span><span class="p">)</span>
+<span class="n">xc</span> <span class="o">=</span> <span class="n">Functional</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;XC&#39;</span><span class="p">,</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;LDA&#39;</span><span class="p">,</span> <span class="n">libxc</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">hartree</span> <span class="o">=</span> <span class="n">Functional</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;HARTREE&#39;</span><span class="p">)</span>
+<span class="n">pseudo</span> <span class="o">=</span> <span class="n">Functional</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s1">&#39;PSEUDO&#39;</span><span class="p">,</span> <span class="n">grid</span><span class="o">=</span><span class="n">grid</span><span class="p">,</span> <span class="n">ions</span><span class="o">=</span><span class="n">atoms</span><span class="p">,</span> <span class="n">PP_list</span><span class="o">=</span><span class="n">PP_list</span><span class="p">)</span>
+<span class="n">totalfunctional</span> <span class="o">=</span> <span class="n">TotalFunctional</span><span class="p">(</span><span class="n">KineticEnergyFunctional</span><span class="o">=</span><span class="n">ke</span><span class="p">,</span>
+                                <span class="n">XCFunctional</span><span class="o">=</span><span class="n">xc</span><span class="p">,</span>
+                                <span class="n">HARTREE</span><span class="o">=</span><span class="n">hartree</span><span class="p">,</span>
+                                <span class="n">PSEUDO</span><span class="o">=</span><span class="n">pseudo</span>
+                                 <span class="p">)</span>
+
+<span class="n">optimization_options</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;econv&#39;</span> <span class="p">:</span> <span class="mf">1e-10</span> <span class="o">*</span> <span class="n">nelec</span><span class="p">,</span>
+                        <span class="s1">&#39;maxfun&#39;</span> <span class="p">:</span> <span class="mi">50</span><span class="p">,</span>
+                        <span class="s1">&#39;maxiter&#39;</span> <span class="p">:</span> <span class="mi">100</span><span class="p">}</span>
+
+<span class="n">opt</span> <span class="o">=</span> <span class="n">Optimization</span><span class="p">(</span><span class="n">EnergyEvaluator</span><span class="o">=</span><span class="n">totalfunctional</span><span class="p">,</span> <span class="n">optimization_options</span> <span class="o">=</span> <span class="n">optimization_options</span><span class="p">,</span>
+        <span class="n">optimization_method</span> <span class="o">=</span> <span class="s1">&#39;TN&#39;</span><span class="p">)</span>
+<span class="n">rho0</span> <span class="o">=</span> <span class="n">opt</span><span class="o">.</span><span class="n">optimize_rho</span><span class="p">(</span><span class="n">guess_rho</span><span class="o">=</span><span class="n">rho_ini</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+setting key: Mg -&gt; ../DATA/Mg_OEPP_PZ.UPF
+Step    Energy(a.u.)            dE              dP              Nd      Nls     Time(s)
+0       8.951916882520E+00      8.951917E+00    2.343046E+00    1       1       2.489614E-02
+!WARN: Change to steepest decent
+1       -4.970850195117E+00     -1.392277E+01   1.121758E+00    1       3       5.590415E-02
+2       -5.991894332924E+00     -1.021044E+00   1.516348E-01    4       2       9.531522E-02
+3       -6.128065576848E+00     -1.361712E-01   1.802917E-02    8       3       1.328633E-01
+4       -6.143827137693E+00     -1.576156E-02   3.111792E-03    10      3       1.782541E-01
+5       -6.146022421154E+00     -2.195283E-03   3.902247E-04    7       3       2.148213E-01
+6       -6.146449721223E+00     -4.273001E-04   4.586828E-05    10      3       2.616313E-01
+7       -6.146493566939E+00     -4.384572E-05   6.805825E-06    7       3       2.967911E-01
+8       -6.146501643512E+00     -8.076573E-06   7.727337E-07    10      2       3.360162E-01
+9       -6.146502268766E+00     -6.252545E-07   1.062330E-07    7       3       3.697093E-01
+10      -6.146502350816E+00     -8.204981E-08   1.158942E-08    9       2       4.079611E-01
+11      -6.146502359965E+00     -9.148524E-09   1.779616E-09    8       3       4.453881E-01
+12      -6.146502361806E+00     -1.841606E-09   2.793301E-10    9       3       4.856284E-01
+13      -6.146502362096E+00     -2.892584E-10   7.062214E-11    8       3       5.267513E-01
+14      -6.146502362161E+00     -6.586731E-11   3.935713E-11    11      3       5.811613E-01
+#### Density Optimization Converged ####
+Chemical potential (a.u.): -0.12885029478146545
+Chemical potential (eV)  : -3.5061951106519684
+</pre></div></div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ke</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s1">&#39;y&#39;</span><span class="p">:</span><span class="mi">0</span><span class="p">})</span> <span class="c1"># Remove the von Weizsacker term since the laplacian is included in the Hamiltonian</span>
+
+<span class="n">totalfunctional</span> <span class="o">=</span> <span class="n">TotalFunctional</span><span class="p">(</span><span class="n">KEDF</span><span class="o">=</span><span class="n">ke</span><span class="p">,</span> <span class="n">XC</span><span class="o">=</span><span class="n">xc</span><span class="p">,</span> <span class="n">HARTREE</span><span class="o">=</span><span class="n">hartree</span><span class="p">,</span> <span class="n">PSEUDO</span><span class="o">=</span><span class="n">pseudo</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>To build the casida matrix we get the orbitals from the hamiltonian of the orbital free DFT system</p>
+<div class="math notranslate nohighlight">
+\[\underbrace{\left[-\frac{1}{2} \nabla^2 + v_B(n_0) \right]}_{\hat{H}_B}\phi(\vec{r})= \mu \phi(\vec{r})\]</div>
+<p>The diagonalization of the hamiltonian will lead to a set of eigenfunctions <span class="math notranslate nohighlight">\(\{\phi(\vec{r})\}\)</span> where the eigenfunction with lowest energy is the ground state density and yields the ground state density <span class="math notranslate nohighlight">\(n_0(\vec{r}) = |\phi_0(\vec{r})|\)</span></p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">numeig</span> <span class="o">=</span> <span class="mi">150</span>
+<span class="n">potential</span> <span class="o">=</span> <span class="n">totalfunctional</span><span class="p">(</span><span class="n">rho0</span><span class="p">,</span> <span class="n">calcType</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;V&#39;</span><span class="p">})</span><span class="o">.</span><span class="n">potential</span>
+
+<span class="n">hamiltonian</span> <span class="o">=</span> <span class="n">Hamiltonian</span><span class="p">(</span><span class="n">potential</span><span class="p">)</span>
+<span class="n">eigs</span><span class="p">,</span> <span class="n">psi_list</span> <span class="o">=</span> <span class="n">hamiltonian</span><span class="o">.</span><span class="n">diagonalize</span><span class="p">(</span><span class="n">numeig</span><span class="p">)</span>
+
+<span class="n">totalfunctional</span><span class="o">.</span><span class="n">UpdateFunctional</span><span class="p">(</span><span class="n">keysToRemove</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;HARTREE&#39;</span><span class="p">,</span> <span class="s1">&#39;PSEUDO&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<p>Once we get the eigenfunctions we can build the Casida matrix in the following way</p>
+<div class="math notranslate nohighlight">
+\[\sum_j \left[ \delta_{ij} \omega_{ij}^2 + 2 \sqrt{\omega_{ij}} K_{ij,i'j'} \sqrt{\omega_{j'k'}} \right] F_{j'k'} = \Omega^2 F_{ik}\]</div>
+<p>Where <span class="math notranslate nohighlight">\(K_{ij,i'j'}\)</span> is refer as the soupling matrix and has the following form</p>
+<div class="math notranslate nohighlight">
+\[K_{ij,j'k'}(\Omega) = \int d^3r \int d^3r' \phi_{ji}(\mathbf{r}) f_{{PHxc}}(\mathbf{r},\mathbf{r}',\Omega) \phi_{j'i'}^*(\mathbf{r}')\]</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[41]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">casida</span> <span class="o">=</span> <span class="n">Casida</span><span class="p">(</span><span class="n">rho0</span><span class="p">,</span> <span class="n">totalfunctional</span><span class="p">)</span>
+<span class="n">casida</span><span class="o">.</span><span class="n">build_matrix</span><span class="p">(</span><span class="n">numeig</span><span class="p">,</span> <span class="n">eigs</span><span class="p">,</span> <span class="n">psi_list</span><span class="p">,</span> <span class="n">build_ab</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">omega</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">x_minus_y_list</span> <span class="o">=</span> <span class="n">casida</span><span class="p">()</span>
+<br/></pre></div>
+</div>
+</div>
+<p>Postprocess the oscillator strengths to plo the optical spectra</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[42]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">gauss</span><span class="p">(</span><span class="n">freq</span><span class="p">,</span><span class="n">omega</span><span class="p">,</span><span class="n">sigma</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span> <span class="p">(</span><span class="n">freq</span> <span class="o">-</span> <span class="n">omega</span> <span class="o">*</span> <span class="mf">27.2114</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">/</span> <span class="mf">2.0</span> <span class="o">/</span> <span class="n">sigma</span><span class="p">)</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mf">2.0</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span><span class="o">/</span><span class="n">sigma</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">smooth</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">omega</span><span class="p">,</span> <span class="n">sigma</span><span class="p">):</span>
+    <span class="n">s</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">freq</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">omega</span><span class="p">)):</span>
+        <span class="n">s</span> <span class="o">+=</span> <span class="n">gauss</span><span class="p">(</span><span class="n">freq</span><span class="p">,</span><span class="n">omega</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="n">sigma</span><span class="p">)</span> <span class="o">*</span> <span class="n">f</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">s</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">get_spectra_lr</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">omega</span><span class="p">,</span> <span class="n">sigma</span><span class="p">):</span>
+    <span class="n">slr</span> <span class="o">=</span> <span class="n">smooth</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">omega</span><span class="p">,</span> <span class="n">sigma</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">slr</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[43]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">freq</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">78540</span><span class="p">)</span>
+<span class="n">sof_lr</span> <span class="o">=</span> <span class="n">get_spectra_lr</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">omega</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mf">0.01</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>Read the data from the <a class="reference internal" href="td-ofdft-tutorial.html"><span class="doc">Real time TD-OFDFT tutorial</span></a> and compare with the Linear response results</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">h5py</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">dftpy.td.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">calc_spectra_mu</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">dftpy.constants</span><span class="w"> </span><span class="kn">import</span> <span class="n">Units</span>
+<span class="k">with</span> <span class="n">h5py</span><span class="o">.</span><span class="n">File</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;td_ofdft_rt_reference.h5&quot;</span><span class="p">),</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">t_rt</span> <span class="o">=</span> <span class="n">f</span><span class="p">[</span><span class="s2">&quot;runner2/t&quot;</span><span class="p">][:]</span>
+    <span class="n">dmu_rt</span> <span class="o">=</span> <span class="n">f</span><span class="p">[</span><span class="s2">&quot;runner2/dipole&quot;</span><span class="p">][:,</span> <span class="mi">0</span><span class="p">]</span>
+    <span class="n">interval</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">f</span><span class="p">[</span><span class="s2">&quot;meta/interval&quot;</span><span class="p">][()])</span>
+    <span class="n">kick</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">f</span><span class="p">[</span><span class="s2">&quot;meta/k&quot;</span><span class="p">][()])</span>
+
+<span class="n">omega_rt</span><span class="p">,</span> <span class="n">spectra_rt</span> <span class="o">=</span> <span class="n">calc_spectra_mu</span><span class="p">(</span><span class="n">dmu_rt</span><span class="p">,</span> <span class="n">interval</span><span class="p">,</span> <span class="n">kick</span><span class="o">=</span><span class="n">kick</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mf">1e-5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>Plot the optical spectra from both methods</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[50]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">omega_rt</span> <span class="o">*</span> <span class="n">Units</span><span class="o">.</span><span class="n">Ha</span><span class="p">,</span> <span class="n">spectra_rt</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;RT&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">freq</span><span class="p">,</span> <span class="n">sof_lr</span><span class="o">*</span><span class="mi">3</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;LR&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">15</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Frequency (eV)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Intensity (a.u.)&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[50]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Text(0, 0.5, &#39;Intensity (a.u.)&#39;)
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/tutorials_jupyter_lr-ofdft-tutorial_18_1.png" src="../../_images/tutorials_jupyter_lr-ofdft-tutorial_18_1.png" />
+</div>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="td-ofdft-tutorial.html" class="btn btn-neutral float-left" title="Real time TD-OFDFT Tutorials" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="density_optimization.html" class="btn btn-neutral float-right" title="Optimization" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2019-2025, Pavanello Research Group.
+      <span class="lastupdated">Last updated on Tuesday, 14 Apr 2026 18:17:13.
+      </span></p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+  
+<button onclick="topFunction()" id="btn" title="Go to top">Top</button>
+
+<script>
+var mybutton = document.getElementById("btn");
+
+window.onscroll = function() {scrollFunction()};
+
+function scrollFunction() {
+  if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+    mybutton.style.display = "block";
+  } else {
+    mybutton.style.display = "none";
+  }
+}
+
+function topFunction() {
+  document.body.scrollTop = 0;
+  document.documentElement.scrollTop = 0;
+}
+</script>
+
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

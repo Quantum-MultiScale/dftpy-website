@@ -498,7 +498,7 @@ KEDF
 **kedf**
 	The type of KEDF. GGA functionals are available with keywords GGA and LIBXC.
 
-	- *Options* : TF, GGA, LIBXC, vW, TFvW, WT, SM, FP, MGP, MGPA, MGPG, LMGP, LMGPA, LMGPG
+	- *Options* : TF, GGA, LIBXC, vW, TFvW, WT, SM, FP, MGP, MGPA, MGPG, LMGP, LMGPA, LMGPG, LWT, HC, revHC, WTE
 
 	- *Default* : WT
 
@@ -857,7 +857,7 @@ KEDF2
 **kedf**
 	The type of KEDF. GGA functionals are available with keywords GGA and LIBXC.
 
-	- *Options* : TF, GGA, LIBXC, vW, TFvW, WT, SM, FP, MGP, MGPA, MGPG, LMGP, LMGPA, LMGPG
+	- *Options* : TF, GGA, LIBXC, vW, TFvW, WT, SM, FP, MGP, MGPA, MGPG, LMGP, LMGPA, LMGPG, LWT, HC, revHC, WTE
 
 	- *Default* : WT
 
