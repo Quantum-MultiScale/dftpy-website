@@ -1,0 +1,21 @@
+# Sphinx build cache (never publish)
+.doctrees/
+**/.doctrees/
+
+# Sphinx local build fingerprint (optional; harmless if omitted from git)
+.buildinfo
+
+# macOS
+.DS_Store
+
+# Editors
+.idea/
+.vscode/
+*.swp
+*~
+
+# Python (if you add scripts later)
+__pycache__/
+*.py[cod]
+.venv/
+venv/
