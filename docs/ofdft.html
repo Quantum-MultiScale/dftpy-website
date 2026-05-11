@@ -6,11 +6,11 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>How does DFTpy work? &mdash; DFTpy 2.2.0dev documentation</title>
+  <title>Introduction to DFT &mdash; DFTpy 2.2.0dev documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
-      <link rel="stylesheet" type="text/css" href="_static/custom.css?v=06adf165" />
+      <link rel="stylesheet" type="text/css" href="_static/custom.css?v=32dd92b7" />
 
   
     <link rel="shortcut icon" href="_static/dftpy.ico"/>
@@ -51,9 +51,13 @@
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="contact.html">Contact</a></li>
 <li class="toctree-l1"><a class="reference internal" href="install.html">Installation</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">How does DFTpy work?</a><ul>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Introduction to DFT</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#density-functional-theory-dft">Density Functional Theory (DFT)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#kohn-sham-system">Kohn-Sham System</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#orbital-free-dft">Orbital-Free DFT</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#time-dependent-orbital-free-dft">Time-Dependent Orbital-Free DFT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#solvers-for-of-dft-and-ks-dft">Solvers for OF-DFT and KS-DFT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#time-dependent-density-functional-theory-tddft">Time-Dependent Density-Functional Theory (TDDFT)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#linear-response-theory">Linear response theory</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#short-note-on-the-implementation">Short note on the implementation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#references">References</a></li>
 </ul>
@@ -78,7 +82,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active">How does DFTpy work?</li>
+      <li class="breadcrumb-item active">Introduction to DFT</li>
       <li class="wy-breadcrumbs-aside">
         
 			<a href=genindex.html>Index</a>
@@ -98,26 +102,101 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="how-does-dftpy-work">
-<span id="ofdft"></span><h1>How does DFTpy work?<a class="headerlink" href="#how-does-dftpy-work" title="Link to this heading">¶</a></h1>
+  <section id="introduction-to-dft">
+<span id="ofdft"></span><h1>Introduction to DFT<a class="headerlink" href="#introduction-to-dft" title="Link to this heading">¶</a></h1>
+<section id="density-functional-theory-dft">
+<h2>Density Functional Theory (DFT)<a class="headerlink" href="#density-functional-theory-dft" title="Link to this heading">¶</a></h2>
+<p>DFT is a theoretical framework based on the Hohenberg and Kohn theorems, that established a one-to-one correspondence between the ground state electron density, <span class="math notranslate nohighlight">\(n_0(\mathbf{r})\)</span>, the ground state wavefunction, <span class="math notranslate nohighlight">\(\Psi_0(\mathbf{r})\)</span>, and the external potential, <span class="math notranslate nohighlight">\(v(\mathbf{r})\)</span>. This means that the ground state properties of a system can be fully determined by the density.</p>
+<div class="math notranslate nohighlight">
+\[\psi_0 \leftrightarrow n_0 \leftrightarrow v(\mathbf{r})\]</div>
+<p>The ground state total energy is then given as a functional of the electron density, <span class="math notranslate nohighlight">\(E[n]\)</span>, which is given by:</p>
+<div class="math notranslate nohighlight">
+\[E[n] = T[n] + E_{ee}[n] + E_{eN}[n] + E_{NN}[n]\]</div>
+<p>where <span class="math notranslate nohighlight">\(T[n]\)</span> is the kinetic energy, <span class="math notranslate nohighlight">\(E_{ee}[n]\)</span> is the electron-electron interaction, <span class="math notranslate nohighlight">\(E_{eN}[n]\)</span> the electron-nuclear interaction, and <span class="math notranslate nohighlight">\(E_{NN}[n]\)</span> is the nuclear-nuclear interaction.</p>
+<p>To determine the density of the system and evaluate the energy functional, DFT explores the mapping between the real system and fictitious systems shown in Figure 1.</p>
+<figure class="align-center" id="id1">
+<a class="reference internal image-reference" href="_images/maps.svg"><img alt="_images/maps.svg" src="_images/maps.svg" style="width: 50%;" />
+</a>
+<figcaption>
+<p><span class="caption-text">Figure1. Mapping between the real system and fictitious systems in DFT.</span><a class="headerlink" href="#id1" title="Link to this image">¶</a></p>
+</figcaption>
+</figure>
+</section>
+<section id="kohn-sham-system">
+<h2>Kohn-Sham System<a class="headerlink" href="#kohn-sham-system" title="Link to this heading">¶</a></h2>
+<p>In the non-interacting fermionic system, known as the single-particle or <cite>Kohn-Sham</cite> system, the total energy functional is given by:</p>
+<div class="math notranslate nohighlight">
+\[E[n] = T_s[n] + E_H[n] + E_{xc}[n] + \int v_{eN}(\mathbf{r}) n(\mathbf{r}) d\mathbf{r} + E_{NN}[n]\]</div>
+<p>where the density <span class="math notranslate nohighlight">\(n(r) = \sum_i |\phi_i(r)|^2\)</span>. And the single-particle kinetic energy is</p>
+<div class="math notranslate nohighlight">
+\[T_{s}[n] \equiv T_s[\{\phi_i\}]=  -\frac{1}{2}\sum_i n_i \langle \phi_i | \nabla^2 | \phi_i\rangle = -\frac{1}{2}\sum_i n_i \int \phi_i^*(r) \nabla^2 \phi_i(r) dr\]</div>
+<p>The electron-electron repulsion and the total kinetic energy are related to <span class="math notranslate nohighlight">\(T_s\)</span> and <span class="math notranslate nohighlight">\(E_{xc}\)</span> as follows:</p>
+<div class="math notranslate nohighlight">
+\[E_H[n]=\frac{1}{2}\int \frac{n(r)n(r')}{|r-r'|}drdr'\]</div>
+<div class="math notranslate nohighlight">
+\[E_{xc} =  T[n] + E_{ee}[n] = T_s[n] + E_H[n] + E_{xc}[n] \to \textbf{Approximated}\]</div>
+<p>For the Kohn-Sham system, the Lagrangian is defined as follows:</p>
+<div class="math notranslate nohighlight">
+\[\mathcal{L}_{KS}[\{\phi_i\}] = E[\{\phi_i\}] - \sum_{ij} \varepsilon_{ij}\left(\langle \phi_j|\phi_i \rangle - \delta_{ij}\right)\]</div>
+<p>to find the ground state KS orbitals and ground state density, the KS lagrangian is minimized <span class="math notranslate nohighlight">\(\frac{\delta \mathcal{L}_{KS}[\{\phi_i\}]}{\delta \langle \phi_j|}=0\)</span>, or just <span class="math notranslate nohighlight">\(\frac{\delta \mathcal{L}_{KS}[\{\phi_i\}]}{\delta \phi_j^*(r)}=0\)</span>, which yields to the KS-equation for the non-interacting fermionic system:</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<div class="math notranslate nohighlight">
+\[\left(-\frac{1}{2} \nabla^2 + v_s(\mathbf{r})\right) \phi_i(\mathbf{r}) = \epsilon_i \phi_i(\mathbf{r})\]</div>
+</div>
+<p>where <span class="math notranslate nohighlight">\(\psi_i(\mathbf{r})\)</span> are the KS orbitals, and <span class="math notranslate nohighlight">\(v_s(\mathbf{r})\)</span> is the Kohn-Sham potential given by:</p>
+<div class="math notranslate nohighlight">
+\[v_s[n](r) = \frac{\delta E_{H}[n]}{\delta n(r)} + \frac{\delta E_{xc}[n]}{\delta n(r)} + v_{eN}(r)\]</div>
+</section>
 <section id="orbital-free-dft">
 <h2>Orbital-Free DFT<a class="headerlink" href="#orbital-free-dft" title="Link to this heading">¶</a></h2>
-<p>In OF-DFT, the ground state electron density, <span class="math notranslate nohighlight">\(n_0(\mathbf{r})\)</span>, is obtained from the direct minimization of the ground state energy density functional, <span class="math notranslate nohighlight">\(E[n]\)</span>. Namely,</p>
+<p>In the non-interacting bosonic system, used in Orbital-Free DFT, the total energy functionals is given by:</p>
 <div class="math notranslate nohighlight">
-\[n_0 = \text{argmin}_n \left[ E[n] - \mu \left( \int n(\mathbf{r}) d\mathbf{r} - N \right) \right]\]</div>
-<p>where <span class="math notranslate nohighlight">\(N\)</span> is the number of valence electrons in the system. Both <span class="math notranslate nohighlight">\(n_0(\mathbf{r})\)</span> and  <span class="math notranslate nohighlight">\(\mu\)</span> are determined during the minimization. The ground state energy is, <span class="math notranslate nohighlight">\(E_0 = E[n_0]\)</span>.</p>
-<p>In practice, the above minimization can only be carried out if the ground state energy functional is known as a pure functional of the density. The energy functional is a sum of several terms:</p>
+\[E[n] = T_{B}[n] + T_P[n] + E_{H}[n] + E_{xc}[n] + \int v_{eN}[n](r) n(r) dr  + E_{NN}\]</div>
+<p>where <span class="math notranslate nohighlight">\(T_P[n] = T_{s}[n] - T_{vW}[n]\)</span>, <span class="math notranslate nohighlight">\(T_{s}[n]\)</span> is the non-interacting kinetic energy functional (KEDF, which is an <span class="math notranslate nohighlight">\(\textbf{approximated}\)</span> functional), and <span class="math notranslate nohighlight">\(T_{B}[n]\)</span> is the bosonic kinetic energy functional (von Weizsäcker kinetic energy functional), given by:</p>
 <div class="math notranslate nohighlight">
-\[E[n]=T_s[n]+E_H[n]+E_{xc}[n]+\int v_{ext}(\mathbf{r}) n(\mathbf{r}) d\mathbf{r}\]</div>
-<p>where</p>
-<blockquote>
-<div><ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(T_s[n]\)</span>: noninteracting kinetic energy or KEDF.</p></li>
-<li><p><span class="math notranslate nohighlight">\(E_{xc}[n]\)</span>: exchange-correlation energy or EXC.</p></li>
-<li><p><span class="math notranslate nohighlight">\(E_{H}[n]=\frac{1}{2}\int \frac{n(\mathbf{r})n(\mathbf{r}^\prime)}{|\mathbf{r}-\mathbf{r}^\prime|}d\mathbf{r} d\mathbf{r}^\prime\)</span>: Hartree energy.</p></li>
-<li><p><span class="math notranslate nohighlight">\(v_{ext}(\mathbf{r})\)</span>: the external potential (typically the electron-ion interaction).</p></li>
-</ul>
-</div></blockquote>
+\[T_{B}[n] = T_{vW}[n] = -\frac{1}{2}\int \phi^*(r) \nabla^2 \phi(r) dr\]</div>
+<p>where: <span class="math notranslate nohighlight">\(\phi(r)=\sqrt{n(r)}\)</span>. The appropiate Lagrangian for OF-DFT is given by:</p>
+<div class="math notranslate nohighlight">
+\[\mathcal{L}_{OF}[n] = E[n] - \mu \left( \int n(\mathbf{r}) d\mathbf{r} - N \right)\]</div>
+<p>where <span class="math notranslate nohighlight">\(\mu\)</span> is the Lagrange multiplier, <span class="math notranslate nohighlight">\(N\)</span> is the number of valence electrons in the system. Both <span class="math notranslate nohighlight">\(n_0(\mathbf{r})\)</span> and  <span class="math notranslate nohighlight">\(\mu\)</span> are determined during the minimization.</p>
+<p>To find the ground state density, the Lagrangian is minimized <span class="math notranslate nohighlight">\(\frac{\delta \mathcal{L}_{OF}[n]}{\delta \langle \phi|}=0\)</span> or <span class="math notranslate nohighlight">\(\frac{\delta \mathcal{L}_{OF}[n]}{\delta \phi^*(r)}=0\)</span>, which yields to the KS-equation for the non-interacting bosonic system:</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<div class="math notranslate nohighlight">
+\[-\frac{1}{2}\nabla^2 \phi(r) + v_B[n](r)\phi(r) = \mu\phi(r)\]</div>
+</div>
+<p>where <span class="math notranslate nohighlight">\(\phi(r)\)</span> is the bosonic orbitals, and <span class="math notranslate nohighlight">\(v_B[n](r)\)</span> is the bosonic potential given by:</p>
+<div class="math notranslate nohighlight">
+\[v_B[n](r) = \underbrace{\frac{\delta T_{s}[n]}{\delta n(r)} - \frac{\delta T_{vW}[n]}{\delta n(r)}}_{\frac{\delta T_P[n]}{\delta n(r)}} + \frac{\delta E_{H}[n]}{\delta n(r)} + \frac{\delta E_{xc}[n]}{\delta n(r)} + v_{eN}(r)\]</div>
+</section>
+<section id="solvers-for-of-dft-and-ks-dft">
+<h2>Solvers for OF-DFT and KS-DFT<a class="headerlink" href="#solvers-for-of-dft-and-ks-dft" title="Link to this heading">¶</a></h2>
+<p>In KS-DFT, the ground state electron density, <span class="math notranslate nohighlight">\(n_0(\mathbf{r})\)</span>, is obtained from a self-consistent field (SCF) iteration, as shown in the table below.</p>
+<p>In OF-DFT, the ground state electron density, <span class="math notranslate nohighlight">\(n_0(\mathbf{r})\)</span>, is obtained from the direct minimization of the ground state energy density functional, <span class="math notranslate nohighlight">\(E[n]\)</span>, as shown in the table below. The ground state energy is, <span class="math notranslate nohighlight">\(E_0 = E[n_0]\)</span>.</p>
+<table class="solver-comparison docutils align-center">
+<colgroup>
+<col style="width: 18.0%" />
+<col style="width: 41.0%" />
+<col style="width: 41.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head stub"><p>Method</p></th>
+<th class="head"><p>OF-DFT</p></th>
+<th class="head"><p>KS-DFT</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><th class="stub"><p>Direct Minimization</p></th>
+<td><p><span class="math notranslate nohighlight">\(n_0(\mathbf{r})=\arg\underset{n}{\min}\big\{ \mathcal{L}_{OF}[n]\big\}\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\{\phi_i^0\} = \arg\underset{\{\phi_i\}}{\min}\big\{ \mathcal{L}_{KS}[\{\phi_i\}]\big\}\)</span></p></td>
+</tr>
+<tr class="row-odd"><th class="stub"><p>SCF</p></th>
+<td><p><span class="math notranslate nohighlight">\(-\frac{1}{2}\nabla^2 \sqrt{n(r)} + v_B(r)\sqrt{n(r)} = \mu\sqrt{n(r)}\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(-\frac{1}{2}\nabla^2 \phi_i(r) + v_s(r)\phi_i(r) = \varepsilon_i\phi_i(r)\)</span></p></td>
+</tr>
+</tbody>
+</table>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>In DFTpy, <span class="math notranslate nohighlight">\(T_s[n]\)</span> and <span class="math notranslate nohighlight">\(E_{xc}[n]\)</span> are pure functionals of the density. Check out the tutorials for a list of available <a class="reference external" href="tutorials/config.html#kedf">KEDF</a> and <a class="reference external" href="tutorials/config.html#exc">EXC</a> functionals,</p>
@@ -127,25 +206,33 @@
 <p>DFTpy solves the ground state problem with the so-called <cite>direct energy minimization</cite>. Other (faster) methods are available, such as <a class="reference external" href="https://pubs.acs.org/doi/abs/10.1021/acs.jpclett.1c00716">OESCF</a>, which is implemented in <a class="reference external" href="http://edftpy.rutgers.edu">eDFTpy</a>. <a class="reference external" href="https://pubs.acs.org/doi/abs/10.1021/acs.jpclett.1c00716">OESCF</a> may be implemented in DFTpy upon request.</p>
 </div>
 </section>
-<section id="time-dependent-orbital-free-dft">
-<h2>Time-Dependent Orbital-Free DFT<a class="headerlink" href="#time-dependent-orbital-free-dft" title="Link to this heading">¶</a></h2>
-<p>DFTpy can also describe systems out of equilibrium by propagating them in <a class="reference external" href="https://wires.onlinelibrary.wiley.com/doi/abs/10.1002/wcms.1482">real time</a> as well as in <a class="reference external" href="https://journals.aps.org/prb/abstract/10.1103/PhysRevB.103.245102">frequency space</a> finding the roots of the frequency dependent polarizability (Casida). Because of the OF-DFT foundation, DFTpy implements the so-called time-dependent orbital-free DFT (td-OF-DFT) approach whereby a single Bosonic wavefunction, <span class="math notranslate nohighlight">\(\Psi(\mathbf{r},t)\)</span> is propagated with a time-dependent KS-like Hamiltonian. Namely,</p>
+<section id="time-dependent-density-functional-theory-tddft">
+<h2>Time-Dependent Density-Functional Theory (TDDFT)<a class="headerlink" href="#time-dependent-density-functional-theory-tddft" title="Link to this heading">¶</a></h2>
+<p>DFT can also describe a system out of equilibrium by propagating it in <a class="reference external" href="https://wires.onlinelibrary.wiley.com/doi/abs/10.1002/wcms.1482">real time</a> or in <a class="reference external" href="https://journals.aps.org/prb/abstract/10.1103/PhysRevB.103.245102">frequency space</a> finding the roots of the frequency dependent polarizability (Casida). In the time regime the Runge and Gross theorem is an analog of the Hohenberg and Khon theorem. This theorem formally defines a one-to-one correspondance between densities and potentials, for any fixed initial many-body state, the it follows that the time-dependent density is a unique functional of the potentials and vice versa. This means that the many-body Hamiltonian <span class="math notranslate nohighlight">\(\hat{H}(t)\)</span> and thus the many-body wave function <span class="math notranslate nohighlight">\(\Psi(t)\)</span> are functionals of <span class="math notranslate nohighlight">\(n(\mathbf{r},t)\)</span> as well</p>
+<p>Following the Runge and Gross theorem, we can write time-dependent Schrodinger like equation, namely:</p>
 <div class="math notranslate nohighlight">
 \[\hat{H}(t)  \Psi(\mathbf{r},t) = i \frac{d}{dt}\Psi(\mathbf{r},t)\]</div>
-<p>where</p>
+<p>In the KS formalism the KS orbitals are propagated with a time-dependent Hamiltonian, given by:</p>
 <div class="math notranslate nohighlight">
-\[\hat{H}(t) = -\frac{1}{2} \nabla^2 + v_B(\mathbf{r},t).\]</div>
+\[\hat{H}(t) = -\frac{1}{2} \nabla^2 + v_s[n](\mathbf{r},t)\]</div>
+<p>where the time-dependent KS potential is given by:</p>
+<div class="math notranslate nohighlight">
+\[\]</div>
+<p>v_s[n](mathbf r,t) = v_{eN}(mathbf r,t) + v_H[n](mathbf r,t) + v_{xc}[n](mathbf r,t).</p>
+<p>In the OF formalism the bosonic wavefunction <span class="math notranslate nohighlight">\(\Psi(\mathbf{r},t)\)</span> is propagated with a time-dependent KS-like Hamiltonian, given by:</p>
+<div class="math notranslate nohighlight">
+\[\hat{H}(t) = -\frac{1}{2} \nabla^2 + v_B[n](\mathbf{r},t).\]</div>
 <p>The Bosonic KS-like potential is given by two major contributions</p>
 <div class="math notranslate nohighlight">
-\[v_B(\mathbf{r},t) = v_s(\mathbf{r},t) + v_P(\mathbf{r},t)\]</div>
-<p>where <span class="math notranslate nohighlight">\(v_s(\mathbf{r},t)=v_{ext}(\mathbf{r},t)+v_H[n(t)](\mathbf{r},t)+v_{xc}[n(t)](\mathbf{r},t)\)</span> where the adiabatic approximation has been invoked. The <cite>Pauli</cite> potential is given by adiabatic and nonadiabatic contributions,</p>
+\[v_B(\mathbf{r},t) = v_s[n](\mathbf{r},t) + v_P[n](\mathbf{r},t)\]</div>
+<p>where the adiabatic approximation has been invoked fro the <cite>xc</cite> potential <span class="math notranslate nohighlight">\(v_{xc}[n(t)]\)</span>. The <cite>Pauli</cite> potential is given by adiabatic and nonadiabatic contributions,</p>
 <div class="math notranslate nohighlight">
-\[v_P(\mathbf{r},t)=v_P^{ad}(\mathbf{r},t)+v_P^{nad}(\mathbf{r},t).\]</div>
+\[v_P(\mathbf{r},t)=v_P^{ad}(\mathbf{r},t)+v_P^{nad}[n](\mathbf{r},t).\]</div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>The adiabatic Pauli potential can be specified according to any given <a class="reference external" href="tutorials/config.html#kedf">KEDF</a> available in DFTpy.</p>
 </div>
-<p>The nonadiabatic contribution is usually neglected in the litarature. In DFTpy the <a class="reference external" href="https://journals.aps.org/prb/abstract/10.1103/PhysRevB.104.235110">JP</a> functional is available,</p>
+<p>The nonadiabatic contribution is usually neglected in the literature. In DFTpy the <a class="reference external" href="https://journals.aps.org/prb/abstract/10.1103/PhysRevB.104.235110">JP</a> functional is available,</p>
 <div class="math notranslate nohighlight">
 \[v_P^{nad}(\mathbf{r},t) = -\frac{\pi^3}{12}\left(\frac{6}{k_F^2(\mathbf{r},t)}\mathcal{F}^{-1}\left\{i\mathbf{q}\cdot\mathbf{j}(\mathbf{q},t)\frac{1}{q}\right\}+\frac{1}{k_F^4(\mathbf{r},t)}\mathcal{F}^{-1}\left\{i\mathbf{q}\cdot\mathbf{j}(\mathbf{q},t)q\right\}\right)\]</div>
 <p>where <span class="math notranslate nohighlight">\(\mathbf{j}\)</span> and <span class="math notranslate nohighlight">\(\mathbf{q}\)</span> are the electronic current density and the reciprocal space vector, respectively. The current density is determined by the standard equation <span class="math notranslate nohighlight">\(\mathbf{j}(\mathbf{r})=\frac{1}{2i}\left[\Psi^*(\mathbf{r})\nabla\Psi(\mathbf{r})-\Psi(\mathbf{r})\nabla\Psi^*(\mathbf{r})\right]\)</span>.  <span class="math notranslate nohighlight">\(\mathcal{F}\)</span> stands for Fourier transform and <span class="math notranslate nohighlight">\(k_F(\mathbf{r},t)=[3\pi^2 n(\mathbf{r},t)]^{1/3}\)</span> is the Fermi wavevector function of the local electron density.</p>
@@ -157,6 +244,67 @@
 <p class="admonition-title">Note</p>
 <p>Optical spectra and nonlinear electronic processes can be modelled by DFTpy. See tutorials for additional information. Ehrenfest dynamics is not yet available.</p>
 </div>
+</section>
+<section id="linear-response-theory">
+<h2>Linear response theory<a class="headerlink" href="#linear-response-theory" title="Link to this heading">¶</a></h2>
+<p>Linear-response TDDFT refers to the determination of excitation energies and excited state properties by solving for the linear-response function.</p>
+<div class="math notranslate nohighlight">
+\[\delta n(r,\omega) = \int  \chi(r,r',\omega)\,\delta v_{appl}(r',\omega)\,\,dr'\]</div>
+<p>Lehman reresentation of the response function,
+.. math::
+chi(r,r’,omega) = sum_{n}frac{n_{0n}^*(r)n_{0n}(r’)}{omega-Omega_{n}+ieta}-frac{n_{0n}^*(r)n_{0n}(r’)}{omega+Omega_{n}+ieta}</p>
+<p>where <span class="math notranslate nohighlight">\(n_{0n}(r) = \langle \Psi_0 | \hat n(r) | \Psi_n \rangle\)</span> is the ground-to-$n^text{th}$ excited state transition density, and <span class="math notranslate nohighlight">\(\Omega_n = E_n - E_0\)</span>.</p>
+<p>Applying the Runge-Gross theorem,</p>
+<div class="math notranslate nohighlight">
+\[\delta n(r,\omega) = \int  \chi(r,r',\omega)\,\delta v_{appl}(r',\omega)\,\,dr' =  \int  \chi_s(r,r',\omega)\,\delta v_{s}(r',\omega)\,\,dr' = \int  \chi_B(r,r',\omega)\,\delta v_{B}(r',\omega)\,\,dr'\]</div>
+<p>where the variation of the KS potential can be decomposed into:</p>
+<div class="math notranslate nohighlight">
+\[\delta v_{s}(r,\omega) = \delta v_{H}[n](r,\omega) + \delta v_{xc}[n](r,\omega) + \delta v_{appl}(r,\omega)\]</div>
+<p>and the variation of the bosonic potential can be decomposed into crucial contributions</p>
+<div class="math notranslate nohighlight">
+\[\delta v_{B}(r,\omega) = \delta v_s[n](r,\omega) + \delta v_P[n](r,\omega)\]</div>
+<p>which can be derived from their dependence on the density</p>
+<div class="math notranslate nohighlight">
+\[\delta v_{H}(r,\omega) = \int \frac{\delta v_{H}(r,\omega)}{\delta n(r',\omega)} \, \delta n(r',\omega) \, dr' = \int \frac{1}{|r-r'|}\, \delta n(r',\omega)\,dr'\]</div>
+<div class="math notranslate nohighlight">
+\[\delta v_{xc}(r,\omega) = \int \frac{\delta v_{xc}(r,\omega)}{\delta n(r',\omega)} \, \delta n(r',\omega) \, dr' = \int f_{xc}(r,r',\omega)\, \delta n(r',\omega)\,dr'\]</div>
+<div class="math notranslate nohighlight">
+\[\delta v_{P}(r,\omega) = \int \frac{\delta v_{P}(r,\omega)}{\delta n(r',\omega)} \, \delta n(r',\omega) \, dr' = \int f_{P}(r,r',\omega)\, \delta n(r',\omega)\,dr'\]</div>
+<p>The Dyson equation for the response function between the real system and the KS system then given by:</p>
+<div class="math notranslate nohighlight">
+\[-\chi^{-1} = -\chi_s^{-1} + \frac{1}{|r-r'|} + f_{xc}(r,r',\omega)\]</div>
+<p>while the Dyson equation for the response function between the real system and the OF system then given by:</p>
+<div class="math notranslate nohighlight">
+\[-\chi^{-1} = -\chi_B^{-1} + \frac{1}{|r-r'|} + f_{xc}(r,r',\omega) + f_P(r,r',\omega)\]</div>
+<p>The Dyson equation turns into a matrix equation, known as the Casida equation, given by:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\left( \begin{array}{cc}
+A_{iajb}(\omega) &amp; B_{iajb}(\omega) \\
+B_{iajb}(\omega) &amp; A_{iajb}(\omega)
+\end{array} \right) \left( \begin{array}{c}
+X_{ia}  \\
+Y_{ia}
+\end{array} \right) = \omega \left( \begin{array}{cc}
+1 &amp; 0 \\
+0 &amp; -1
+\end{array} \right) \left( \begin{array}{c}
+X_{ia}  \\
+Y_{ia}
+\end{array} \right)\end{split}\]</div>
+<p>where defining <span class="math notranslate nohighlight">\(\omega_{ia} = \varepsilon_a - \varepsilon_i\)</span>,</p>
+<div class="math notranslate nohighlight">
+\[A_{iajb}(\omega) = \delta_{ij}\delta_{ab} \omega_{ia} + \big\langle \phi_i \phi_a \big| K(r,r',\omega) \big| \phi_j \phi_b \big\rangle\]</div>
+<p>and</p>
+<div class="math notranslate nohighlight">
+\[B_{iajb}(\omega) = \big\langle \phi_i \phi_a \big|  K(r,r',\omega)  \big| \phi_j \phi_b \big\rangle\]</div>
+<p>where in KS <span class="math notranslate nohighlight">\(K(r,r',\omega)\)</span> is the kernel given by:</p>
+<div class="math notranslate nohighlight">
+\[K(r,r',\omega) = \frac{1}{|r-r'|} + f_{xc}(r,r',\omega)\]</div>
+<p>while in OF <span class="math notranslate nohighlight">\(K(r,r',\omega)\)</span> is the kernel given by:</p>
+<div class="math notranslate nohighlight">
+\[K(r,r',\omega) = \frac{1}{|r-r'|} + f_{xc}(r,r',\omega) + f_P(r,r',\omega)\]</div>
+<p>Collective modes such as <strong>plasmons</strong> are built from many particle–hole pairs in the fermionic KS picture but appear more directly in the bosonic reference, which can make Casida matrices <strong>much smaller</strong> for plasmon-dominated spectra while describing the <strong>same</strong> interacting response once approximations are controlled. Approximate <span class="math notranslate nohighlight">\(f_P\)</span> (e.g. Thomas–Fermi–von Weizsäcker in linear response) shifts peaks slightly compared with KS-TDDFT; <strong>Landau damping</strong> needs <strong>nonadiabatic</strong> kernels—DFTpy offers the nonadiabatic Pauli (<a class="reference external" href="https://journals.aps.org/prb/abstract/10.1103/PhysRevB.104.235110">JP</a>) formulation for that regime.</p>
+<p>In <strong>frequency space</strong>, DFTpy performs Casida TD-OFDFT using the modules <code class="docutils literal notranslate"><span class="pre">Casida</span></code>, <code class="docutils literal notranslate"><span class="pre">CasidaRunner</span></code>, and <code class="docutils literal notranslate"><span class="pre">Hamiltonian</span></code> on top of a converged ground-state density (see the linear-response tutorial <code class="docutils literal notranslate"><span class="pre">lr-ofdft-tutorial.ipynb</span></code>); this parallels <strong>real-time</strong> propagation in <code class="docutils literal notranslate"><span class="pre">td-ofdft-tutorial.ipynb</span></code>.</p>
 </section>
 <section id="short-note-on-the-implementation">
 <h2>Short note on the implementation<a class="headerlink" href="#short-note-on-the-implementation" title="Link to this heading">¶</a></h2>
@@ -185,7 +333,7 @@
 
   <div role="contentinfo">
     <p>&#169; Copyright 2019-2025, Pavanello Research Group.
-      <span class="lastupdated">Last updated on Tuesday, 14 Apr 2026 18:17:13.
+      <span class="lastupdated">Last updated on Monday, 11 May 2026 12:12:41.
       </span></p>
   </div>
 
