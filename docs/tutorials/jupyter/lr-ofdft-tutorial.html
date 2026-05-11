@@ -11,7 +11,7 @@
       <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
       <link rel="stylesheet" type="text/css" href="../../_static/nbsphinx-code-cells.css?v=2aa19091" />
-      <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=06adf165" />
+      <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=32dd92b7" />
 
   
     <link rel="shortcut icon" href="../../_static/dftpy.ico"/>
@@ -25,7 +25,7 @@
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Optimization" href="density_optimization.html" />
+    <link rel="next" title="Stable releases" href="../../releases.html" />
     <link rel="prev" title="Real time TD-OFDFT Tutorials" href="td-ofdft-tutorial.html" /> 
 </head>
 
@@ -52,14 +52,13 @@
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../../contact.html">Contact</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../install.html">Installation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../ofdft.html">How does DFTpy work?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ofdft.html">Introduction to DFT</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../LPP.html">Local Pseudopotentials</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../tutorials.html">Tutorials</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="../tutorials.html#config-of-dftpy-script">Config of DFTpy script</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorials.html#input-file-mode-of-dftpy">Input file mode of DFTpy</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../tutorials.html#ofdft">OFDFT</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../tutorials.html#local-pseudopotentials">Local Pseudopotentials</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="../tutorials.html#tddft">TDDFT</a><ul class="current">
-<li class="toctree-l3"><a class="reference internal" href="../tddft/propagate.html">Use of Propagator</a></li>
 <li class="toctree-l3"><a class="reference internal" href="td-ofdft-tutorial.html">Real time TD-OFDFT Tutorials</a></li>
 <li class="toctree-l3 current"><a class="current reference internal" href="#">Linear response TD-OFDFT Tutorials</a></li>
 </ul>
@@ -99,7 +98,7 @@
     
   </ul><div class="rst-breadcrumbs-buttons" role="navigation" aria-label="Sequential page navigation">
         <a href="td-ofdft-tutorial.html" class="btn btn-neutral float-left" title="Real time TD-OFDFT Tutorials" accesskey="p"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="density_optimization.html" class="btn btn-neutral float-right" title="Optimization" accesskey="n">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="../../releases.html" class="btn btn-neutral float-right" title="Stable releases" accesskey="n">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
   </div>
   <hr/>
 </div>
@@ -112,9 +111,18 @@
 <ul class="simple">
 <li><p>How to run Casida TD-OFDFT calculations</p></li>
 </ul>
+<p>Run this cell to install DFTpy in google colab</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>!python<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span><span class="s2">&quot;git+https://github.com/Quantum-MultiScale/DFTpy.git@dev&quot;</span>
+</pre></div>
+</div>
+<p>Download the pseudopotential file</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>!wget<span class="w"> </span>https://raw.githubusercontent.com/Quantum-MultiScale/DFTpy/dev/DATA/Mg8.vasp
+!wget<span class="w"> </span>https://raw.githubusercontent.com/Quantum-MultiScale/DFTpy/dev/DATA/Mg_OEPP_PZ.UPF
+</pre></div>
+</div>
 <p>First we need to load the necesary modules</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
@@ -200,22 +208,22 @@
 <div class="highlight"><pre>
 setting key: Mg -&gt; ../DATA/Mg_OEPP_PZ.UPF
 Step    Energy(a.u.)            dE              dP              Nd      Nls     Time(s)
-0       8.951916882520E+00      8.951917E+00    2.343046E+00    1       1       2.489614E-02
+0       8.951916882520E+00      8.951917E+00    2.343046E+00    1       1       2.524233E-02
 !WARN: Change to steepest decent
-1       -4.970850195117E+00     -1.392277E+01   1.121758E+00    1       3       5.590415E-02
-2       -5.991894332924E+00     -1.021044E+00   1.516348E-01    4       2       9.531522E-02
-3       -6.128065576848E+00     -1.361712E-01   1.802917E-02    8       3       1.328633E-01
-4       -6.143827137693E+00     -1.576156E-02   3.111792E-03    10      3       1.782541E-01
-5       -6.146022421154E+00     -2.195283E-03   3.902247E-04    7       3       2.148213E-01
-6       -6.146449721223E+00     -4.273001E-04   4.586828E-05    10      3       2.616313E-01
-7       -6.146493566939E+00     -4.384572E-05   6.805825E-06    7       3       2.967911E-01
-8       -6.146501643512E+00     -8.076573E-06   7.727337E-07    10      2       3.360162E-01
-9       -6.146502268766E+00     -6.252545E-07   1.062330E-07    7       3       3.697093E-01
-10      -6.146502350816E+00     -8.204981E-08   1.158942E-08    9       2       4.079611E-01
-11      -6.146502359965E+00     -9.148524E-09   1.779616E-09    8       3       4.453881E-01
-12      -6.146502361806E+00     -1.841606E-09   2.793301E-10    9       3       4.856284E-01
-13      -6.146502362096E+00     -2.892584E-10   7.062214E-11    8       3       5.267513E-01
-14      -6.146502362161E+00     -6.586731E-11   3.935713E-11    11      3       5.811613E-01
+1       -4.970850195117E+00     -1.392277E+01   1.121758E+00    1       3       5.266213E-02
+2       -5.991894332924E+00     -1.021044E+00   1.516348E-01    4       2       7.940507E-02
+3       -6.128065576848E+00     -1.361712E-01   1.802917E-02    8       3       1.207283E-01
+4       -6.143827137693E+00     -1.576156E-02   3.111792E-03    10      3       1.696901E-01
+5       -6.146022421154E+00     -2.195283E-03   3.902247E-04    7       3       2.043753E-01
+6       -6.146449721223E+00     -4.273001E-04   4.586828E-05    10      3       2.555830E-01
+7       -6.146493566939E+00     -4.384572E-05   6.805825E-06    7       3       2.923172E-01
+8       -6.146501643512E+00     -8.076573E-06   7.727337E-07    10      2       3.314099E-01
+9       -6.146502268766E+00     -6.252545E-07   1.062330E-07    7       3       3.668339E-01
+10      -6.146502350816E+00     -8.204981E-08   1.158942E-08    9       2       4.037402E-01
+11      -6.146502359965E+00     -9.148524E-09   1.779616E-09    8       3       4.420323E-01
+12      -6.146502361806E+00     -1.841606E-09   2.793301E-10    9       3       4.811163E-01
+13      -6.146502362096E+00     -2.892584E-10   7.062214E-11    8       3       5.176163E-01
+14      -6.146502362161E+00     -6.586731E-11   3.935713E-11    11      3       5.626161E-01
 #### Density Optimization Converged ####
 Chemical potential (a.u.): -0.12885029478146545
 Chemical potential (eV)  : -3.5061951106519684
@@ -231,12 +239,20 @@ Chemical potential (eV)  : -3.5061951106519684
 </pre></div>
 </div>
 </div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">v2</span> <span class="o">=</span> <span class="n">totalfunctional</span><span class="p">(</span><span class="n">rho0</span><span class="p">,</span> <span class="n">calcType</span><span class="o">=</span><span class="s1">&#39;V2&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">v2rho2</span>
+</pre></div>
+</div>
+</div>
 <p>To build the casida matrix we get the orbitals from the hamiltonian of the orbital free DFT system</p>
 <div class="math notranslate nohighlight">
 \[\underbrace{\left[-\frac{1}{2} \nabla^2 + v_B(n_0) \right]}_{\hat{H}_B}\phi(\vec{r})= \mu \phi(\vec{r})\]</div>
 <p>The diagonalization of the hamiltonian will lead to a set of eigenfunctions <span class="math notranslate nohighlight">\(\{\phi(\vec{r})\}\)</span> where the eigenfunction with lowest energy is the ground state density and yields the ground state density <span class="math notranslate nohighlight">\(n_0(\vec{r}) = |\phi_0(\vec{r})|\)</span></p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">numeig</span> <span class="o">=</span> <span class="mi">150</span>
@@ -256,7 +272,7 @@ Chemical potential (eV)  : -3.5061951106519684
 <div class="math notranslate nohighlight">
 \[K_{ij,j'k'}(\Omega) = \int d^3r \int d^3r' \phi_{ji}(\mathbf{r}) f_{{PHxc}}(\mathbf{r},\mathbf{r}',\Omega) \phi_{j'i'}^*(\mathbf{r}')\]</div>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[41]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">casida</span> <span class="o">=</span> <span class="n">Casida</span><span class="p">(</span><span class="n">rho0</span><span class="p">,</span> <span class="n">totalfunctional</span><span class="p">)</span>
@@ -267,7 +283,7 @@ Chemical potential (eV)  : -3.5061951106519684
 </div>
 <p>Postprocess the oscillator strengths to plo the optical spectra</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[42]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">gauss</span><span class="p">(</span><span class="n">freq</span><span class="p">,</span><span class="n">omega</span><span class="p">,</span><span class="n">sigma</span><span class="p">):</span>
@@ -286,7 +302,7 @@ Chemical potential (eV)  : -3.5061951106519684
 </div>
 </div>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[43]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">freq</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">78540</span><span class="p">)</span>
@@ -294,12 +310,13 @@ Chemical potential (eV)  : -3.5061951106519684
 </pre></div>
 </div>
 </div>
-<p>Read the data from the <a class="reference internal" href="td-ofdft-tutorial.html"><span class="doc">Real time TD-OFDFT tutorial</span></a> and compare with the Linear response results</p>
+<p>Read the data from the Real time propagation and compare with the Linear response results</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">h5py</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">dftpy.td.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">calc_spectra_mu</span>
@@ -341,7 +358,7 @@ Text(0, 0.5, &#39;Intensity (a.u.)&#39;)
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../../_images/tutorials_jupyter_lr-ofdft-tutorial_18_1.png" src="../../_images/tutorials_jupyter_lr-ofdft-tutorial_18_1.png" />
+<img alt="../../_images/tutorials_jupyter_lr-ofdft-tutorial_20_1.png" src="../../_images/tutorials_jupyter_lr-ofdft-tutorial_20_1.png" />
 </div>
 </div>
 </section>
@@ -351,14 +368,14 @@ Text(0, 0.5, &#39;Intensity (a.u.)&#39;)
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="td-ofdft-tutorial.html" class="btn btn-neutral float-left" title="Real time TD-OFDFT Tutorials" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="density_optimization.html" class="btn btn-neutral float-right" title="Optimization" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="../../releases.html" class="btn btn-neutral float-right" title="Stable releases" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
 
   <div role="contentinfo">
     <p>&#169; Copyright 2019-2025, Pavanello Research Group.
-      <span class="lastupdated">Last updated on Tuesday, 14 Apr 2026 18:17:13.
+      <span class="lastupdated">Last updated on Monday, 11 May 2026 13:55:20.
       </span></p>
   </div>
 

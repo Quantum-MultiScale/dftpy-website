@@ -10,7 +10,7 @@
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
-      <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=06adf165" />
+      <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=32dd92b7" />
 
   
     <link rel="shortcut icon" href="../_static/dftpy.ico"/>
@@ -24,7 +24,7 @@
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Input file description" href="config.html" />
+    <link rel="next" title="Script mode of DFTpy" href="config.html" />
     <link rel="prev" title="Local Pseudopotentials" href="../LPP.html" /> 
 </head>
 
@@ -51,19 +51,19 @@
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../contact.html">Contact</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../ofdft.html">How does DFTpy work?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ofdft.html">Introduction to DFT</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../LPP.html">Local Pseudopotentials</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Tutorials</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#input-file-mode-of-dftpy">Input file mode of DFTpy</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="config.html">Input file description</a></li>
+<li class="toctree-l3"><a class="reference internal" href="config.html">Script mode of DFTpy</a></li>
 <li class="toctree-l3"><a class="reference internal" href="ofdft/optimize.html">Optimization of Density</a></li>
 <li class="toctree-l3"><a class="reference internal" href="tddft/propagate.html">Use of Propagator</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#ofdft">OFDFT</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="jupyter/density_optimization.html">Optimization of Density</a></li>
-<li class="toctree-l3"><a class="reference internal" href="ofdft/relax.html">Relaxation of Structure</a></li>
-<li class="toctree-l3"><a class="reference internal" href="ofdft/md.html">Molecular Dynamics Simulation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="jupyter/relax.html">Relaxation of Structure</a></li>
+<li class="toctree-l3"><a class="reference internal" href="jupyter/nvt.html">Molecular Dynamics Simulation</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#local-pseudopotentials">Local Pseudopotentials</a><ul>
@@ -114,7 +114,7 @@
     
   </ul><div class="rst-breadcrumbs-buttons" role="navigation" aria-label="Sequential page navigation">
         <a href="../LPP.html" class="btn btn-neutral float-left" title="Local Pseudopotentials" accesskey="p"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="config.html" class="btn btn-neutral float-right" title="Input file description" accesskey="n">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="config.html" class="btn btn-neutral float-right" title="Script mode of DFTpy" accesskey="n">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
   </div>
   <hr/>
 </div>
@@ -127,7 +127,7 @@
 <h2>Input file mode of DFTpy<a class="headerlink" href="#input-file-mode-of-dftpy" title="Link to this heading">¶</a></h2>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="config.html">Input file description</a></li>
+<li class="toctree-l1"><a class="reference internal" href="config.html">Script mode of DFTpy</a></li>
 <li class="toctree-l1"><a class="reference internal" href="ofdft/optimize.html">Optimization of Density</a></li>
 <li class="toctree-l1"><a class="reference internal" href="tddft/propagate.html">Use of Propagator</a></li>
 </ul>
@@ -138,8 +138,8 @@
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="jupyter/density_optimization.html">Optimization of Density</a></li>
-<li class="toctree-l1"><a class="reference internal" href="ofdft/relax.html">Relaxation of Structure</a></li>
-<li class="toctree-l1"><a class="reference internal" href="ofdft/md.html">Molecular Dynamics Simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="jupyter/relax.html">Relaxation of Structure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="jupyter/nvt.html">Molecular Dynamics Simulation</a></li>
 </ul>
 </div>
 </section>
@@ -172,6 +172,8 @@
 </div>
 <ul class="simple">
 <li><p><strong>Density optimization</strong> — <a class="reference external" href="https://github.com/Quantum-MultiScale/DFTpy/blob/dev/examples/notebooks/density_optimization.ipynb">GitHub</a> · <a class="reference external" href="https://colab.research.google.com/github/Quantum-MultiScale/DFTpy/blob/dev/examples/notebooks/density_optimization.ipynb">Colab</a></p></li>
+<li><p><strong>NVT molecular dynamics (ASE)</strong> — <a class="reference external" href="https://github.com/Quantum-MultiScale/DFTpy/blob/dev/examples/notebooks/nvt.ipynb">GitHub</a> · <a class="reference external" href="https://colab.research.google.com/github/Quantum-MultiScale/DFTpy/blob/dev/examples/notebooks/nvt.ipynb">Colab</a></p></li>
+<li><p><strong>Relax structure (ASE)</strong> — <a class="reference external" href="https://github.com/Quantum-MultiScale/DFTpy/blob/dev/examples/notebooks/relax.ipynb">GitHub</a> · <a class="reference external" href="https://colab.research.google.com/github/Quantum-MultiScale/DFTpy/blob/dev/examples/notebooks/relax.ipynb">Colab</a></p></li>
 <li><p><strong>LPP optimization (LPPS)</strong> — <a class="reference external" href="https://github.com/Quantum-MultiScale/DFTpy/blob/dev/examples/Pseudopotentials/lpps.ipynb">GitHub</a> · <a class="reference external" href="https://colab.research.google.com/github/Quantum-MultiScale/DFTpy/blob/dev/examples/Pseudopotentials/lpps.ipynb">Colab</a></p></li>
 <li><p><strong>Real-time TD-OFDFT</strong> — <a class="reference external" href="https://github.com/Quantum-MultiScale/DFTpy/blob/dev/examples/notebooks/td-ofdft-tutorial.ipynb">GitHub</a> · <a class="reference external" href="https://colab.research.google.com/github/Quantum-MultiScale/DFTpy/blob/dev/examples/notebooks/td-ofdft-tutorial.ipynb">Colab</a></p></li>
 <li><p><strong>Linear-response TD-OFDFT (Casida)</strong> — <a class="reference external" href="https://github.com/Quantum-MultiScale/DFTpy/blob/dev/examples/notebooks/lr-ofdft-tutorial.ipynb">GitHub</a> · <a class="reference external" href="https://colab.research.google.com/github/Quantum-MultiScale/DFTpy/blob/dev/examples/notebooks/lr-ofdft-tutorial.ipynb">Colab</a></p></li>
@@ -186,14 +188,14 @@
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="../LPP.html" class="btn btn-neutral float-left" title="Local Pseudopotentials" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="config.html" class="btn btn-neutral float-right" title="Input file description" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="config.html" class="btn btn-neutral float-right" title="Script mode of DFTpy" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
 
   <div role="contentinfo">
     <p>&#169; Copyright 2019-2025, Pavanello Research Group.
-      <span class="lastupdated">Last updated on Monday, 20 Apr 2026 16:01:12.
+      <span class="lastupdated">Last updated on Monday, 11 May 2026 13:55:20.
       </span></p>
   </div>
 

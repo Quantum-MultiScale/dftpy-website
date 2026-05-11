@@ -6,12 +6,12 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Optimization &mdash; DFTpy 2.2.0dev documentation</title>
+  <title>Optimization of Density &mdash; DFTpy 2.2.0dev documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
       <link rel="stylesheet" type="text/css" href="../../_static/nbsphinx-code-cells.css?v=2aa19091" />
-      <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=06adf165" />
+      <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=32dd92b7" />
 
   
     <link rel="shortcut icon" href="../../_static/dftpy.ico"/>
@@ -25,8 +25,8 @@
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Stable releases" href="../../releases.html" />
-    <link rel="prev" title="Linear response TD-OFDFT Tutorials" href="lr-ofdft-tutorial.html" /> 
+    <link rel="next" title="Relaxation of Structure" href="relax.html" />
+    <link rel="prev" title="Use of Propagator" href="../tddft/propagate.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -52,15 +52,34 @@
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../../contact.html">Contact</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../install.html">Installation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../ofdft.html">How does DFTpy work?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ofdft.html">Introduction to DFT</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../LPP.html">Local Pseudopotentials</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../tutorials.html">Tutorials</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="../tutorials.html#config-of-dftpy-script">Config of DFTpy script</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../tutorials.html#ofdft">OFDFT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorials.html#input-file-mode-of-dftpy">Input file mode of DFTpy</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../tutorials.html#ofdft">OFDFT</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Optimization of Density</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#import-some-modules">import some modules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pseudopotential-file">pseudopotential file</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#build-the-ions-or-read-from-file">build the ions or read from file</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#make-a-grid">make a grid</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#build-local-pseudo,-and-generate-guess-density">build local pseudo, and generate guess density</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#instance-KEDF,-XC-and-HARTREE-functionals">instance KEDF, XC and HARTREE functionals</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#instance-DFTpy-evaluator">instance DFTpy evaluator</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#instance-and-execute-DFTpy-density-optimizer">instance and execute DFTpy density optimizer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#evaluate-final-energy">evaluate final energy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#print-the-timing">print the timing</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Visualize-with-scikit-image-and-matplotlib">Visualize with scikit-image and matplotlib</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Visualize-with-VESTA">Visualize with VESTA</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="relax.html">Relaxation of Structure</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nvt.html">Molecular Dynamics Simulation</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="../tutorials.html#local-pseudopotentials">Local Pseudopotentials</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../tutorials.html#tddft">TDDFT</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="../tutorials.html#do-it-on-a-jupyter-notebook">Do it on a Jupyter Notebook!</a><ul class="current">
-<li class="toctree-l3 current"><a class="current reference internal" href="#">Optimization</a><ul>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Optimization of Density</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#import-some-modules">import some modules</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#pseudopotential-file">pseudopotential file</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#build-the-ions-or-read-from-file">build the ions or read from file</a></li>
@@ -98,7 +117,7 @@
   <ul class="wy-breadcrumbs">
       <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="../tutorials.html">Tutorials</a></li>
-      <li class="breadcrumb-item active">Optimization</li>
+      <li class="breadcrumb-item active">Optimization of Density</li>
       <li class="wy-breadcrumbs-aside">
         
 			<a href=../../genindex.html>Index</a>
@@ -110,16 +129,24 @@
       </li>
     
   </ul><div class="rst-breadcrumbs-buttons" role="navigation" aria-label="Sequential page navigation">
-        <a href="lr-ofdft-tutorial.html" class="btn btn-neutral float-left" title="Linear response TD-OFDFT Tutorials" accesskey="p"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="../../releases.html" class="btn btn-neutral float-right" title="Stable releases" accesskey="n">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="../tddft/propagate.html" class="btn btn-neutral float-left" title="Use of Propagator" accesskey="p"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="relax.html" class="btn btn-neutral float-right" title="Relaxation of Structure" accesskey="n">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
   </div>
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="Optimization">
-<h1>Optimization<a class="headerlink" href="#Optimization" title="Link to this heading">¶</a></h1>
+  <section id="Optimization-of-Density">
+<h1>Optimization of Density<a class="headerlink" href="#Optimization-of-Density" title="Link to this heading">¶</a></h1>
+<p>Run this cell to install DFTpy in google colab</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>!python<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span><span class="s2">&quot;git+https://github.com/Quantum-MultiScale/DFTpy.git@dev&quot;</span>
+</pre></div>
+</div>
+<p>Download the pseudopotential file</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>!wget<span class="w"> </span>https://raw.githubusercontent.com/Quantum-MultiScale/DFTpy/dev/DATA/Al_lda.oe01.recpot
+</pre></div>
+</div>
 <section id="import-some-modules">
 <h2>import some modules<a class="headerlink" href="#import-some-modules" title="Link to this heading">¶</a></h2>
 <div class="nbinput nblast docutils container">
@@ -365,15 +392,15 @@ save ./.dftpy.xsf in darwin platform
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="lr-ofdft-tutorial.html" class="btn btn-neutral float-left" title="Linear response TD-OFDFT Tutorials" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="../../releases.html" class="btn btn-neutral float-right" title="Stable releases" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="../tddft/propagate.html" class="btn btn-neutral float-left" title="Use of Propagator" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="relax.html" class="btn btn-neutral float-right" title="Relaxation of Structure" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
 
   <div role="contentinfo">
     <p>&#169; Copyright 2019-2025, Pavanello Research Group.
-      <span class="lastupdated">Last updated on Tuesday, 14 Apr 2026 18:17:13.
+      <span class="lastupdated">Last updated on Monday, 11 May 2026 13:55:20.
       </span></p>
   </div>
 
