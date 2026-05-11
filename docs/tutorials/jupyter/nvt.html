@@ -1,0 +1,326 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Molecular Dynamics Simulation &mdash; DFTpy 2.2.0dev documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/nbsphinx-code-cells.css?v=2aa19091" />
+      <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=32dd92b7" />
+
+  
+    <link rel="shortcut icon" href="../../_static/dftpy.ico"/>
+      <script src="../../_static/documentation_options.js?v=15cefba6"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+      <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+      <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+      <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Build your own optimized local pseudopotential (LPP)" href="lpps.html" />
+    <link rel="prev" title="Relaxation of Structure" href="relax.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            DFTpy
+              <img src="../../_static/dftpy.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../contact.html">Contact</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ofdft.html">Introduction to DFT</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../LPP.html">Local Pseudopotentials</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../tutorials.html">Tutorials</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../tutorials.html#input-file-mode-of-dftpy">Input file mode of DFTpy</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../tutorials.html#ofdft">OFDFT</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="density_optimization.html">Optimization of Density</a></li>
+<li class="toctree-l3"><a class="reference internal" href="relax.html">Relaxation of Structure</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Molecular Dynamics Simulation</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorials.html#local-pseudopotentials">Local Pseudopotentials</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorials.html#tddft">TDDFT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorials.html#do-it-on-a-jupyter-notebook">Do it on a Jupyter Notebook!</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../releases.html">Stable releases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../faq.html">Frequently Asked Questions</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">DFTpy</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../tutorials.html">Tutorials</a></li>
+      <li class="breadcrumb-item active">Molecular Dynamics Simulation</li>
+      <li class="wy-breadcrumbs-aside">
+        
+			<a href=../../genindex.html>Index</a>
+		
+          
+			<a href="https://gitlab.com/pavanello-research-group/dftpy/tree/master/doc/tutorials/jupyter/nvt.ipynb">Source</a>
+          
+        
+      </li>
+    
+  </ul><div class="rst-breadcrumbs-buttons" role="navigation" aria-label="Sequential page navigation">
+        <a href="relax.html" class="btn btn-neutral float-left" title="Relaxation of Structure" accesskey="p"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="lpps.html" class="btn btn-neutral float-right" title="Build your own optimized local pseudopotential (LPP)" accesskey="n">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+  </div>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="Molecular-Dynamics-Simulation">
+<h1>Molecular Dynamics Simulation<a class="headerlink" href="#Molecular-Dynamics-Simulation" title="Link to this heading">¶</a></h1>
+<p>DFTpy performs molecular dynamics (MD) simulations with <code class="docutils literal notranslate"><span class="pre">ASE</span></code>_. This is one example to run NVT (canonical ensemble) simulation:</p>
+<p>The output <code class="docutils literal notranslate"><span class="pre">md.traj</span></code> can be converted with <code class="docutils literal notranslate"><span class="pre">ASE</span></code>_:</p>
+<p>Run this cell to install DFTpy in google colab</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>!python<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span><span class="s2">&quot;git+https://github.com/Quantum-MultiScale/DFTpy.git@dev&quot;</span>
+</pre></div>
+</div>
+<p>Download the pseudopotential file</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>!wget<span class="w"> </span>https://raw.githubusercontent.com/Quantum-MultiScale/DFTpy/dev/DATA/Al_lda.oe01.recpot
+</pre></div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pathlib</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">ase.lattice.cubic</span><span class="w"> </span><span class="kn">import</span> <span class="n">FaceCenteredCubic</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">ase.md.langevin</span><span class="w"> </span><span class="kn">import</span> <span class="n">Langevin</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">ase.md.verlet</span><span class="w"> </span><span class="kn">import</span> <span class="n">VelocityVerlet</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">ase.md.velocitydistribution</span><span class="w"> </span><span class="kn">import</span> <span class="n">MaxwellBoltzmannDistribution</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">ase.io.trajectory</span><span class="w"> </span><span class="kn">import</span> <span class="n">Trajectory</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">ase</span><span class="w"> </span><span class="kn">import</span> <span class="n">units</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">ase.md.npt</span><span class="w"> </span><span class="kn">import</span> <span class="n">NPT</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">dftpy.config</span><span class="w"> </span><span class="kn">import</span> <span class="n">DefaultOption</span><span class="p">,</span> <span class="n">OptionFormat</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">dftpy.interface</span><span class="w"> </span><span class="kn">import</span> <span class="n">OptimizeDensityConf</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">dftpy.api.api4ase</span><span class="w"> </span><span class="kn">import</span> <span class="n">DFTpyCalculator</span>
+<br/></pre></div>
+</div>
+</div>
+<p>For parallel implementation when running in python</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># MPI / parallel setup</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">dftpy.mpi</span><span class="w"> </span><span class="kn">import</span> <span class="n">MP</span><span class="p">,</span> <span class="n">sprint</span>
+<span class="n">mp</span> <span class="o">=</span> <span class="n">MP</span><span class="p">(</span><span class="n">parallel</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span> <span class="c1"># Set parallel=True to run in parallel</span>
+</pre></div>
+</div>
+</div>
+<p>Define initial configuration with DFTpy</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">conf</span> <span class="o">=</span> <span class="n">DefaultOption</span><span class="p">()</span>
+<span class="n">conf</span><span class="p">[</span><span class="s1">&#39;PATH&#39;</span><span class="p">][</span><span class="s1">&#39;pppath&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;../DATA&#39;</span>
+<span class="n">conf</span><span class="p">[</span><span class="s1">&#39;PP&#39;</span><span class="p">][</span><span class="s1">&#39;Al&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;Al_lda.oe01.recpot&#39;</span>
+<span class="n">conf</span><span class="p">[</span><span class="s1">&#39;OPT&#39;</span><span class="p">][</span><span class="s1">&#39;method&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;TN&#39;</span>
+<span class="n">conf</span><span class="p">[</span><span class="s1">&#39;KEDF&#39;</span><span class="p">][</span><span class="s1">&#39;kedf&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;WT&#39;</span>
+<span class="n">conf</span><span class="p">[</span><span class="s1">&#39;JOB&#39;</span><span class="p">][</span><span class="s1">&#39;calctype&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;Energy Force&#39;</span>
+<span class="n">conf</span> <span class="o">=</span> <span class="n">OptionFormat</span><span class="p">(</span><span class="n">conf</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>Build the system with ASE</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">size</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="n">a</span> <span class="o">=</span> <span class="mf">4.24068463425528</span>
+<span class="n">T</span> <span class="o">=</span> <span class="mi">1023</span>  <span class="c1"># Kelvin</span>
+<span class="n">T</span> <span class="o">*=</span> <span class="n">units</span><span class="o">.</span><span class="n">kB</span>
+<span class="n">atoms</span> <span class="o">=</span> <span class="n">FaceCenteredCubic</span><span class="p">(</span><span class="n">directions</span><span class="o">=</span><span class="p">[[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]],</span>
+                          <span class="n">latticeconstant</span> <span class="o">=</span> <span class="n">a</span><span class="p">,</span>
+                          <span class="n">symbol</span><span class="o">=</span><span class="s2">&quot;Al&quot;</span><span class="p">,</span>
+                          <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">size</span><span class="p">,</span> <span class="n">size</span><span class="p">,</span> <span class="n">size</span><span class="p">),</span>
+                          <span class="n">pbc</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>Set the DFTpy calculator to the ase atoms</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">calc</span> <span class="o">=</span> <span class="n">DFTpyCalculator</span><span class="p">(</span><span class="n">config</span> <span class="o">=</span> <span class="n">conf</span><span class="p">)</span> <span class="c1"># DFTpy can be run in parallel using the MPI interface, as follows: DFTpyCalculator(config = conf, mp=mp)</span>
+<span class="n">atoms</span><span class="o">.</span><span class="n">calc</span> <span class="o">=</span> <span class="n">calc</span>
+</pre></div>
+</div>
+</div>
+<p>Perform the dynamics</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">MaxwellBoltzmannDistribution</span><span class="p">(</span><span class="n">atoms</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">force_temp</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+
+<span class="n">dyn</span> <span class="o">=</span> <span class="n">Langevin</span><span class="p">(</span><span class="n">atoms</span><span class="p">,</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">units</span><span class="o">.</span><span class="n">fs</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">)</span>
+
+<span class="n">step</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">interval</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">printenergy</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="n">atoms</span><span class="p">):</span>
+    <span class="k">global</span> <span class="n">step</span><span class="p">,</span> <span class="n">interval</span>
+    <span class="n">epot</span> <span class="o">=</span> <span class="n">a</span><span class="o">.</span><span class="n">get_potential_energy</span><span class="p">()</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+    <span class="n">ekin</span> <span class="o">=</span> <span class="n">a</span><span class="o">.</span><span class="n">get_kinetic_energy</span><span class="p">()</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Step=</span><span class="si">{:&lt;8d}</span><span class="s1"> Epot=</span><span class="si">{:.5f}</span><span class="s1"> Ekin=</span><span class="si">{:.5f}</span><span class="s1"> T=</span><span class="si">{:.3f}</span><span class="s1"> Etot=</span><span class="si">{:.5f}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">step</span><span class="p">,</span> <span class="n">epot</span><span class="p">,</span> <span class="n">ekin</span><span class="p">,</span> <span class="n">ekin</span> <span class="o">/</span> <span class="p">(</span><span class="mf">1.5</span> <span class="o">*</span> <span class="n">units</span><span class="o">.</span><span class="n">kB</span><span class="p">),</span> <span class="n">epot</span> <span class="o">+</span> <span class="n">ekin</span><span class="p">))</span>
+    <span class="n">step</span> <span class="o">+=</span> <span class="n">interval</span>
+
+<span class="n">dyn</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="n">printenergy</span><span class="p">,</span> <span class="n">interval</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">traj</span> <span class="o">=</span> <span class="n">Trajectory</span><span class="p">(</span><span class="s1">&#39;md.traj&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">,</span> <span class="n">atoms</span><span class="p">)</span>
+<span class="n">dyn</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="n">traj</span><span class="o">.</span><span class="n">write</span><span class="p">,</span> <span class="n">interval</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+
+<span class="n">dyn</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="mi">500</span><span class="p">)</span>
+<br/></pre></div>
+</div>
+</div>
+<p>Analyse the trajectory by plotting the rdial distribution function (RDF)</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[25]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">ase.geometry.analysis</span><span class="w"> </span><span class="kn">import</span> <span class="n">Analysis</span>
+<span class="n">analysis</span> <span class="o">=</span> <span class="n">Analysis</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">Trajectory</span><span class="p">(</span><span class="s1">&#39;md.traj&#39;</span><span class="p">)))</span>
+<span class="n">rdf</span> <span class="o">=</span> <span class="n">analysis</span><span class="o">.</span><span class="n">get_rdf</span><span class="p">(</span><span class="n">rmax</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">nbins</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">return_dists</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">rdf</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">rdf</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[28]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">rdf</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">rdf</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s1">&#39;g&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;MD&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;RDF&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;r ($\AA$)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">6</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[28]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+&lt;matplotlib.legend.Legend at 0x122f91f30&gt;
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/tutorials_jupyter_nvt_15_1.png" src="../../_images/tutorials_jupyter_nvt_15_1.png" />
+</div>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="relax.html" class="btn btn-neutral float-left" title="Relaxation of Structure" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="lpps.html" class="btn btn-neutral float-right" title="Build your own optimized local pseudopotential (LPP)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2019-2025, Pavanello Research Group.
+      <span class="lastupdated">Last updated on Monday, 11 May 2026 13:55:20.
+      </span></p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+  
+<button onclick="topFunction()" id="btn" title="Go to top">Top</button>
+
+<script>
+var mybutton = document.getElementById("btn");
+
+window.onscroll = function() {scrollFunction()};
+
+function scrollFunction() {
+  if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+    mybutton.style.display = "block";
+  } else {
+    mybutton.style.display = "none";
+  }
+}
+
+function topFunction() {
+  document.body.scrollTop = 0;
+  document.documentElement.scrollTop = 0;
+}
+</script>
+
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
